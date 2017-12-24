@@ -1,0 +1,29 @@
+{
+  "name": "blog",
+  "description": "application created by thinkjs",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node development.js",
+    "lint": "eslint src/",
+    "lint-fix": "eslint --fix src/"
+  },
+  "dependencies": {
+    "think-logger3": "^1.0.0",
+    "think-model": "^1.0.0",
+    "think-model-mysql": "^1.0.0",
+    "think-session": "^1.0.0",
+    "think-session-jwt": "^1.0.8",
+    "thinkjs": "^3.0.0"
+  },
+  "devDependencies": {
+    "think-watcher": "^3.0.0",
+    "eslint": "^4.2.0",
+    "eslint-config-think": "^1.0.0"
+  },
+  "repository": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=7.6.0"
+  },
+  "readmeFilename": "README.md"
+}
