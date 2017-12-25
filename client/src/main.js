@@ -9,21 +9,19 @@ import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import { sync } from 'vuex-router-sync';
 
-
-
+// 插件
 Vue.use(Vuex);
 Vue.use(iView);
 Vue.use(VueAxios, axios)
-
-
 sync(store, router)
+
+// 配置
 Vue.config.productionTip = false;
 
-
 new Vue({
-  el: '#app',
-  store,
-  router,
-  template: '<App/>',
-  components: { App }
+	el: '#app',
+	store,
+	router,
+	template: '<App/>',
+	components: { App }
 })

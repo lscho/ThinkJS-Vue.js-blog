@@ -35,22 +35,22 @@
     </div>
 </template>
 <script>
-import { user } from '@/api'
+import { user } from "@/api";
 export default {
-    data () {
-        return {
-            userInfo:{},
-        };
-    },
-    mounted(){
-        this.get();
-    },
-    methods:{
-        get () {
-            user.getInfo(this.$store.state.admin.user.name).then(res=>{
-                this.userInfo=res.data;
-            });
-        }        
+  data() {
+    return {
+      userInfo: {}
+    };
+  },
+  mounted() {
+    this.get();
+  },
+  methods: {
+    get() {
+      user.getInfo(this.$store.state.admin.user.name).then(res => {
+        this.userInfo = res.data;
+      });
     }
+  }
 };
 </script>

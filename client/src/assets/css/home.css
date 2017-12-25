@@ -252,6 +252,7 @@ textarea {
 #main {
     padding-top:20px;
     margin: 0 auto;
+    min-height: 800px;
 }
 .post {
     padding:36px 0 0;
@@ -280,7 +281,6 @@ textarea {
     font-size: 17px;
     line-height: 1.92;
     color:#444;
-    padding-top:32px;
 }
 .page-content{
     padding-top: 40px;

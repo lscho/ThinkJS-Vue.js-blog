@@ -1,9 +1,10 @@
 import Vue from 'vue';
 
 export default {
-	create(userInfo){
+	
+	create(userInfo) {
 		return new Promise((resolve, reject) => {
-			Vue.axios.post('/token',userInfo).then(res=>{
+			Vue.axios.post('/token', userInfo).then(res => {
 				resolve(res.data);
 			});
 		})

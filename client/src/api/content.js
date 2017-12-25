@@ -1,43 +1,44 @@
 import Vue from 'vue';
 
 export default {
-	create(data){
+	
+	create(data) {
 		return new Promise((resolve, reject) => {
-			Vue.axios.post('/content',data).then(res=>{
+			Vue.axios.post('/content', data).then(res => {
 				resolve(res.data);
 			});
 		})
 	},
 
-	getList(){
+	getList() {
 		return new Promise((resolve, reject) => {
-			Vue.axios.get('/content').then(res=>{
+			Vue.axios.get('/content').then(res => {
 				resolve(res.data);
 			});
 		})
 	},
 
-	getInfo(id){
+	getInfo(slug) {
 		return new Promise((resolve, reject) => {
-			Vue.axios.get('/content/'+id).then(res=>{
-				resolve(res.data);
-			});
-		})		
-	},
-
-	update(id,data){
-		return new Promise((resolve, reject) => {
-			Vue.axios.put('/content/'+id,data).then(res=>{
+			Vue.axios.get('/content/' + slug).then(res => {
 				resolve(res.data);
 			});
 		})
 	},
 
-	delete(id){
+	update(id, data) {
 		return new Promise((resolve, reject) => {
-			Vue.axios.delete('/content/'+id).then(res=>{
+			Vue.axios.put('/content/' + id, data).then(res => {
 				resolve(res.data);
 			});
-		})		
+		})
+	},
+
+	delete(id) {
+		return new Promise((resolve, reject) => {
+			Vue.axios.delete('/content/' + id).then(res => {
+				resolve(res.data);
+			});
+		})
 	}
 }

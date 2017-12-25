@@ -1,7 +1,10 @@
 <template>
     <Form :model="formItem"  ref="formItem" :rules="ruleInline" :label-width="80">
         <FormItem label="文章标题"  prop="title">
-            <Input v-model="formItem.title" placeholder="Enter something..."></Input>
+            <Input v-model="formItem.title"></Input>
+        </FormItem>
+        <FormItem label="文章标识"  prop="slug">
+            <Input v-model="formItem.slug" style="width:200px;"></Input>
         </FormItem>
         <FormItem label="文章分类"  prop="category_id">
             <Select v-model="formItem.category_id"  style="width:200px;">
@@ -35,7 +38,7 @@
         </FormItem>
         <FormItem label="文章内容">
             <div id="editor">
-                <mavon-editor ref=md @imgAdd="imgAdd" class="editor" v-model="formItem.content"></mavon-editor>
+                <mavon-editor ref=md @imgAdd="imgAdd" class="editor" v-model="formItem.markdown"></mavon-editor>
             </div>
         </FormItem>
         <FormItem>
@@ -62,7 +65,8 @@
                     date: new Date(),
                     time: new Date(),
                     create_time:[],
-                    content: ''
+                    markdown: '',
+                    content:''
                 },
                 ruleInline: {
                     title: [
@@ -84,6 +88,7 @@
         },
         methods:{
             post(){
+                this.formItem.content=this.$refs['md'].d_render;
                 //处理发布时间
                 let seperator1 = "-";
                 let seperator2 = ":";
@@ -147,14 +152,14 @@
                formdata.append('image', $file); 
                image.upload(formdata).then(res=>{
                     if(res.errno==0&&res.data.url){
-                        this.$refs.md.$img2Url(pos, res.data.url);
+                        this.$refs['md'].$img2Url(pos, res.data.url);
                     }
                });               
             }
         },
         mounted(){
-            if(this.$route.query.id){
-                this.get(this.$route.query.id)
+            if(this.$route.query.slug){
+                this.get(this.$route.query.slug)
             }
             //获取分类
             this.getCategory();

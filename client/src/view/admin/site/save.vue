@@ -22,33 +22,31 @@
     </Form>
 </template>
 <script>
-    import { site } from '@/api';
-    export default {
-        data () {
-            return {
-                formItem: {
-                    id:"",
-                    title: '',
-                    description:'',
-                    url:"",
-                    footer:""
-                }
-            }
-        },
-        methods:{
-            get(){
-                site.getInfo(1).then(res=>{
-                    this.formItem=res.data;
-                });
-            },
-            post(){
-                site.update(1,this.formItem).then(res=>{
-
-                });
-            }            
-        },
-        mounted(){
-            this.get()
-        }
+import { site } from "@/api";
+export default {
+  data() {
+    return {
+      formItem: {
+        id: "",
+        title: "",
+        description: "",
+        url: "",
+        footer: ""
+      }
+    };
+  },
+  methods: {
+    get() {
+      site.getInfo(1).then(res => {
+        this.formItem = res.data;
+      });
+    },
+    post() {
+      site.update(1, this.formItem).then(res => {});
     }
+  },
+  mounted() {
+    this.get();
+  }
+};
 </script>

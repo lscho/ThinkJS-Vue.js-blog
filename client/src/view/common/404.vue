@@ -14,19 +14,19 @@
 </template>
 
 <script>
-import 'iview/dist/styles/iview.css';
-import '@/assets/css/404.css';
+import "iview/dist/styles/iview.css";
+import "@/assets/css/404.css";
 export default {
-    name: 'Error404',
-    methods: {
-        backPage () {
-            this.$router.go(-1);
-        },
-        goHome () {
-            this.$router.push({
-                name: 'home_index'
-            });
-        }
+  name: "Error404",
+  methods: {
+    backPage() {
+      this.$router.go(-1);
+    },
+    goHome() {
+      this.$router.push({
+        name: "home_index"
+      });
     }
+  }
 };
 </script>

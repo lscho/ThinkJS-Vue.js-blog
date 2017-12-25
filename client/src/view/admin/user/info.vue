@@ -24,34 +24,34 @@
     </Form>
 </template>
 <script>
-    import { user } from '@/api';
-    export default {
-        data () {
-            return {
-                formItem: {
-                    username: '',
-                    email: '',
-                    github: '',
-                    qq: '',
-                    weibo: '',
-                    zhihu: ''
-                }
-            }
-        },
-        methods:{
-            get(){
-                user.getInfo(this.$store.state.admin.user.name).then(res=>{
-                    this.formItem=res.data;
-                });
-            },
-            post(){
-                user.update(this.$store.state.admin.user.name,this.formItem).then(res=>{
-
-                });
-            }            
-        },
-        mounted(){
-            this.get()
-        }
+import { user } from "@/api";
+export default {
+  data() {
+    return {
+      formItem: {
+        username: "",
+        email: "",
+        github: "",
+        qq: "",
+        weibo: "",
+        zhihu: ""
+      }
+    };
+  },
+  methods: {
+    get() {
+      user.getInfo(this.$store.state.admin.user.name).then(res => {
+        this.formItem = res.data;
+      });
+    },
+    post() {
+      user
+        .update(this.$store.state.admin.user.name, this.formItem)
+        .then(res => {});
     }
+  },
+  mounted() {
+    this.get();
+  }
+};
 </script>

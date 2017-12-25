@@ -18,54 +18,52 @@
     </Form>
 </template>
 <script>
-    import { tag } from '@/api'
-    export default {
-        data () {
-            return {
-                formItem: {
-                    id:"",
-                    name: '',
-                    slug: '',
-                    sort:0,
-                    description: ''
-                },
-                ruleInline: {
-                    name: [
-                        { required: true, message: '标签名称必须填写', trigger: 'blur' }
-                    ]
-                }                
-            }
-        },
-        methods:{
-            post(){
-                this.$refs['formItem'].validate((valid) => {
-                    if (valid) {
-                        if(this.formItem.id){
-                            //更新数据
-                            tag.update(this.formItem.id,this.formItem).then(res=>{
-                                this.$router.push("/admin/tag/list");
-                            })
-                        }else{
-                            //新增数据
-                            tag.create(this.formItem).then(res=>{
-                                this.$router.push("/admin/tag/list");
-                            })
-                        }
-                    } else {
-                        this.$Message.error('请填写必要信息');
-                    }
-                })
-            },
-            get(id){
-                tag.getInfo(id).then(res=>{
-                    this.formItem=res;
-                });
-            }
-        },
-        mounted(){
-            if(this.$route.query.id){
-                this.get(this.$route.query.id)
-            }
+import { tag } from "@/api";
+export default {
+  data() {
+    return {
+      formItem: {
+        id: "",
+        name: "",
+        slug: "",
+        sort: 0,
+        description: ""
+      },
+      ruleInline: {
+        name: [{ required: true, message: "标签名称必须填写", trigger: "blur" }]
+      }
+    };
+  },
+  methods: {
+    post() {
+      this.$refs["formItem"].validate(valid => {
+        if (valid) {
+          if (this.formItem.id) {
+            //更新数据
+            tag.update(this.formItem.id, this.formItem).then(res => {
+              this.$router.push("/admin/tag/list");
+            });
+          } else {
+            //新增数据
+            tag.create(this.formItem).then(res => {
+              this.$router.push("/admin/tag/list");
+            });
+          }
+        } else {
+          this.$Message.error("请填写必要信息");
         }
+      });
+    },
+    get(id) {
+      tag.getInfo(id).then(res => {
+        this.formItem = res;
+      });
     }
+  },
+  mounted() {
+    if (this.$route.query.id) {
+      this.get(this.$route.query.id);
+    }
+  }
+};
 </script>

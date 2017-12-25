@@ -6,9 +6,9 @@
     </div>  
 </template>
 <script>
-    export default {
-        props: {
-          text: String
-        }        
-    }
+export default {
+  props: {
+    text: String
+  }
+};
 </script>

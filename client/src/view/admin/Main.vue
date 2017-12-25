@@ -60,129 +60,129 @@
     </div>
 </template>
 <script>
-    import '@/assets/css/admin.css';
-    import { mapState } from 'vuex'
-    export default {
-        data () {
-            return {
-                fold: this.$store.getters.getMenu.fold,
-                username:this.$store.state.admin.user.name,
-                //菜单数据
-                // TODO：后台获取
-                menu:[
-                  {
-                    name:'控制台',
-                    path:'/admin/home',
-                    icon:'home'
-                  },
-                  {
-                    name:'内容管理',
-                    path:'/admin/content',
-                    icon:'document',
-                    children:[
-                      {
-                        name:'内容发布',
-                        path:'/admin/content/save',
-                        icon:'edit'
-                      },
-                      {
-                        name:'内容列表',
-                        path:'/admin/content/list',
-                        icon:'navicon-round'
-                      }
-                    ]
-                  },
-                  {
-                    name:'分类管理',
-                    path:'/admin/category',
-                    icon:'shuffle',
-                    children:[
-                      {
-                        name:'分类发布',
-                        path:'/admin/category/save',
-                        icon:'edit'
-                      },
-                      {
-                        name:'分类列表',
-                        path:'/admin/category/list',
-                        icon:'navicon-round'
-                      }
-                    ]
-                  },
-                  {
-                    name:'标签管理',
-                    path:'/admin/tag',
-                    icon:'pricetags',
-                    children:[
-                      {
-                        name:'标签发布',
-                        path:'/admin/tag/save',
-                        icon:'edit'
-                      },
-                      {
-                        name:'标签列表',
-                        path:'/admin/tag/list',
-                        icon:'navicon-round'
-                      }
-                    ]
-                  },
-                  {
-                    name:'系统设置',
-                    path:'/admin/site',
-                    icon:'ios-gear'
-                  }                  
-                ]
+import "@/assets/css/admin.css";
+import { mapState } from "vuex";
+export default {
+  data() {
+    return {
+      fold: this.$store.getters.getMenu.fold,
+      username: this.$store.state.admin.user.name,
+      //菜单数据
+      // TODO：后台获取
+      menu: [
+        {
+          name: "控制台",
+          path: "/admin/home",
+          icon: "home"
+        },
+        {
+          name: "内容管理",
+          path: "/admin/content",
+          icon: "document",
+          children: [
+            {
+              name: "内容发布",
+              path: "/admin/content/save",
+              icon: "edit"
+            },
+            {
+              name: "内容列表",
+              path: "/admin/content/list",
+              icon: "navicon-round"
             }
+          ]
         },
-        computed: {
-            iconSize () {
-                return this.fold ? 24 : 14;
+        {
+          name: "分类管理",
+          path: "/admin/category",
+          icon: "shuffle",
+          children: [
+            {
+              name: "分类发布",
+              path: "/admin/category/save",
+              icon: "edit"
             },
-            breadcrumb(){
-                let breadcrumbs=this.route.path.split('/');
-                let _breadcrumb={
-                    'admin':'后台',
-                    'home':'控制台',
-                    'content':'内容',
-                    'category':'分类',
-                    'tag':'标签',
-                    'save':'编辑',
-                    'list':'列表'
-                };
-                let arr=[];
-                for (var i in breadcrumbs) {
-                    let key=breadcrumbs[i];
-                    if(key){
-                        arr.push(_breadcrumb[key]?_breadcrumb[key]:"");
-                    }
-                }
-                return arr;
-            },
-            ...mapState({
-              route:state => state.route,
-              page:state => state.page.open
-            })
-        },
-        methods: {
-            toggleClick () {
-                this.fold=!this.fold;
-                this.$store.commit('setMenuFlod',this.fold);
-            },
-            select(name){
-                this.$router.push(name);
-            },
-            loginOut(){
-                this.$store.commit('clearToken');
-                this.$router.push("/login");
-            },
-            dropdownClick(name){
-                if(name=='loginOut'){
-                    this.loginOut();
-                }
-                if(name=='userInfo'){
-                    this.$router.push("/admin/user/info");
-                }
+            {
+              name: "分类列表",
+              path: "/admin/category/list",
+              icon: "navicon-round"
             }
+          ]
         },
+        {
+          name: "标签管理",
+          path: "/admin/tag",
+          icon: "pricetags",
+          children: [
+            {
+              name: "标签发布",
+              path: "/admin/tag/save",
+              icon: "edit"
+            },
+            {
+              name: "标签列表",
+              path: "/admin/tag/list",
+              icon: "navicon-round"
+            }
+          ]
+        },
+        {
+          name: "系统设置",
+          path: "/admin/site",
+          icon: "ios-gear"
+        }
+      ]
+    };
+  },
+  computed: {
+    iconSize() {
+      return this.fold ? 24 : 14;
+    },
+    breadcrumb() {
+      let breadcrumbs = this.route.path.split("/");
+      let _breadcrumb = {
+        admin: "后台",
+        home: "控制台",
+        content: "内容",
+        category: "分类",
+        tag: "标签",
+        save: "编辑",
+        list: "列表"
+      };
+      let arr = [];
+      for (var i in breadcrumbs) {
+        let key = breadcrumbs[i];
+        if (key) {
+          arr.push(_breadcrumb[key] ? _breadcrumb[key] : "");
+        }
+      }
+      return arr;
+    },
+    ...mapState({
+      route: state => state.route,
+      page: state => state.page.open
+    })
+  },
+  methods: {
+    toggleClick() {
+      this.fold = !this.fold;
+      this.$store.commit("setMenuFlod", this.fold);
+    },
+    select(name) {
+      this.$router.push(name);
+    },
+    loginOut() {
+      this.$store.commit("clearToken");
+      this.$router.push("/login");
+    },
+    dropdownClick(name) {
+      if (name == "loginOut") {
+        this.loginOut();
+      }
+      if (name == "userInfo") {
+        this.$router.push("/admin/user/info");
+      }
     }
+  }
+};
 </script>

@@ -7,12 +7,11 @@
                 <article class="post" v-for="v in content">              
                     <header>
                         <h3 class="post-title">
-                            <router-link :to="{ path: 'post/'+v.id }">{{v.title}}</router-link>
+                            <router-link :to="{ path: 'post/'+v.slug }">{{v.title}}</router-link>
                         </h3>
-                         <div class="post-meta">December 23, 2017 </div>
+                         <div class="post-meta">{{v.create_time|date}}</div>
                         <div class="post-content">
-                            {{v.content}}
-                            <p class="more"><a href="">- 阅读剩余部分 -</a></p>
+                            <div v-html="v.description"></div>
                         </div>
                     </header>
                 </article>
@@ -23,22 +22,28 @@
 </div>
 </template>
 <script>
-    import { content } from '@/api';
-    export default {
-        data(){
-            return {
-                content:[]
-            }
-        },
-        methods:{
-            getContent(){
-                content.getList().then(res=>{
-                    this.content=res.data;
-                });
-            },
-        },
-        mounted(){
-            this.getContent();
-        }
+import { content } from "@/api";
+export default {
+  data() {
+    return {
+      content: []
+    };
+  },
+  methods: {
+    getList() {
+      content.getList().then(res => {
+        this.content = res.data;
+      });
     }
+  },
+  filters: {
+    date: function(value) {
+      if (!value) return "";
+      return new Date(value * 1000).toLocaleString();
+    }
+  },
+  mounted() {
+    this.getList();
+  }
+};
 </script>
