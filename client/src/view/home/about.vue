@@ -5,11 +5,6 @@
 			<div class="res-cons">
 				<article class="post">              
 					<header>
-						<h5 class="post-title">
-							{{item.title}}
-						</h5>
-						 <div class="post-meta">{{item.create_time|date}}</div>
-             <hr>
 						<div class="post-content" v-html="item.content">
 						</div>
 					</header>
@@ -29,8 +24,8 @@ export default {
     };
   },
   methods: {
-    getContent(slug) {
-      content.getInfo(slug).then(res => {
+    getContent() {
+      content.getInfo('about').then(res => {
         this.item = res.data;
       });
     }
@@ -43,13 +38,11 @@ export default {
   },
   watch: {
     $route(to, from) {
-      const slug = this.$route.params.slug;
-      this.getContent(slug);
+      this.getContent();
     }
   },
   mounted() {
-    const slug = this.$route.params.slug;
-    this.getContent(slug);
+    this.getContent();
   }
 };
 </script>

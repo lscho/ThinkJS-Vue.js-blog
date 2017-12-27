@@ -159,8 +159,7 @@ export default {
       return arr;
     },
     ...mapState({
-      route: state => state.route,
-      page: state => state.page.open
+      route: state => state.route
     })
   },
   methods: {

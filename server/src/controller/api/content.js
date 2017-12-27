@@ -55,11 +55,20 @@ module.exports = class extends BaseRest {
 	//获取内容
 	async getAction(){
 		let data;
+		// 获取详情
 		if (this.id) {
 			data = await this.modelInstance.where({ slug: this.id }).find();
 			return this.success(data);
 		}
-		data = await this.modelInstance.order('id desc').select();
+		// 获取列表
+		const type=this.get('type')||'default';
+		if(type=='default'){
+			data = await this.modelInstance.order('id desc').fieldReverse('content,markdown').select();
+		}
+		console.log(type)
+		if(type=='archives'){
+			data = await this.modelInstance.order('id desc').fieldReverse('content,markdown').select();
+		}
 		return this.success(data);		
 	}
 

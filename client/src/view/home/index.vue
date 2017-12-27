@@ -3,19 +3,17 @@
     <div class="col-group">
         <div class="col-8" id="main">
             <div class="res-cons">
-
-                <article class="post" v-for="v in content">              
+                <article class="post" v-for="(item , index) in items" :key="index">              
                     <header>
-                        <h3 class="post-title">
-                            <router-link :to="{ path: 'post/'+v.slug }">{{v.title}}</router-link>
-                        </h3>
-                         <div class="post-meta">{{v.create_time|date}}</div>
+                        <h5 class="post-title">
+                            <router-link :to="{ path: 'post/'+item.slug }">{{item.title}}</router-link>
+                        </h5>
+                         <div class="post-meta">{{item.create_time|date}}</div>
                         <div class="post-content">
-                            <div v-html="v.description"></div>
+                            <div v-html="item.description"></div>
                         </div>
                     </header>
                 </article>
-
             </div>
         </div>
     </div>
@@ -23,16 +21,17 @@
 </template>
 <script>
 import { content } from "@/api";
+import "mavon-editor/dist/highlightjs/styles/github.min.css";
 export default {
   data() {
     return {
-      content: []
+      items: []
     };
   },
   methods: {
     getList() {
       content.getList().then(res => {
-        this.content = res.data;
+        this.items = res.data;
       });
     }
   },

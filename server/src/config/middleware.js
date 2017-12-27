@@ -14,7 +14,7 @@ module.exports = [
 		enable: isDev,
 		options: {
 			root: path.join(think.ROOT_PATH, 'www'),
-			publicPath: /^\/(static|upload|favicon\.ico|admin.html)/
+			publicPath: /^\/(static|upload|favicon\.ico|admin\.html)/
 		}
 	},
 	{
@@ -26,7 +26,9 @@ module.exports = [
 	},
 	{
 		handle: 'payload',
-		options: {}
+		options: {
+			uploadDir: path.join(think.ROOT_PATH, 'runtime/data')
+		}
 	},
 	{
 		handle: 'router',

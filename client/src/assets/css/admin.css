@@ -1,145 +1,182 @@
-html,body{width: 100%;height: 100%;background: #f0f0f0;overflow: hidden;}
-#app {
-  height: 100%;
-  width: 100%;
+html,
+body {
+	width: 100%;
+	height: 100%;
+	background: #f0f0f0;
+	overflow: hidden;
 }
-    .layout{
-        border: 1px solid #d7dde4;
-        background: #f5f7f9;
-        position: relative;
-        border-radius: 4px;
-        overflow: hidden;
-        height: 100%;
-        width: 100%;
-    }
-    .admin{
-        height: 100%;
-    }
-    .layout-breadcrumb{
-        padding: 10px 15px 0;
-    }
-    .layout-content{
-        min-height: 200px;
-        margin: 15px;
-        overflow: hidden;
-        background: #fff;
-        border-radius: 4px;
-    }
-    .layout-content-main{
-        padding: 10px;
-    }
-    .layout-copy{
-        text-align: center;
-        padding: 10px 0 20px;
-        color: #9ea7b4;
-    }
-    .layout-rignt{
-      overflow-y:auto;
-    }
-    .layout-menu-left{
-        background: #464c5b;
-    }
-    .layout-menu-left ul{
-        z-index: 500;
-    }
-    .layout-menu-left i{
-        width: 14px;
-    }
-    .layout-header{
-        height: 60px;
-        background: #fff;
-        box-shadow: 0 1px 1px rgba(0,0,0,.1);
-    }
-    .layout-header-right{
-        float: right;
-        line-height: 60px;
-        padding-right: 20px;
-    }
-    .layout-logo-left{
-        width: 90%;
-        height: 30px;
-        background: #5b6270;
-        border-radius: 3px;
-        margin: 15px auto;
-    }
-    .layout-ceiling-main a{
-        color: #9ba7b5;
-    }
-    .layout-hide-text .layout-text,.layout-hide-text .ivu-menu-submenu-title-icon{
-        display: none;
-    }
-    .ivu-col{
-        transition: width .2s ease-in-out;
-        text-align: left;
-    }
-    #editor .editor{
-        z-index: 800;
-    }
+
+#app {
+	height: 100%;
+	width: 100%;
+}
+
+.layout {
+	border: 1px solid #d7dde4;
+	background: #f5f7f9;
+	position: relative;
+	border-radius: 4px;
+	overflow: hidden;
+	height: 100%;
+	width: 100%;
+}
+
+.admin {
+	height: 100%;
+}
+
+.layout-breadcrumb {
+	padding: 10px 15px 0;
+}
+
+.layout-content {
+	min-height: 200px;
+	margin: 15px;
+	overflow: hidden;
+	background: #fff;
+	border-radius: 4px;
+}
+
+.layout-content-main {
+	padding: 10px;
+}
+
+.layout-copy {
+	text-align: center;
+	padding: 10px 0 20px;
+	color: #9ea7b4;
+}
+
+.layout-rignt {
+	overflow-y: auto;
+}
+
+.layout-menu-left {
+	background: #464c5b;
+}
+
+.layout-menu-left ul {
+	z-index: 500;
+}
+
+.layout-menu-left i {
+	width: 14px;
+}
+
+.layout-header {
+	height: 60px;
+	background: #fff;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+}
+
+.layout-header-right {
+	float: right;
+	line-height: 60px;
+	padding-right: 20px;
+}
+
+.layout-logo-left {
+	width: 90%;
+	height: 30px;
+	background: #5b6270;
+	border-radius: 3px;
+	margin: 15px auto;
+}
+
+.layout-ceiling-main a {
+	color: #9ba7b5;
+}
+
+.layout-hide-text .layout-text,
+.layout-hide-text .ivu-menu-submenu-title-icon {
+	display: none;
+}
+
+.ivu-col {
+	transition: width .2s ease-in-out;
+	text-align: left;
+}
+
+#editor .editor {
+	z-index: 800;
+}
 
 @keyframes error404animation {
-  0% {
-  transform: rotatez(0deg);
-}
-20% {
-  transform: rotatez(-60deg);
-}
-40% {
-  transform: rotatez(-10deg);
-}
-60% {
-  transform: rotatez(50deg);
-}
-80% {
-  transform: rotatez(-20deg);
-}
-100% {
-  transform: rotatez(0deg);
+	0% {
+		transform: rotatez(0deg);
+	}
+	20% {
+		transform: rotatez(-60deg);
+	}
+	40% {
+		transform: rotatez(-10deg);
+	}
+	60% {
+		transform: rotatez(50deg);
+	}
+	80% {
+		transform: rotatez(-20deg);
+	}
+	100% {
+		transform: rotatez(0deg);
+	}
 }
 
-}
 .user-infor {
-  height: 135px;
+	height: 135px;
 }
+
 .avator-img {
-  display: block;
-  width: 80%;
-  max-width: 100px;
-  height: auto;
+	display: block;
+	width: 80%;
+	max-width: 100px;
+	height: auto;
 }
+
 .card-user-infor-name {
-  font-size: 2em;
-  color: #2d8cf0;
+	font-size: 2em;
+	color: #2d8cf0;
 }
+
 .card-title {
-  color: #abafbd;
+	color: #abafbd;
 }
+
 .made-child-con-middle {
-  height: 100%;
+	height: 100%;
 }
+
 .to-do-list-con {
-  height: 145px;
-  overflow: auto;
+	height: 145px;
+	overflow: auto;
 }
+
 .to-do-item {
-  padding: 2px;
+	padding: 2px;
 }
+
 .infor-card-con {
-  height: 100px;
+	height: 100px;
 }
+
 .infor-card-icon-con {
-  height: 100%;
-  color: white;
-  border-radius: 3px 0 0 3px;
+	height: 100%;
+	color: white;
+	border-radius: 3px 0 0 3px;
 }
+
 .map-con {
-  height: 305px;
+	height: 305px;
 }
+
 .map-incon {
-  height: 100%;
+	height: 100%;
 }
+
 .data-source-row {
-  height: 200px;
+	height: 200px;
 }
+
 .line-chart-con {
-  height: 150px;
+	height: 150px;
 }

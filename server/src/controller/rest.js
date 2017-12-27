@@ -32,7 +32,6 @@ module.exports = class extends think.Controller {
 			return id;
 		}
 		const last = this.ctx.path.split('/').slice(-1)[0];
-		console.log(last)
 		if (last !== this.resource) {
 			return last;
 		}

@@ -31,6 +31,8 @@ export const clientRouter = [
         children: [
             { path: '/index', alias: '/', name: 'index', meta: { title: '首页' }, component: resolve => { require(['@/view/home/index.vue'], resolve); } },
             { path: '/post/:slug', name: 'post', meta: { title: '内容' }, component: resolve => { require(['@/view/home/post.vue'], resolve); } },
+            { path: '/archives', name: 'archives', meta: { title: '归档' }, component: resolve => { require(['@/view/home/archives.vue'], resolve); } },
+            { path: '/about', name: 'about', meta: { title: '关于' }, component: resolve => { require(['@/view/home/about.vue'], resolve); } },
         ]
     }
 ]

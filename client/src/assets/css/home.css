@@ -141,9 +141,23 @@ textarea {
     border-bottom-color:transparent;
 }
 .header {
-    text-align:center;
+    width: 100%;
+    height: 120px;
+    margin: 0 auto;
+    text-align: right;
+    -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.1);
+    -moz-box-shadow: 0 1px 5px rgba(0,0,0,.1);
+    box-shadow: 0 1px 5px rgba(0,0,0,.1);
 }
-#description {
+.header .container{
+    position: relative;
+    width: 1040px;
+}
+.header .site-name{
+    position: absolute;
+    left: 0;
+}
+.header .description {
     color: #999;
     font-size: 1em;
     margin: -2em 0 2em;
@@ -165,8 +179,6 @@ textarea {
 }
 #nav-menu a:first-child {
     border:none;
-}
-#nav-menu a:hover {
 }
 #nav-menu a.current {
     background-color: #303538;
@@ -276,9 +288,9 @@ textarea {
     color:#999;
     text-align:center;
     display: block;
+    font-size: 14px;
 }
 .post-content {
-    font-size: 17px;
     line-height: 1.92;
     color:#444;
 }
@@ -287,15 +299,6 @@ textarea {
 }
 .post-content h3,.post-content h2{
     margin: 1.4em 0 1.1em;
-}
-.post-content pre code ,.comment-content pre code {
-    padding: 1.5em 2em;
-}
-.post-content p code, .comment-content p code {
-    display:inline;
-    margin:0 5px;
-    padding:3px 5px;
-    border: 1px solid #ddd;
 }
 .post-content p {
     margin:0 0 1.234em;

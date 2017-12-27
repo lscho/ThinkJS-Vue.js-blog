@@ -10,9 +10,10 @@ export default {
 		})
 	},
 
-	getList() {
+	getList(map={}) {
+		map.type=map.type||"default";
 		return new Promise((resolve, reject) => {
-			Vue.axios.get('/content').then(res => {
+			Vue.axios.get('/content',{ params: map }).then(res => {
 				resolve(res.data);
 			});
 		})
