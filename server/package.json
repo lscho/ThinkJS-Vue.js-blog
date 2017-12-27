@@ -13,6 +13,7 @@
     "think-model-mysql": "^1.0.0",
     "think-session": "^1.0.0",
     "think-session-jwt": "^1.0.8",
+    "think-view": "^1.0.11",
     "thinkjs": "^3.0.0"
   },
   "devDependencies": {
