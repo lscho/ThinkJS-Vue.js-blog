@@ -1,17 +1,19 @@
-## 设计方案 
+## 设计方案  
 
-1.前后端分离 
+1.前后端分离  
+2.RESTful API  
+3.使用 jwt 身份认证  
+4.后台使用 iview  
 
-2.后端只提供接口 
 
-3.RESTful API 
+## 结构  
 
-4.使用 jwt 身份认证
-
+|-[client](https://github.com/lscho/ThinkJS-Vue.js-blog/tree/master/client) 前端  
+|-[server](https://github.com/lscho/ThinkJS-Vue.js-blog/tree/master/server) 后端  
 
 ## 依赖 
 
-#### 服务端 
+#### 服务端  
 
 ```json
   "dependencies": {
