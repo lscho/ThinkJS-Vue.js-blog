@@ -8,7 +8,7 @@
         </FormItem>
         <FormItem label="文章分类"  prop="category_id">
             <Select v-model="formItem.category_id"  style="width:200px;">
-                <Option v-for="v in category" :value="v.id" :label="v.name"></Option>
+                <Option v-for="(item,index) in category" :value="item.id" :label="item.name" :key="index"></Option>
             </Select>
         </FormItem>
         <FormItem label="发布时间" prop="date">
@@ -28,12 +28,13 @@
         <FormItem label="状态">
             <RadioGroup v-model="formItem.status">
                 <Radio label="0">草稿</Radio>
-                <Radio label="1">发布</Radio>
+                <Radio label="1">页面</Radio>
+                <Radio label="99">发布</Radio>
             </RadioGroup>
         </FormItem>
         <FormItem label="标签">
             <CheckboxGroup v-model="formItem.tag">
-                <Checkbox :label="v.id" v-for="v in tag">{{v.name}}</Checkbox>
+                <Checkbox :label="item.id" v-for="(item , index) in tag" :key="index">{{item.name}}</Checkbox>
             </CheckboxGroup>
         </FormItem>
         <FormItem label="文章内容">

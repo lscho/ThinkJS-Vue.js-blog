@@ -26,6 +26,16 @@ export default {
           align: "center"
         },
         {
+          title: "发布时间",
+          key: "create_time",
+          width: 200,
+          align: "center",
+          render: (h, params) => {
+            if (!params.row.create_time) return "";
+            return new Date(params.row.create_time * 1000).toLocaleString();
+          }
+        },
+        {
           title: "操作",
           key: "action",
           width: 150,
@@ -81,7 +91,7 @@ export default {
   },
   methods: {
     get() {
-      content.getList().then(res => {
+      content.getList({all:1}).then(res => {
         this.data = res.data;
         this.loading = false;
       });

@@ -55,21 +55,39 @@ module.exports = class extends BaseRest {
 	//获取内容
 	async getAction(){
 		let data;
+		let map = {};
 		// 获取详情
 		if (this.id) {
-			data = await this.modelInstance.where({ slug: this.id }).find();
+			map.slug=this.id;
+			if (think.isEmpty(this.userInfo)){
+				map.status=99;
+			}
+			data = await this.modelInstance.where(map).find();
+			// 增加阅读量
+			this.modelInstance.where(map).increment('view');
 			return this.success(data);
 		}
 		// 获取列表
 		const type=this.get('type')||'default';
+		// 归档
+		if (type == 'archives') {
+			data = await this.modelInstance.where({ status: 99 }).order('id desc').fieldReverse('content,markdown').select();
+			return this.success(data);
+		}
+		// 是否获取全部
+		const all=this.get('all');
+		if(!all||think.isEmpty(this.userInfo)){
+			map.status=99;
+		}
+		// 关键词
+		const key=this.get('key');
+		if(key){
+			map['title|description'] = ['like', '%'+key+'%'];
+		}
 		if(type=='default'){
-			data = await this.modelInstance.order('id desc').fieldReverse('content,markdown').select();
+			data = await this.modelInstance.where(map).order('id desc').fieldReverse('content,markdown').select();
 		}
-		console.log(type)
-		if(type=='archives'){
-			data = await this.modelInstance.order('id desc').fieldReverse('content,markdown').select();
-		}
-		return this.success(data);		
+		return this.success(data);
 	}
 
 	//删除内容

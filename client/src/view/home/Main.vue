@@ -16,7 +16,7 @@
     <!--sidebar-->
     <div :class="{'icon-arrow-down':!sidebarOpen,'icon-cross':sidebarOpen,'side-click':true,}" @click="toggleClick"></div>
     <div id="secondary"  :class="{'active':sidebarOpen}">
-        <sidebar></sidebar>
+        <sidebar :route="route"></sidebar>
     </div>
     <!--sidebar-->
     
@@ -51,6 +51,11 @@ export default {
     ...mapState({
       route: state => state.route
     })    
+  },
+  watch: {
+    $route(to, from) {
+      this.sidebarOpen = false;
+    }
   },
   methods: {
     getSite() {

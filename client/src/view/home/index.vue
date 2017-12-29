@@ -3,7 +3,7 @@
     <div class="col-group">
         <div class="col-8" id="main">
             <div class="res-cons">
-                <article class="post" v-for="(item , index) in items" :key="index">              
+                <article class="post" v-for="(item , index) in items" :key="index" v-if="items.length>0">              
                     <header>
                         <h5 class="post-title">
                             <router-link :to="{ path: 'post/'+item.slug }">{{item.title}}</router-link>
@@ -14,6 +14,10 @@
                         </div>
                     </header>
                 </article>
+
+                <div v-if="items.length==0">
+                  <h3>暂无任何结果</h3>
+                </div>
             </div>
         </div>
     </div>
@@ -30,15 +34,25 @@ export default {
   },
   methods: {
     getList() {
-      content.getList().then(res => {
+      let map={};
+      const key = this.$route.query.key;
+      if(key){
+        map.key=key;
+      }
+      content.getList(map).then(res => {
         this.items = res.data;
       });
+    }
+  },
+  watch: {
+    $route(to, from) {
+      this.getList();
     }
   },
   filters: {
     date: function(value) {
       if (!value) return "";
-      return new Date(value * 1000).toLocaleString();
+      return new Date(value * 1000).toDateString();
     }
   },
   mounted() {

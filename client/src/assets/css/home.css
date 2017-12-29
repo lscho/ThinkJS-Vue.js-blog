@@ -156,6 +156,7 @@ textarea {
 .header .site-name{
     position: absolute;
     left: 0;
+    margin-left: 25px;
 }
 .header .description {
     color: #999;

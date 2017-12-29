@@ -38,7 +38,7 @@ export default {
   filters: {
     date: function(value) {
       if (!value) return "";
-      return new Date(value * 1000).toLocaleString();
+      return new Date(value * 1000).toDateString();
     }
   },
   watch: {
