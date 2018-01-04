@@ -78,10 +78,9 @@ module.exports = class extends think.Model {
 	parseContent(data) {
 		//描述处理
 		if (data.content.indexOf('<!--more-->') > -1) {
-			data.description = data.content.split("<!--more-->")[0],
-				data.content = data.content.split("<!--more-->")[1]
+			data.description = data.content.split("<!--more-->")[0];
 		} else {
-			data.description = ""
+			data.description = "";
 		}
 		//唯一标识处理
 		if (!data.slug) {

@@ -8,10 +8,6 @@
             <Input v-model="formItem.description"></Input>
         </FormItem>
 
-        <FormItem label="博客链接">
-            <Input v-model="formItem.url"></Input>
-        </FormItem>
-
         <FormItem label="底部说明">
             <Input v-model="formItem.footer"></Input>
         </FormItem>
@@ -30,7 +26,6 @@ export default {
         id: "",
         title: "",
         description: "",
-        url: "",
         footer: ""
       }
     };

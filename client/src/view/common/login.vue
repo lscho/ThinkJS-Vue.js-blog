@@ -1,7 +1,7 @@
 <template>
 <div class="login-form">
             <div class="top-login">
-                <span><img src="@/assets/images/group.png" alt=""/></span>
+                <span><img src="../../assets/images/group.png" alt=""/></span>
             </div>
             <h1>登录</h1>
             <div class="login-top">

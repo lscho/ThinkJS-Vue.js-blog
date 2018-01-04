@@ -10,7 +10,7 @@
                         </h5>
                          <div class="post-meta">{{item.create_time|date}}</div>
                         <div class="post-content">
-                            <div v-html="item.description"></div>
+                            <div class="post-content-description" v-html="item.description"></div>
                         </div>
                     </header>
                 </article>

@@ -22,6 +22,7 @@
     "think-model-mysql": "^1.0.0",
     "think-session": "^1.0.0",
     "think-session-jwt": "^1.0.8",
+    "think-view": "^1.0.11",
     "thinkjs": "^3.0.0"
   }
 ```
@@ -39,3 +40,27 @@
     "vuex-router-sync": "^5.0.0"
   }
 ```
+
+## 安装  
+
+#### 开发  
+
+导入sql,修改[配置](https://github.com/lscho/ThinkJS-Vue.js-blog/blob/master/server/src/config/adapter.js)中 mysql 部分,启动服务  
+```bash
+# 启动后台服务
+cd ./server
+npm start
+# 启动前台服务
+cd ./client
+npm start
+```
+
+#### 部署  
+
+```bash
+# 编译
+cd ./client
+npm run build
+```
+
+将 server 文件夹上传至服务器，参考[nginx.conf](https://github.com/lscho/ThinkJS-Vue.js-blog/blob/master/server/nginx.conf)进行配置

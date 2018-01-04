@@ -1,7 +1,6 @@
 <template>
     <div class="footer">
-        <div class="container">
-            {{text}}
+        <div class="container" v-html="text">
         </div>
     </div>  
 </template>

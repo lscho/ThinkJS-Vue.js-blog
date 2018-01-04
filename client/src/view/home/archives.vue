@@ -1,6 +1,8 @@
 <<style> 
   .archives ul li{
     margin-top:15px;
+  }
+  .archives ul li a{
     color: #666;
   }
   .archives ul li .date{

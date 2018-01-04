@@ -49,6 +49,7 @@ body {
 
 .layout-rignt {
 	overflow-y: auto;
+	max-height: 100%;
 }
 
 .layout-menu-left {

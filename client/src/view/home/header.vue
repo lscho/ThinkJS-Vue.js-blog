@@ -7,8 +7,7 @@
                     <router-link :to="{ path: '/'}">
                         <h1>{{title}}</h1>
                     </router-link>
-                    <br>
-                    <h2 class="serif description">{{description}}</h2>
+                    <span class="serif description">{{description}}</span>
                 </div>
 
                 <div>
