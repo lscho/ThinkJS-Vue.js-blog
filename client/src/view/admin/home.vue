@@ -35,22 +35,23 @@
     </div>
 </template>
 <script>
+import { mapState } from "vuex";
 import { user } from "@/api";
+import { Row, Col, Card} from 'iview';
 export default {
-  data() {
-    return {
-      userInfo: {}
-    };
+  components: {
+    Row, Col, Card
+  },
+  computed: {
+    ...mapState({
+      userInfo: state => state.admin.user.info
+    })
   },
   mounted() {
-    this.get();
+
   },
   methods: {
-    get() {
-      user.getInfo(this.$store.state.admin.user.name).then(res => {
-        this.userInfo = res.data;
-      });
-    }
+
   }
 };
 </script>

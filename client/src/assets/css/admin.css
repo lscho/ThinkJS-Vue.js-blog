@@ -71,11 +71,16 @@ body {
 }
 
 .layout-header-right {
-	float: right;
+	text-align: right!important;
 	line-height: 60px;
-	padding-right: 20px;
+	padding-right: 10px;
 }
 
+.layout-header-right .home{
+	padding-right: 10px;
+	font-size: 18px;
+	color: #495060;
+}
 .layout-logo-left {
 	width: 90%;
 	height: 30px;

@@ -38,3 +38,5 @@ www/index.html
 
 config.development.js
 adapter.development.js
+adapter.production.js
+adapter.production.js

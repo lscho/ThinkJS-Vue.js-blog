@@ -1,10 +1,10 @@
 <template>
     <Form :model="formItem"  ref="formItem" :rules="ruleInline" :label-width="80">
         <FormItem label="文章标题"  prop="title">
-            <Input v-model="formItem.title"></Input>
+            <Input v-model="formItem.title" placeholder="文章标题"></Input>
         </FormItem>
         <FormItem label="文章标识"  prop="slug">
-            <Input v-model="formItem.slug" style="width:200px;"></Input>
+            <Input v-model="formItem.slug" placeholder="文章唯一标识，并作为参数构造url"></Input>
         </FormItem>
         <FormItem label="文章分类"  prop="category_id">
             <Select v-model="formItem.category_id"  style="width:200px;">
@@ -50,10 +50,11 @@
 <script>
     import 'mavon-editor/dist/css/index.css';
     import { mavonEditor } from 'mavon-editor';
+    import { Form, FormItem, Button, Col, Row, CheckboxGroup, Checkbox, RadioGroup, Radio, DatePicker, TimePicker, Select, Option, Input} from 'iview';
     import { category , tag , content , image} from '@/api';
     export default {
         components: {
-            mavonEditor
+            mavonEditor, Form, FormItem, Button, Col, Row, CheckboxGroup, Checkbox, RadioGroup, Radio, DatePicker, TimePicker, Select, Option, Input
         },
         data () {
             return {

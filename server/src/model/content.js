@@ -53,12 +53,20 @@ module.exports = class extends think.Model {
 
 	//更新文章
 	async save(id, data) {
+		//查询修改前数据
+		const oldData=await this.where({ id: id }).find();
+		//修改分类统计
+		if(oldData.category_id!=data.category_id){
+			think.model('meta').where({ id: oldData.category_id }).decrement('count');
+		}
+
+		//更新数据
 		const tag = data.tag;
 		delete data.tag;
 		data = this.parseContent(data);
 		const res = await this.where({ id: id }).update(data);
 		if (res) {
-			//添加标签关系
+			// 添加标签关系
 			let tagData = [];
 			for (var i in tag) {
 				tagData.push({
@@ -68,7 +76,7 @@ module.exports = class extends think.Model {
 			}
 			await think.model('relationships').where({ content_id: id }).delete();
 			think.model('relationships').addMany(tagData);
-			//更新文章数量
+			// 更新文章数量
 			this.updateCount(id,data.category_id,tag);
 		}
 		return res;
@@ -90,13 +98,13 @@ module.exports = class extends think.Model {
 	}
 
 	// 更新文章数量
-	updateCount(id, category_id, tagData) {
+	async updateCount(id, category_id, tagData) {
 		//更新分类数量
-		const category_count = this.where({ category_id: category_id }).count();
+		const category_count = await this.where({ category_id: category_id }).count();
 		think.model('meta').where({ id: category_id }).update({ count: category_count });
 		//更新标签数量
 		for (var i in tagData) {
-			let tag_count = think.model('relationships').where({ meta_id: tagData[i] }).count();
+			let tag_count = await think.model('relationships').where({ meta_id: tagData[i] }).count();
 			think.model('meta').where({ id: tagData[i] }).update({ count: tag_count });
 		}
 	}

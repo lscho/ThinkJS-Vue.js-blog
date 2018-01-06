@@ -30,8 +30,12 @@
 import "iview/dist/styles/iview.css";
 import "@/assets/css/login.css";
 import { mapGetters, mapActions } from "vuex";
+import { Form, FormItem, Icon, Input, Button } from 'iview';
 import { token } from "@/api/index";
 export default {
+  components: {
+    Form, FormItem, Icon, Input, Button
+  },
   data() {
     return {
       userInfo: {

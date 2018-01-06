@@ -3,7 +3,12 @@
 </template>
 <script>
 import { category } from "@/api";
+import { Button, Table } from 'iview';
 export default {
+  components: {
+    Button,
+    Table
+  },
   data() {
     return {
       loading: true,

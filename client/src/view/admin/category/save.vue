@@ -19,7 +19,11 @@
 </template>
 <script>
 import { category } from "@/api";
+import { Form, FormItem, Input, InputNumber, Button } from 'iview';
 export default {
+  components: {
+    Form, FormItem, Input, InputNumber, Button
+  },
   data() {
     return {
       formItem: {

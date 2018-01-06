@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Message } from 'iview';
+import { Message , LoadingBar } from 'iview';
 import store from '@/store';
 import router from '@/router'
 
@@ -8,12 +8,15 @@ axios.defaults.timeout = 5000;
 
 // http请求拦截器
 axios.interceptors.request.use(config => {
+	// 进度条开始
+	LoadingBar.start();
 	//token
 	if (localStorage.getItem('token')) {
 		config.headers.Authorization = localStorage.getItem('token')
 	}
 	return config;
 }, error => {
+	LoadingBar.error();
 	Message.error('请求服务器超时');
 	return error;
 })
@@ -22,6 +25,7 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(data => {
 	if (!data || typeof data.data != 'object') {
 		console.log(data);
+		LoadingBar.error();
 		Message.error('服务器响应格式错误');
 	} else {
 		let errmsg = "";
@@ -44,6 +48,7 @@ axios.interceptors.response.use(data => {
 			Message.success(errmsg);
 		}
 	}
+    LoadingBar.finish();
 	return data;
 }, error => {
 	let errmsg = "服务器响应错误";
@@ -56,6 +61,7 @@ axios.interceptors.response.use(data => {
 				break;
 		}
 	}
+    LoadingBar.error();
 	Message.error(errmsg);
 	return Promise.reject(error.response.data)
 })

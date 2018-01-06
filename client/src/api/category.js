@@ -1,5 +1,4 @@
 import Vue from 'vue';
-
 export default {
 	
 	create(data) {

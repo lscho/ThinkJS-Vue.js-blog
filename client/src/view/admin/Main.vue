@@ -26,21 +26,25 @@
             <Col :span="fold?23:21" class="layout-rignt">
                 <div class="layout-header">
                     <Row>
-                        <Button type="text" @click="toggleClick">
-                            <Icon type="navicon" size="32"></Icon>
-                        </Button>
-                        <div  class="layout-header-right">
+                        <Col span="12" class="layout-header-left">
+                          <Button type="text" @click="toggleClick">
+                              <Icon type="navicon" size="32"></Icon>
+                          </Button>                          
+                        </Col>
+                        <Col span="12" class="layout-header-right">
+                            <a class="home" target="_blank" href="/"><Icon type="home"></Icon></a>
                             <Dropdown  trigger="click" @on-click="dropdownClick">
                                 <a href="javascript:void(0)">
-                                    {{username}}
+                                    {{userInfo.username}}
                                     <Icon type="arrow-down-b"></Icon>
                                 </a>
                                 <DropdownMenu slot="list">
                                     <DropdownItem name="userInfo">个人资料</DropdownItem>
                                     <DropdownItem name="loginOut">退出后台</DropdownItem>
                                 </DropdownMenu>
-                            </Dropdown>                         
-                        </div>                        
+                            </Dropdown>
+                            <Avatar :src="userInfo.avator" size="large" />
+                        </Col>
                     </Row>
                 </div>
                 <div class="layout-breadcrumb">
@@ -60,13 +64,21 @@
     </div>
 </template>
 <script>
+import "iview/dist/styles/iview.css";
 import "@/assets/css/admin.css";
+import { Row, Col, Menu, DropdownMenu, DropdownItem, Breadcrumb, BreadcrumbItem, Card, Dropdown, Icon, Submenu, MenuItem, Button, Avatar} from 'iview';
 import { mapState } from "vuex";
+import { user } from "@/api";
+import Vue from 'vue';
+Vue.component('Button', Button);
 export default {
+  components: {
+    Row, Col, Menu, DropdownMenu, DropdownItem, Breadcrumb, BreadcrumbItem, Card, Dropdown, Icon, Submenu, MenuItem, Button, Avatar
+  },
   data() {
     return {
+      userInfo: {},
       fold: this.$store.getters.getMenu.fold,
-      username: this.$store.state.admin.user.name,
       //菜单数据
       // TODO：后台获取
       menu: [
@@ -162,7 +174,16 @@ export default {
       route: state => state.route
     })
   },
+  mounted() {
+    this.getUserInfo();
+  },
   methods: {
+    getUserInfo(){
+      user.getInfo(this.$store.state.admin.user.name).then(res => {
+        this.$store.commit("setUserInfo", res.data);
+        this.userInfo = res.data;
+      });
+    },
     toggleClick() {
       this.fold = !this.fold;
       this.$store.commit("setMenuFlod", this.fold);

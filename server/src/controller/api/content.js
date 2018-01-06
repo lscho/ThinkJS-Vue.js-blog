@@ -84,9 +84,11 @@ module.exports = class extends BaseRest {
 		if(key){
 			map['title|description'] = ['like', '%'+key+'%'];
 		}
-		if(type=='default'){
-			data = await this.modelInstance.where(map).order('id desc').fieldReverse('content,markdown').select();
-		}
+		//页码
+		const page=this.get('page')||1;
+		//每页显示数量
+		const pageSize=this.get('pageSize')||5;
+		data = await this.modelInstance.where(map).page(page,pageSize).order('id desc').fieldReverse('content,markdown').countSelect();
 		return this.success(data);
 	}
 

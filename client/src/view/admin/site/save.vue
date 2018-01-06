@@ -9,7 +9,7 @@
         </FormItem>
 
         <FormItem label="底部说明">
-            <Input v-model="formItem.footer"></Input>
+            <Input type="textarea" v-model="formItem.footer"></Input>
         </FormItem>
 
         <FormItem>
@@ -19,7 +19,11 @@
 </template>
 <script>
 import { site } from "@/api";
+import { Form, FormItem, Input, Button } from 'iview';
 export default {
+  components: {
+    Form, FormItem, Input, Button
+  },
   data() {
     return {
       formItem: {

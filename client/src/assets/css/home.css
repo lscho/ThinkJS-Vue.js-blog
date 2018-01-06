@@ -86,16 +86,7 @@ mark {
     background: #fffdd1;
 }
 pre, code {
-    background:#f8f8f8;
-    font-family:Menlo, Monaco, Consolas, "Lucida Console", "Courier New", monospace;
     font-size:.92857em;
-    display: block;
-}
-pre {
-    margin: 2em 0;
-    overflow:auto;
-    background: none;
-    border: 1px solid #ddd;
 }
 blockquote,.stressed {
     -moz-box-sizing: border-box;
@@ -224,7 +215,6 @@ textarea {
 .col-12{width:100%;}
 .container {
     width:1150px;
-    padding:0 60px;
     margin:0 auto;
 }
 #secondary {
@@ -259,6 +249,9 @@ textarea {
 }
 .post {
     padding:36px 0 0;
+}
+.post .text-center{
+    text-align: center;
 }
 .post .post-title {
     margin:0;
@@ -301,6 +294,9 @@ textarea {
 }
 .post-content-description{
     color: #666;
+}
+.post-content-description p{
+    text-align: center;
 }
 .post-footer {
     position: relative;
@@ -367,16 +363,18 @@ textarea {
     padding:0 10px;
     height:25px;
     line-height:25px;
-    padding:5px 9px;
-    border:1px solid #DDD;
+    color: 666;
+    cursor:not-allowed;
 }
-.page-navigator a:hover {
-    background:#F8F8F8;
-    border-bottom-color:#D26911;
+.page-navigator .active a{
+    color: #444;
+}
+.page-navigator .active a:hover {
+    border-bottom:1px solid #666;
+    cursor:pointer;
 }
 .page-navigator .current a {
-    background:#F8F8F8;
-    border-bottom-color:#D26911;
+    border-bottom:1px solid #666;
 }
 .related-article{
     border:1px solid #ddd;
@@ -889,8 +887,8 @@ background-size: auto 100%;
     margin: 20px 20px 0 24px;
     color: #000;
     border: 3px solid #000;
-    width: 26px;
-    height: 26px;
+    width: 20px;
+    height: 20px;
     line-height: 22px;
     font-size: 20px;
     border-radius: 100px;
@@ -904,4 +902,100 @@ background-size: auto 100%;
     transition-timing-function: cubic-bezier(0.165,0.630,0.140,0.820);
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     cursor:pointer;
+}
+/* iview公用组件样式 */
+.ivu-loading-bar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000
+}
+
+.ivu-loading-bar-inner {
+    transition: width .2s linear
+}
+
+.ivu-loading-bar-inner-color-primary {
+    background-color: #2d8cf0
+}
+
+.ivu-loading-bar-inner-failed-color-error {
+    background-color: #ed3f14
+}
+.ivu-alert-with-desc .ivu-alert-message {
+    font-size:14px;
+    color:#1c2438;
+    display:block
+}
+.ivu-message {
+    font-size:12px;
+    position:fixed;
+    z-index:1010;
+    width:100%;
+    top:16px;
+    left:0;
+    pointer-events:none
+}
+.ivu-message-notice {
+    padding:8px;
+    text-align:center;
+    transition:height .3s ease-in-out,padding .3s ease-in-out
+}
+.ivu-message-notice:first-child {
+    margin-top:-8px
+}
+.ivu-message-notice-close {
+    position:absolute;
+    right:4px;
+    top:9px;
+    color:#999;
+    outline:0
+}
+.ivu-message-notice-close i.ivu-icon {
+    font-size:22px;
+    color:#999;
+    transition:color .2s ease;
+    position:relative;
+    top:-3px
+}
+.ivu-message-notice-close i.ivu-icon:hover {
+    color:#444
+}
+.ivu-message-notice-content {
+    display:inline-block;
+    pointer-events:all;
+    padding:8px 16px;
+    border-radius:4px;
+    box-shadow:0 1px 6px rgba(0,0,0,.2);
+    background:#fff;
+    position:relative
+}
+.ivu-message-notice-content-text {
+    display:inline-block
+}
+.ivu-message-notice-closable .ivu-message-notice-content-text {
+    padding-right:32px
+}
+.ivu-message-success .ivu-icon {
+    color:#19be6b
+}
+.ivu-message-error .ivu-icon {
+    color:#ed3f14
+}
+.ivu-message-warning .ivu-icon {
+    color:#f90
+}
+.ivu-message-info .ivu-icon,.ivu-message-loading .ivu-icon {
+    color:#2d8cf0
+}
+.ivu-message .ivu-icon {
+    margin-right:8px;
+    font-size:14px;
+    top:1px;
+    position:relative
+}
+.ivu-icon-close-circled:before {
+    content:"!"
 }

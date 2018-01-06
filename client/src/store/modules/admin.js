@@ -7,7 +7,9 @@ const state = {
 	},
 	user: {
 		//用户名
-		name: localStorage.getItem('user_name')
+		name: localStorage.getItem('user_name'),
+		//全部信息
+		info: {}
 	}
 }
 
@@ -15,7 +17,7 @@ const state = {
 const getters = {
 
 	getMenu: state => state.menu,
-	getUser: state => state.user,
+	getUser: state => state.user
 
 }
 
@@ -35,6 +37,10 @@ const mutations = {
 	setUserName(state, value) {
 		localStorage.setItem('user_name', value);
 		state.user.name = value;
+	},
+
+	setUserInfo(state, value){
+		state.user.info = value;
 	}
 }
 

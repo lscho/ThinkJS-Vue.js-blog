@@ -1,9 +1,39 @@
+<style>
+  .page{
+    float:right;
+    margin-top:10px;
+  }
+  .search{
+    text-align: right;
+  }
+</style>
 <template>
-    <Table border  :loading="loading" :columns="columns" :data="data"></Table>
+    <div>
+      <Form ref="formInline" :model="map" inline class="search">
+          <FormItem>
+              <Input type="text" v-model="map.key" placeholder="关键字">
+              </Input>
+          </FormItem>
+          <FormItem>
+              <Button type="primary" @click="getList">查询</Button>
+          </FormItem>
+      </Form>
+      <Table border :loading="loading" :columns="columns" :data="data.data"></Table>
+      <Page class="page" :total="data.count" :page-size="data.pagesize" show-total  @on-change="changePage"></Page>
+    </div>
 </template>
 <script>
 import { content } from "@/api";
+import { Button, Table, Page, Form, FormItem, Input } from 'iview';
 export default {
+  components: {
+    Button,
+    Table,
+    Page,
+    Form,
+    FormItem,
+    Input
+  },
   data() {
     return {
       loading: true,
@@ -86,12 +116,19 @@ export default {
           }
         }
       ],
-      data: []
+      data: {},
+      map:{
+        page:1,
+        key:"",
+        all:1,
+        pageSize:10
+      }
     };
   },
   methods: {
-    get() {
-      content.getList({all:1}).then(res => {
+    getList() {
+      this.loading=true;
+      content.getList(this.map).then(res => {
         this.data = res.data;
         this.loading = false;
       });
@@ -100,11 +137,14 @@ export default {
       content.delete(id).then(res => {
         this.data.splice(index, 1);
       });
+    },
+    changePage(index){
+      this.map.page=index;
+      this.getList();
     }
   },
   mounted() {
-    console.log(content);
-    this.get();
+    this.getList();
   }
 };
 </script>
