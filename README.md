@@ -31,6 +31,7 @@
 ```json
   "dependencies": {
     "axios": "^0.17.0",
+    "echarts": "^3.8.5",
     "iview": "^2.8.0",
     "mavon-editor": "^2.4.13",
     "vue": "^2.5.2",

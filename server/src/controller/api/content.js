@@ -74,6 +74,11 @@ module.exports = class extends BaseRest {
 			data = await this.modelInstance.where({ status: 99 }).order('id desc').fieldReverse('content,markdown').select();
 			return this.success(data);
 		}
+		// 热门文章
+		if (type=='hot'){
+			data = await this.modelInstance.where({ status: 99 }).order('view desc').limit(10).field('title,view').select();
+			return this.success(data);
+		}
 		// 是否获取全部
 		const all=this.get('all');
 		if(!all||think.isEmpty(this.userInfo)){

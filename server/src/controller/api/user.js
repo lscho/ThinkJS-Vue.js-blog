@@ -7,7 +7,7 @@ module.exports = class extends BaseRest {
 		const userInfo = this.userInfo;
 		let data;
 		if (this.id) {
-			data = await this.modelInstance.where({ id: userInfo.id }).field("username,github,qq,weibo,zhihu,email").find();
+			data = await this.modelInstance.where({ id: userInfo.id }).fieldReverse("id,password,encrypt").find();
 			data.avator = 'https://secure.gravatar.com/avatar/' + think.md5(data.email);
 			return this.success(data);
 		} else {
