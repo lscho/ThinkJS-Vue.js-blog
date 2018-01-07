@@ -5,10 +5,10 @@
             <div class="res-cons">
                 <article class="post" v-for="(item , index) in items.data" :key="index" v-if="items.count>0">              
                     <header>
-                        <h5 class="post-title text-center">
+                        <h5 class="post-title">
                             <router-link :to="{ path: 'post/'+item.slug }">{{item.title}}</router-link>
                         </h5>
-                         <div class="post-meta text-center">{{item.create_time|date}}</div>
+                         <div class="post-meta">{{item.create_time|date}}</div>
                         <div class="post-content">
                             <div class="post-content-description" v-html="item.description"></div>
                             <p class="more"><router-link :to="{ path: 'post/'+item.slug }">- 阅读剩余部分 -</router-link></p>

@@ -143,6 +143,7 @@ textarea {
 .header .container{
     position: relative;
     width: 1040px;
+    max-width: 100%;
 }
 .header .site-name{
     position: absolute;
@@ -158,6 +159,9 @@ textarea {
     color: #999;
     font-size: 1em;
     margin: -2em 0 2em;
+}
+.nav{
+    display: inline-block;
 }
 #nav-menu {
     padding:0;
@@ -250,14 +254,12 @@ textarea {
 .post {
     padding:36px 0 0;
 }
-.post .text-center{
-    text-align: center;
-}
 .post .post-title {
     margin:0;
     color:#555;
     margin-top: 0;
     margin-bottom: 0;
+    text-align: center;
 }
 .post-title a {
     color:#444;
@@ -268,6 +270,7 @@ textarea {
     color:#999;
     display: block;
     font-size: 14px;
+    text-align: center;
 }
 .post-content {
     line-height: 1.92;
@@ -791,6 +794,9 @@ background-size: auto 100%;
     .container {
         width:auto;
     }
+    .nav {
+        padding-right: 50px;
+    }
 }
 @media print, screen and (max-width:1057px) {
     .container {
@@ -799,24 +805,26 @@ background-size: auto 100%;
     .post-content {
         font-size: 16px;
     }
+    .nav {
+        padding-right: 50px;
+    }
 }
 @media print, screen and (max-width:860px) {
     .post-content {
         font-size: 15px;
     }
-    .header {
-        text-align:center;
-    }
     #main {
         width:100%;
-        margin-right:0;
+    }
+    .nav {
+        padding-right: 50px;
     }
     #nav-menu {
         margin:35px 0 -1px;
     }
     .res-cons {
         width:auto;
-        margin-right:0;
+        padding: 0 20px;
     }
     .post-content img {
         max-width:100%;
@@ -827,9 +835,6 @@ background-size: auto 100%;
     }
 }
 @media print, screen and (max-width:680px) {
-    .container {
-        padding:0 20px;
-    }
     .post-title {
         font-size:22px;
     }
@@ -848,11 +853,8 @@ background-size: auto 100%;
     .post {
         padding:27px 0 0;
     }
-    #nav-menu a {
-        padding:0 15px;
-        line-height:27px;
-        height:27px;
-        font-size:13px;
+    .nav{
+        display: none;
     }
 }
 @media print, screen and (max-width:500px) {

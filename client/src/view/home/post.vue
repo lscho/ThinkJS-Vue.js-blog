@@ -4,7 +4,6 @@
 		<div class="col-8" id="main">
 			<div class="res-cons">
 				<article class="post">              
-					<header>
 						<h5 class="post-title">
 							{{item.title}}
 						</h5>
@@ -12,7 +11,6 @@
              <hr>
 						<div class="post-content" v-html="item.content">
 						</div>
-					</header>
 				</article>
 			</div>
 		</div>
