@@ -1,19 +1,23 @@
 {
   "name": "blog",
-  "description": "application created by thinkjs",
+  "description": "A Simple Bloging Platform Base On ThinkJS 3.x & Vue.js & ES2015+",
   "version": "1.0.0",
+  "author": "lscho <me@lscho.com>",
   "scripts": {
     "start": "node development.js",
     "lint": "eslint src/",
     "lint-fix": "eslint --fix src/"
   },
   "dependencies": {
+    "think-cache": "^1.0.0",
+    "think-cache-file": "^1.0.8",
     "think-logger3": "^1.0.0",
     "think-model": "^1.0.0",
     "think-model-mysql": "^1.0.0",
     "think-session": "^1.0.0",
     "think-session-jwt": "^1.0.8",
     "think-view": "^1.0.11",
+    "think-view-ejs": "^0.0.11",
     "thinkjs": "^3.0.0"
   },
   "devDependencies": {
@@ -26,5 +30,18 @@
   "engines": {
     "node": ">=7.6.0"
   },
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "thinkjs": {
+    "metadata": {
+      "name": "blog",
+      "description": "A Simple Bloging Platform Base On ThinkJS 3.x & Vue.js & ES2015+",
+      "author": "lscho <me@lscho.com>",
+      "babel": false
+    },
+    "projectName": "blog",
+    "templateName": "/usr/local/lib/node_modules/think-cli/default_template",
+    "cacheTemplatePath": "/home/lscho/.think-templates/-usr-local-lib-node_modules-think-cli-default_template",
+    "clone": false,
+    "isMultiModule": false
+  }
 }

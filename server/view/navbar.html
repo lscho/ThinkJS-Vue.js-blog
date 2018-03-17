@@ -1,0 +1,20 @@
+<!--[if lt IE 8]> <div class="browsehappy" role="dialog"> 当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/" target="_blank">升级你的浏览器</a>。 </div> <![endif]-->
+<header id="header" class="header bg-white">
+    <div class="navbar-container"> <a href="<%=site.url %>/" class="navbar-logo"> <%=site.title %> </a>
+        <div class="navbar-menu"> 
+            <a href="<%=site.url %>/page/archives.html">Archives</a> 
+            <a href="<%=site.url %>/page/about.html">About</a> 
+            <a href="<%=site.url %>/page/links.html">Links</a> 
+        </div>
+        <div class="navbar-search" onclick=""> <span class="icon-search"></span>
+            <form id="search" method="post" action="/" role="search"> <span class="search-box"> <input type="text" id="input" class="input" name="s" required="true" placeholder="Search..." maxlength="30" autocomplete="off"> </span> </form>
+        </div>
+        <div class="navbar-mobile-menu" onclick=""> <span class="icon-menu cross"><span class="middle"></span></span>
+            <ul>
+                <li><a href="<%=site.url %>/page/archives.html">Archives</a></li>
+                <li><a href="<%=site.url %>/page/about.html">About</a></li>
+                <li><a href="<%=site.url %>/page/links.html">Links</a></li>
+            </ul>
+        </div>
+    </div>
+</header>

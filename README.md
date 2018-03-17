@@ -4,12 +4,13 @@
 2.RESTful API  
 3.使用 jwt 身份认证  
 4.后台使用 iview  
-
+5.前台使用 nuxt.js 做服务端渲染
 
 ## 结构  
 
-|-[client](https://github.com/lscho/ThinkJS-Vue.js-blog/tree/master/client) 前端  
-|-[server](https://github.com/lscho/ThinkJS-Vue.js-blog/tree/master/server) 后端  
+|-[admin](https://github.com/lscho/ThinkJS-Vue.js-blog/tree/master/admin) 后台  
+|-[home](https://github.com/lscho/ThinkJS-Vue.js-blog/tree/master/home) 前台  
+|-[server](https://github.com/lscho/ThinkJS-Vue.js-blog/tree/master/server) 服务端  
 
 ## 依赖 
 
@@ -26,7 +27,7 @@
     "thinkjs": "^3.0.0"
   }
 ```
-#### 前端 
+#### 后台
 
 ```json
   "dependencies": {
@@ -48,11 +49,14 @@
 
 导入sql,修改[配置](https://github.com/lscho/ThinkJS-Vue.js-blog/blob/master/server/src/config/adapter.js)中 mysql 部分,启动服务  
 ```bash
-# 启动后台服务
-cd ./server
+# 启动服务端
+cd ./admin
 npm start
 # 启动前台服务
-cd ./client
+cd ./home
+npm start
+# 启动后台服务
+cd ./admin
 npm start
 ```
 
@@ -60,7 +64,9 @@ npm start
 
 ```bash
 # 编译
-cd ./client
+cd ./admin
+npm run build
+cd ./home
 npm run build
 ```
 

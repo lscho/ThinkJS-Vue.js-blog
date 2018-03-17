@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<% include header.html %>
+
+<body class="" gtools_scp_screen_capture_injected="true">
+    <% include navbar.html %>
+    <article class="main-content page-page" itemscope itemtype="http://schema.org/Article">
+        <div class="post-header">
+            <h1 class="post-title" itemprop="name headline"><%= content.title %></h1>
+        </div>
+        <div id="post-content" class="post-content" itemprop="articleBody">
+            <%- content.content %>
+        </div>
+    </article>
+    <% include footer.html %>
+</body>
+
+</html>
