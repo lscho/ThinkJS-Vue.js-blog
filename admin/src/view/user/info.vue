@@ -25,7 +25,14 @@
 </template>
 <script>
 import { user } from "@/api";
+import { Form, Button, FormItem, Input } from 'iview';
 export default {
+  components: {
+    Button,
+    Form,
+    FormItem,
+    Input
+  },
   data() {
     return {
       formItem: {
@@ -45,9 +52,9 @@ export default {
       });
     },
     post() {
-      user
-        .update(this.$store.state.admin.user.name, this.formItem)
-        .then(res => {});
+      user.update(this.$store.state.admin.user.name, this.formItem).then(res => {
+
+      });
     }
   },
   mounted() {

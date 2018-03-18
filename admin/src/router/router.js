@@ -29,15 +29,17 @@ export const adminRouter = [{
   redirect: '/home',
   component: resolve => { require(['@/view/Main.vue'], resolve) },
   children: [
-    { path: 'home', name: 'AdminHome', meta: { title: '控制台', requiresAuth: true }, component: resolve => { require(['@/view/home.vue'], resolve) } },
-    { path: 'content/save', name: 'AdminContentSave', meta: { title: '内容编辑', requiresAuth: true }, component: resolve => { require(['@/view/content/save.vue'], resolve) } },
-    { path: 'content/list', name: 'AdminContentList', meta: { title: '内容列表', requiresAuth: true }, component: resolve => { require(['@/view/content/list.vue'], resolve) } },
-    { path: 'category/save', name: 'AdminCategorySave', meta: { title: '分类编辑', requiresAuth: true }, component: resolve => { require(['@/view/category/save.vue'], resolve) } },
-    { path: 'category/list', name: 'AdminCategoryList', meta: { title: '分类列表', requiresAuth: true }, component: resolve => { require(['@/view/category/list.vue'], resolve) } },
-    { path: 'tag/save', name: 'AdminTagSave', meta: { title: '标签编辑', requiresAuth: true }, component: resolve => { require(['@/view/tag/save.vue'], resolve) } },
-    { path: 'tag/list', name: 'AdminTagList', meta: { title: '标签列表', requiresAuth: true }, component: resolve => { require(['@/view/tag/list.vue'], resolve) } },
-    { path: 'user/info', name: 'AdminUserInfo', meta: { title: '个人资料', requiresAuth: true }, component: resolve => { require(['@/view/user/info.vue'], resolve) } },
-    { path: 'site', name: 'AdminSystem', meta: { title: '系统设置', requiresAuth: true }, component: resolve => { require(['@/view/site/save.vue'], resolve) } }
+    { path: 'home', name: 'Home', meta: { title: '控制台', requiresAuth: true }, component: resolve => { require(['@/view/home.vue'], resolve) } },
+    { path: 'content/save', name: 'ContentSave', meta: { title: '内容编辑', requiresAuth: true }, component: resolve => { require(['@/view/content/save.vue'], resolve) } },
+    { path: 'content/list', name: 'ContentList', meta: { title: '内容列表', requiresAuth: true }, component: resolve => { require(['@/view/content/list.vue'], resolve) } },
+    { path: 'page/save', name: 'ContentSave', meta: { title: '页面编辑', requiresAuth: true }, component: resolve => { require(['@/view/page/save.vue'], resolve) } },
+    { path: 'page/list', name: 'ContentList', meta: { title: '页面列表', requiresAuth: true }, component: resolve => { require(['@/view/page/list.vue'], resolve) } },    
+    { path: 'category/save', name: 'CategorySave', meta: { title: '分类编辑', requiresAuth: true }, component: resolve => { require(['@/view/category/save.vue'], resolve) } },
+    { path: 'category/list', name: 'CategoryList', meta: { title: '分类列表', requiresAuth: true }, component: resolve => { require(['@/view/category/list.vue'], resolve) } },
+    { path: 'tag/save', name: 'TagSave', meta: { title: '标签编辑', requiresAuth: true }, component: resolve => { require(['@/view/tag/save.vue'], resolve) } },
+    { path: 'tag/list', name: 'TagList', meta: { title: '标签列表', requiresAuth: true }, component: resolve => { require(['@/view/tag/list.vue'], resolve) } },
+    { path: 'user/info', name: 'UserInfo', meta: { title: '个人资料', requiresAuth: true }, component: resolve => { require(['@/view/user/info.vue'], resolve) } },
+    { path: 'site', name: 'System', meta: { title: '系统设置', requiresAuth: true }, component: resolve => { require(['@/view/site/save.vue'], resolve) } }
   ]
 }]
 

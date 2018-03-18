@@ -4,8 +4,8 @@ export default {
   create (data) {
     data.type = 'tag'
     return new Promise((resolve, reject) => {
-      Vue.axios.post('/meta', data).then(res => {
-        resolve(res.data)
+      Vue.axios.post('/meta', data).then(response => {
+        resolve(response.data)
       })
     })
   },
@@ -13,8 +13,8 @@ export default {
   getList (data, map = {}) {
     map.type = 'tag'
     return new Promise((resolve, reject) => {
-      Vue.axios.get('/meta', { params: map }).then(res => {
-        resolve(res.data)
+      Vue.axios.get('/meta', { params: map }).then(response => {
+        resolve(response.data)
       })
     })
   },
@@ -22,8 +22,8 @@ export default {
   getInfo (id, map = {}) {
     map.type = 'tag'
     return new Promise((resolve, reject) => {
-      Vue.axios.get('/meta/' + id, { params: map }).then(res => {
-        resolve(res.data)
+      Vue.axios.get('/meta/' + id, { params: map }).then(response => {
+        resolve(response.data)
       })
     })
   },
@@ -31,16 +31,16 @@ export default {
   update (id, data) {
     data.type = 'tag'
     return new Promise((resolve, reject) => {
-      Vue.axios.put('/meta/' + id, data).then(res => {
-        resolve(res.data)
+      Vue.axios.put('/meta/' + id, data).then(response => {
+        resolve(response.data)
       })
     })
   },
 
   delete (id) {
     return new Promise((resolve, reject) => {
-      Vue.axios.delete('/meta/' + id).then(res => {
-        resolve(res.data)
+      Vue.axios.delete('/meta/' + id).then(response => {
+        resolve(response.data)
       })
     })
   }

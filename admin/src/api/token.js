@@ -4,8 +4,8 @@ export default {
 
   create (userInfo) {
     return new Promise((resolve, reject) => {
-      Vue.axios.post('/token', userInfo).then(res => {
-        resolve(res.data)
+      Vue.axios.post('/token', userInfo).then(response => {
+        resolve(response.data)
       })
     })
   }

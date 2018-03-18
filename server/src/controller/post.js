@@ -15,10 +15,53 @@ module.exports = class extends Base {
 		let page=this.get('page')||1;
 		let pageSize=this.get('pageSize')||5;
 
-		let contents=await this.model('content').where(map).page(page,pageSize).countSelect();
+		let contents=await this.model('content').where(map).page(page,pageSize).fieldReverse('content,markdown').order('create_time desc').countSelect();
 
 		this.assign('contents',contents);
-    return this.display('index');
+    return this.display('list');
+  }
+
+  /**
+   * 文章集合，检索、分类、标签等
+   * @return {[type]} [description]
+   */
+  async musterAction(){
+    let map={
+      status:99,
+      type:'post'
+    }
+
+    let meta={};
+    if(this.get('search')){
+      map['title|description']=this.get('search');
+      meta={key:'search',value:this.get('search')};
+    }
+    if(this.get('category')){
+      let categoryId=await this.model('meta').where({slug:this.get('category'),type:'category'}).getField('id', true);
+      meta={key:'category',value:this.get('category')};
+      if(categoryId){
+        map['category_id']=categoryId;
+      }
+    }
+
+    if(this.get('tag')){
+      let tags=await this.model('meta').where({slug:this.get('tag'),type:'tag'}).getField('id');
+      let contentIds=await this.model('relationships').where({meta_id:['IN',tags]}).getField('content_id');
+      meta={key:'tag',value:this.get('tag')};
+      if(contentIds){
+        map['id']=['IN',contentIds];
+      }
+    }
+
+    this.assign('meta',meta);
+
+    let page=this.get('page')||1;
+    let pageSize=this.get('pageSize')||6;
+
+    let contents=await this.model('content').where(map).page(page,pageSize).fieldReverse('content,markdown').order('create_time desc').countSelect();
+
+    this.assign('contents',contents);
+    return this.display('muster');    
   }
 
   /**
@@ -48,11 +91,12 @@ module.exports = class extends Base {
   		status:99
   	}
 
-  	let data=await this.model('content').field('slug,title,create_time,category_id').where(map).select();
+  	let data=await this.model('content').field('slug,title,create_time,category_id').where(map).order('create_time desc').select();
 
   	let list={};
   	for(let i in data){
-  		let month=think.datetime(data[i].create_time,'MM DD, YYYY');
+      data[i].create_time*=1000;
+  		let month=think.datetime(data[i].create_time,'MM, YYYY');
   		if(!list[month]){
   			list[month]=[];
   		}

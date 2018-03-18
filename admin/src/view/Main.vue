@@ -80,7 +80,7 @@ export default {
       userInfo: {},
       fold: this.$store.getters.getMenu.fold,
       //菜单数据
-      // TODO：后台获取
+      // TODO：需要优化，这样写太丑 
       menu: [
         {
           name: "控制台",
@@ -100,6 +100,23 @@ export default {
             {
               name: "内容列表",
               path: "/content/list",
+              icon: "navicon-round"
+            }
+          ]
+        },
+        {
+          name: "页面管理",
+          path: "/page",
+          icon: "ios-paper",
+          children: [
+            {
+              name: "页面发布",
+              path: "/page/save",
+              icon: "edit"
+            },
+            {
+              name: "页面列表",
+              path: "/page/list",
               icon: "navicon-round"
             }
           ]
@@ -200,7 +217,7 @@ export default {
         this.loginOut();
       }
       if (name == "userInfo") {
-        this.$router.push("/admin/user/info");
+        this.$router.push("/user/info");
       }
     }
   }

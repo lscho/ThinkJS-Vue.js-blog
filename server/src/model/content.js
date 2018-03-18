@@ -36,7 +36,7 @@ module.exports = class extends think.Model {
     const id = await this.add(data);
     if (id) {
       // 添加标签关系
-      const tagData = [];
+      let tagData = [];
       for (var i in tag) {
         tagData.push({
           content_id: id,
@@ -66,8 +66,8 @@ module.exports = class extends think.Model {
     const res = await this.where({ id: id }).update(data);
     if (res) {
       // 添加标签关系
-      const tagData = [];
-      for (var i in tag) {
+      let tagData = [];
+      for (let i in tag) {
         tagData.push({
           content_id: id,
           meta_id: tag[i]
@@ -75,7 +75,7 @@ module.exports = class extends think.Model {
       }
       await think.model('relationships').where({ content_id: id }).delete();
       think.model('relationships').addMany(tagData);
-      // 更新文章数量
+      //更新文章数量
       this.updateCount(id, data.category_id, tag);
     }
     return res;

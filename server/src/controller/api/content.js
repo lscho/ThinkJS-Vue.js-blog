@@ -14,8 +14,9 @@ module.exports = class extends BaseRest {
       content: this.post('content'),
       tag: this.post('tag'),
       type: this.post('type'),
+      thumb: this.post('thumb'),
       view: 0,
-      create_time: this.post('create_time') ? (new Date(this.post('create_time'))).getTime() / 1000 : (new Date()).getTime() / 1000
+      create_time: this.post('create_time') ? (new Date(this.post('create_time'))).getTime()/1000 : (new Date()).getTime()/1000
     };
     const id = this.modelInstance.insert(data);
     if (id) {
@@ -39,8 +40,10 @@ module.exports = class extends BaseRest {
       markdown: this.post('markdown'),
       content: this.post('content'),
       tag: this.post('tag'),
+      type: this.post('type'),
+      thumb: this.post('thumb'),
       view: 0,
-      create_time: this.post('create_time') ? (new Date(this.post('create_time'))).getTime() / 1000 : (new Date()).getTime() / 1000
+      create_time: this.post('create_time') ? (new Date(this.post('create_time'))).getTime()/1000 : (new Date()).getTime()/1000
     };
     const res = this.modelInstance.save(id, data);
     if (res) {
@@ -62,7 +65,9 @@ module.exports = class extends BaseRest {
       }
       data = await this.modelInstance.where(map).find();
       // 增加阅读量
-      this.modelInstance.where(map).increment('view');
+      if(!this.userInfo){
+        this.modelInstance.where(map).increment('view');
+      }
       return this.success(data);
     }
     // 获取列表
@@ -87,6 +92,10 @@ module.exports = class extends BaseRest {
     if (key) {
       map['title|description'] = ['like', '%' + key + '%'];
     }
+
+    // 内容类型
+    const contentType=this.get('contentType')||'post';
+    map['type']=contentType;
     // 页码
     const page = this.get('page') || 1;
     // 每页显示数量

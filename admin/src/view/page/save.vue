@@ -1,45 +1,12 @@
 <template>
     <Form :model="formItem"  ref="formItem" :rules="ruleInline" :label-width="80">
-        <FormItem label="文章标题"  prop="title">
+        <FormItem label="页面标题"  prop="title">
             <Input v-model="formItem.title" placeholder="文章标题"></Input>
         </FormItem>
-        <FormItem label="文章标识"  prop="slug">
+        <FormItem label="页面标识"  prop="slug">
             <Input v-model="formItem.slug" placeholder="文章唯一标识，并作为参数构造url"></Input>
         </FormItem>
-        <FormItem label="文章分类"  prop="category_id">
-            <Select v-model="formItem.category_id"  style="width:200px;">
-                <Option v-for="(item,index) in category" :value="item.id" :label="item.name" :key="index"></Option>
-            </Select>
-        </FormItem>
-        <FormItem label="缩略图"  prop="thumb">
-            <Input v-model="formItem.thumb" placeholder="使用编辑器上传得到地址"></Input>
-        </FormItem>
-        <FormItem label="发布时间" prop="date">
-            <Row>
-                <Col span="3" style="width:200px;">
-                    <FormItem prop="date">
-                        <DatePicker type="date" placeholder="Select date" v-model="formItem.date"></DatePicker>
-                    </FormItem>
-                </Col>
-                <Col span="3" style="width:200px;">
-                    <FormItem prop="time">
-                        <TimePicker type="time" placeholder="Select time" v-model="formItem.time"></TimePicker>
-                    </FormItem>
-                </Col>
-            </Row>
-        </FormItem>
-        <FormItem label="状态"  prop="status">
-            <RadioGroup v-model="formItem.status">
-                <Radio :label="0">草稿</Radio>
-                <Radio :label="99">发布</Radio>
-            </RadioGroup>
-        </FormItem>
-        <FormItem label="标签">
-            <CheckboxGroup v-model="formItem.tag">
-                <Checkbox :label="item.id" v-for="(item , index) in tag" :key="index">{{item.name}}</Checkbox>
-            </CheckboxGroup>
-        </FormItem>
-        <FormItem label="文章内容">
+        <FormItem label="页面内容">
             <div id="editor">
                 <mavon-editor ref=md @imgAdd="imgAdd" class="editor" v-model="formItem.markdown"></mavon-editor>
             </div>
@@ -63,7 +30,7 @@
                 formItem: {
                     id:"",
                     title: '',
-                    category_id: '',
+                    category_id: 0,
                     status: 99,
                     tag: [],
                     date: new Date(),
@@ -75,16 +42,7 @@
                 ruleInline: {
                     title: [
                         { required: true, message: '文章标题必须填写' }
-                    ],
-                    category_id: [
-                        { required: true, message: '文章分类必须选择' }
-                    ],
-                    date: [
-                        { required: true, message: '发布日期必须选择' }
-                    ],
-                    time: [
-                        { required: true, message: '发布时间必须选择' }
-                    ],
+                    ]
                 },                
                 category:[],
                 tag:[]
@@ -106,7 +64,7 @@
                 }
                 this.formItem.create_time= this.formItem.date.getFullYear() + seperator1 + month + seperator1 + strDate+ " " + this.formItem.date.getHours() + seperator2 + this.formItem.date.getMinutes()+ seperator2 + this.formItem.date.getSeconds();
                 //文章类型
-                this.formItem.type='post';
+                this.formItem.type='page';
                 //表单验证
                 this.$refs['formItem'].validate((valid) => {
                     if (valid) {

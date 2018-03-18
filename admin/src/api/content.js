@@ -4,8 +4,8 @@ export default {
 
   create (data) {
     return new Promise((resolve, reject) => {
-      Vue.axios.post('/content', data).then(res => {
-        resolve(res.data)
+      Vue.axios.post('/content', data).then(response => {
+        resolve(response.data)
       })
     })
   },
@@ -13,32 +13,32 @@ export default {
   getList (map = {}) {
     map.type = map.type || 'default'
     return new Promise((resolve, reject) => {
-      Vue.axios.get('/content', { params: map }).then(res => {
-        resolve(res.data)
+      Vue.axios.get('/content', { params: map }).then(response => {
+        resolve(response.data)
       })
     })
   },
 
   getInfo (slug) {
     return new Promise((resolve, reject) => {
-      Vue.axios.get('/content/' + slug).then(res => {
-        resolve(res.data)
+      Vue.axios.get('/content/' + slug).then(response => {
+        resolve(response.data)
       })
     })
   },
 
   update (id, data) {
     return new Promise((resolve, reject) => {
-      Vue.axios.put('/content/' + id, data).then(res => {
-        resolve(res.data)
+      Vue.axios.put('/content/' + id, data).then(response => {
+        resolve(response.data)
       })
     })
   },
 
   delete (id) {
     return new Promise((resolve, reject) => {
-      Vue.axios.delete('/content/' + id).then(res => {
-        resolve(res.data)
+      Vue.axios.delete('/content/' + id).then(response => {
+        resolve(response.data)
       })
     })
   }

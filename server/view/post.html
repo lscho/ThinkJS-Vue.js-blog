@@ -2,37 +2,47 @@
 <html>
 <% include header.html %>
 
-<body class="" gtools_scp_screen_capture_injected="true">
+  <body class="" gtools_scp_screen_capture_injected="true">
     <% include navbar.html %>
-    <article class="main-content page-page" itemscope itemtype="http://schema.org/Article">
+      <article class="main-content page-page" itemscope itemtype="http://schema.org/Article">
         <div class="post-header">
-            <h1 class="post-title" itemprop="name headline"><%= content.title %></h1>
-            <div class="post-data">
-                <time datetime="2018-03-10T00:57:00+08:00" itemprop="datePublished">Published on <%= think.datetime(content.create_time, 'MM DD, YYYY')%></time> in <a href="https://lscho.com/category/tech/">tech</a> with <a href="#comments"> 0 comment</a>
-            </div>
+          <h1 class="post-title" itemprop="name headline"><%= content.title %></h1>
+          <div class="post-data">
+            <time datetime="<%= think.datetime(content.create_time*1000, 'MM DD, YYYY')%>" itemprop="datePublished">Published on
+              <%= think.datetime(content.create_time*1000, 'MM DD, YYYY')%>
+            </time> in
+            <a href="<%=site.url %>/category/<%= content.category.slug %>/">
+              <%= content.category.slug %>
+            </a> with <a href="#comments"> 0 comment</a>
+          </div>
         </div>
         <div id="post-content" class="post-content" itemprop="articleBody">
-            <p class="post-tags">
-            </p>
-            <%- content.content %>
+          <p class="post-tags">
+            <% content.tag.forEach(function(tag){ %>
+              <a href="<%=site.url %>/tag/<%= tag.slug %>/">
+                <%= tag.slug %>
+              </a>
+              <% }); %>
+          </p>
+          <%- content.content %>
             <p class="post-info">
-                本文由 <a href="https://lscho.com/author/1/">lscho</a> 创作，采用 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="external nofollow">知识共享署名4.0</a> 国际许可协议进行许可
-                <br>本站文章除注明转载/出处外，均为本站原创或翻译，转载前请务必署名
-                <br>最后编辑时间为: Mar 11, 2018 at 08:43 pm 
+              本文由 <a href="https://lscho.com/author/1/">lscho</a> 创作，采用 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="external nofollow">知识共享署名4.0</a> 国际许可协议进行许可
+              <br>本站文章除注明转载/出处外，均为本站原创或翻译，转载前请务必署名
+              <br>最后编辑时间为: Mar 11, 2018 at 08:43 pm
             </p>
         </div>
-    </article>
-    <div id="respond-post-88" class="comment-container">
+      </article>
+      <div id="respond-post-88" class="comment-container">
         <div id="comments" class="clearfix">
-            <span class="response">Responses / You are <a href="https://lscho.com/system/profile.php" data-no-instant>lscho</a> here, do you want to <a href="https://lscho.com/action/logout" title="Logout" data-no-instant>logout</a> ? <a id="cancel-comment-reply-link" href="https://lscho.com/tech/unix-start.html#respond-post-88" rel="nofollow" style="display:none" onclick="return TypechoComment.cancelReply();"> / Cancel Reply</a></span>
-            <form method="post" action="https://lscho.com/tech/unix-start.html/comment" id="comment-form" class="comment-form" role="form" onsubmit="getElementById('misubmit').disabled=true;return true;">
-                <textarea name="text" id="textarea" class="form-control" placeholder="Your comment here. Be cool. " required></textarea>
-                <button type="submit" class="submit" id="misubmit">SUBMIT</button>
-                <input type="hidden" name="_" value="89d942f37a582d0179ba4ddfa87e6d5d">
-            </form>
+          <span class="response">Responses / You are <a href="https://lscho.com/system/profile.php" data-no-instant>lscho</a> here, do you want to <a href="https://lscho.com/action/logout" title="Logout" data-no-instant>logout</a> ? <a id="cancel-comment-reply-link" href="https://lscho.com/tech/unix-start.html#respond-post-88" rel="nofollow" style="display:none" onclick="return TypechoComment.cancelReply();"> / Cancel Reply</a></span>
+          <form method="post" action="https://lscho.com/tech/unix-start.html/comment" id="comment-form" class="comment-form" role="form" onsubmit="getElementById('misubmit').disabled=true;return true;">
+            <textarea name="text" id="textarea" class="form-control" placeholder="Your comment here. Be cool. " required></textarea>
+            <button type="submit" class="submit" id="misubmit">SUBMIT</button>
+            <input type="hidden" name="_" value="89d942f37a582d0179ba4ddfa87e6d5d">
+          </form>
         </div>
-    </div>
-    <% include footer.html %>
-</body>
+      </div>
+      <% include footer.html %>
+  </body>
 
 </html>

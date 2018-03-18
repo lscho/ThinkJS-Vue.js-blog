@@ -39,15 +39,8 @@ export default {
       loading: true,
       columns: [
         {
-          title: "文章名称",
+          title: "页面名称",
           key: "title"
-        },
-        {
-          title: "分类",
-          key: "category",
-          render: (h, params) => {
-            return params.row.category.name;
-          }
         },
         {
           title: "阅读量",
@@ -85,7 +78,7 @@ export default {
                   on: {
                     click: () => {
                       this.$router.push({
-                        path: "/content/save",
+                        path: "/page/save",
                         query: {
                           slug: params.row.slug
                         }
@@ -122,7 +115,7 @@ export default {
         key:"",
         all:1,
         pageSize:10,
-        contentType:'post'
+        contentType:'page'
       }
     };
   },
