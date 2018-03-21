@@ -17,6 +17,9 @@ module.exports = class extends BaseRest {
 
   // 更新用户信息
   async putAction() {
+    // 删除缓存
+    think.cache('user', null);
+
     const userInfo = this.userInfo;
     const data = this.post();
     if (think.isEmpty(data)) {

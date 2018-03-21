@@ -18,8 +18,15 @@ module.exports = class extends think.Model {
         fKey: 'content_id',
         field: 'id,name,slug,description,count'
       },
+      comment: {
+        type: think.Model.HAS_MANY,
+        key: 'id',
+        fKey: 'content_id',
+        where: 'status=99',
+        order: 'create_time desc'
+      },
       user: {
-        type: think.Model.HAS_ONE,
+        type: think.Model.BELONG_TO,
         model: 'user',
         key: 'uid',
         fKey: 'id',
@@ -36,7 +43,7 @@ module.exports = class extends think.Model {
     const id = await this.add(data);
     if (id) {
       // 添加标签关系
-      let tagData = [];
+      const tagData = [];
       for (var i in tag) {
         tagData.push({
           content_id: id,
@@ -60,24 +67,13 @@ module.exports = class extends think.Model {
     }
 
     // 更新数据
-    const tag = data.tag;
-    delete data.tag;
     data = this.parseContent(data);
-    const res = await this.where({ id: id }).update(data);
-    if (res) {
-      // 添加标签关系
-      let tagData = [];
-      for (let i in tag) {
-        tagData.push({
-          content_id: id,
-          meta_id: tag[i]
-        });
-      }
-      await think.model('relationships').where({ content_id: id }).delete();
-      think.model('relationships').addMany(tagData);
-      //更新文章数量
-      this.updateCount(id, data.category_id, tag);
-    }
+    data.id = id;
+    const res = await this.where({ id: data.id }).update(data);
+    // if (res) {
+    //   //更新文章数量
+    //   this.updateCount(data.category_id, data.tag);
+    // }
     return res;
   }
 
@@ -97,7 +93,7 @@ module.exports = class extends think.Model {
   }
 
   // 更新文章数量
-  async updateCount(id, categoryId, tagData) {
+  async updateCount(categoryId, tagData) {
     // 更新分类数量
     const categoryCount = await this.where({ category_id: categoryId }).count();
     think.model('meta').where({ id: categoryId }).update({ count: categoryCount });

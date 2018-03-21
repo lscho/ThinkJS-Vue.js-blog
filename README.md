@@ -1,10 +1,13 @@
 ## 设计方案  
 
-1.前后端分离  
-2.RESTful API  
-3.使用 jwt 身份认证  
-4.后台使用 iview  
-5.前台使用 nuxt.js 做服务端渲染
+#### 后台
+1.前后端分离
+2.RESTful API
+3.使用 jwt 身份认证
+4.后台使用 iview
+
+#### 前台
+1.前台使用 nuxt.js 做服务端渲染
 
 ## 结构  
 
@@ -12,18 +15,22 @@
 |-[home](https://github.com/lscho/ThinkJS-Vue.js-blog/tree/master/home) 前台  
 |-[server](https://github.com/lscho/ThinkJS-Vue.js-blog/tree/master/server) 服务端  
 
+
 ## 依赖 
 
 #### 服务端  
 
 ```json
   "dependencies": {
+    "think-cache": "^1.0.0",
+    "think-cache-file": "^1.0.8",
     "think-logger3": "^1.0.0",
     "think-model": "^1.0.0",
     "think-model-mysql": "^1.0.0",
     "think-session": "^1.0.0",
     "think-session-jwt": "^1.0.8",
     "think-view": "^1.0.11",
+    "think-view-ejs": "^0.0.11",
     "thinkjs": "^3.0.0"
   }
 ```
@@ -43,6 +50,14 @@
   }
 ```
 
+#### 前台
+
+```json
+  "dependencies": {
+    "nuxt": "^1.0.0"
+  }
+```
+
 ## 安装  
 
 #### 开发  
@@ -51,13 +66,13 @@
 ```bash
 # 启动服务端
 cd ./admin
-npm start
+npm run dev
 # 启动前台服务
 cd ./home
-npm start
+npm run dev
 # 启动后台服务
 cd ./admin
-npm start
+npm run dev
 ```
 
 #### 部署  

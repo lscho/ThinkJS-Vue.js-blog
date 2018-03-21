@@ -23,7 +23,6 @@ exports.cache = {
   }
 };
 
-
 /**
  * model adapter config
  * @type {Object}
@@ -82,16 +81,16 @@ exports.view = {
   common: {
     viewPath: path.join(think.ROOT_PATH, 'view'),
     extname: '.html',
-    sep: '_' //seperator between controller and action
+    sep: '_' // seperator between controller and action
   },
   ejs: {
-    //options
+    // options
     handle: ejs,
     beforeRender: (ejs, handleOptions) => {
-      //do something before render the template.
+      // do something before render the template.
     }
   }
-}
+};
 
 /**
  * logger adapter config

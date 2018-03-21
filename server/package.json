@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "author": "lscho <me@lscho.com>",
   "scripts": {
-    "start": "node development.js",
+    "dev":"node development.js",
+    "start": "npm run dev",
     "lint": "eslint src/",
     "lint-fix": "eslint --fix src/"
   },

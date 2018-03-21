@@ -33,7 +33,7 @@ module.exports = [
   {
     handle: 'router',
     options: {
-      suffix: ['.html'],
+      suffix: ['.html']
     }
   },
   'logic',

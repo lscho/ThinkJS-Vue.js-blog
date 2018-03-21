@@ -7,6 +7,8 @@
       <div class="main-content index-page clearfix onelist-page">
         <div class="post-lists">
           <div class="post-lists-body">
+
+            <% if (contents.data.length>0) { %>
             <% contents.data.forEach(function(content){ %>
               <div class="post-onelist-item">
                 <div class="post-onelist-item-container">
@@ -39,6 +41,8 @@
                 </div>
               </div>
               <% }); %>
+              <% } %>
+
           </div>
         </div>
         

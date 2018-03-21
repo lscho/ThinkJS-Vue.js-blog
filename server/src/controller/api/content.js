@@ -1,9 +1,13 @@
 const BaseRest = require('../rest.js');
 
 module.exports = class extends BaseRest {
-  // 添加内容
+  /**
+   * 添加内容
+   * @return {[type]} [description]
+   */
   async postAction() {
     const userInfo = this.userInfo;
+    const createTime = this.post('create_time') ? (new Date(this.post('create_time'))).getTime() / 1000 : (new Date()).getTime() / 1000;
     const data = {
       uid: userInfo.id,
       title: this.post('title'),
@@ -16,7 +20,8 @@ module.exports = class extends BaseRest {
       type: this.post('type'),
       thumb: this.post('thumb'),
       view: 0,
-      create_time: this.post('create_time') ? (new Date(this.post('create_time'))).getTime()/1000 : (new Date()).getTime()/1000
+      create_time: createTime,
+      modify_time: createTime
     };
     const id = this.modelInstance.insert(data);
     if (id) {
@@ -26,8 +31,14 @@ module.exports = class extends BaseRest {
     }
   }
 
-  // 更新内容
+  /**
+   * 更新内容
+   * @return {[type]} [description]
+   */
   async putAction() {
+    // 删除缓存
+    think.cache('recent_content', null);
+
     const id = this.id;
     if (!this.id) {
       return this.fail(1001, '文章不存在');
@@ -43,7 +54,8 @@ module.exports = class extends BaseRest {
       type: this.post('type'),
       thumb: this.post('thumb'),
       view: 0,
-      create_time: this.post('create_time') ? (new Date(this.post('create_time'))).getTime()/1000 : (new Date()).getTime()/1000
+      create_time: this.post('create_time') ? (new Date(this.post('create_time'))).getTime() / 1000 : (new Date()).getTime() / 1000,
+      modify_time: (new Date()).getTime() / 1000
     };
     const res = this.modelInstance.save(id, data);
     if (res) {
@@ -53,7 +65,10 @@ module.exports = class extends BaseRest {
     }
   }
 
-  // 获取内容
+  /**
+   * 获取内容
+   * @return {[type]} [description]
+   */
   async getAction() {
     let data;
     const map = {};
@@ -65,8 +80,8 @@ module.exports = class extends BaseRest {
       }
       data = await this.modelInstance.where(map).find();
       // 增加阅读量
-      if(!this.userInfo){
-        this.modelInstance.where(map).increment('view');
+      if (!this.userInfo) {
+        // this.modelInstance.where(map).increment('view');
       }
       return this.success(data);
     }
@@ -94,8 +109,8 @@ module.exports = class extends BaseRest {
     }
 
     // 内容类型
-    const contentType=this.get('contentType')||'post';
-    map['type']=contentType;
+    const contentType = this.get('contentType') || 'post';
+    map['type'] = contentType;
     // 页码
     const page = this.get('page') || 1;
     // 每页显示数量
@@ -104,7 +119,10 @@ module.exports = class extends BaseRest {
     return this.success(data);
   }
 
-  // 删除内容
+  /**
+   * 删除内容
+   * @return {[type]} [description]
+   */
   async deleteAction() {
     if (!this.id) {
       return this.fail(1001, '文章不存在');
