@@ -1,5 +1,4 @@
 import Vue from 'vue'
-console.log(11)
 export default {
 
   upload (data) {

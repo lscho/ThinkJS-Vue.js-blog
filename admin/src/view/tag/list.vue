@@ -1,13 +1,22 @@
 <template>
-    <Table border  :loading="loading" :columns="columns" :data="data"></Table>
+    <div>
+      <Form ref="formInline" inline>
+          <FormItem>
+          <Button type="primary" icon="plus" @click="add">添加标签</Button>
+          </FormItem>
+      </Form>
+      <Table border :loading="loading" :columns="columns" :data="data"></Table>
+    </div>
 </template>
 <script>
 import { tag } from "@/api";
-import { Button, Table } from 'iview';
+import { Button, Table, Form, FormItem } from 'iview';
 export default {
   components: {
     Button,
-    Table
+    Table,
+    Form,
+    FormItem
   },
   data() {
     return {
@@ -49,7 +58,8 @@ export default {
                 {
                   props: {
                     type: "primary",
-                    size: "small"
+                    size: "small",
+                    icon:'edit'
                   },
                   style: {
                     marginRight: "5px"
@@ -57,22 +67,22 @@ export default {
                   on: {
                     click: () => {
                       this.$router.push({
-                        path: "/admin/tag/save",
+                        path: "/tag/save",
                         query: {
                           id: params.row.id
                         }
                       });
                     }
                   }
-                },
-                "编辑"
+                }
               ),
               h(
                 "Button",
                 {
                   props: {
                     type: "error",
-                    size: "small"
+                    size: "small",
+                    icon:'trash-a'
                   },
                   on: {
                     click: () => {
@@ -81,8 +91,7 @@ export default {
                       }
                     }
                   }
-                },
-                "删除"
+                }
               )
             ]);
           }
@@ -92,13 +101,6 @@ export default {
     };
   },
   methods: {
-    show(index) {
-      this.$Modal.info({
-        title: "User Info",
-        content: `Name：${this.data6[index].name}<br>Age：${this.data6[index]
-          .age}<br>Address：${this.data6[index].address}`
-      });
-    },
     get() {
       tag.getList().then(res => {
         this.data = res.data;
@@ -109,6 +111,9 @@ export default {
       tag.delete(id).then(res => {
         this.data.splice(index, 1);
       });
+    },
+    add(){
+      this.$router.push('/tag/save');
     }
   },
   mounted() {

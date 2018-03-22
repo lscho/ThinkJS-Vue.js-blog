@@ -3,7 +3,7 @@
         <FormItem label="标签名称"  prop="name">
             <Input v-model="formItem.name" placeholder="标签名称"></Input>
         </FormItem>
-        <FormItem label="缩略名">
+        <FormItem label="缩略名" prop="slug">
             <Input v-model="formItem.slug" placeholder="标签缩略名用于创建友好的链接形式, 建议使用字母, 数字, 下划线和横杠"></Input>
         </FormItem>
         <FormItem label="排序">
@@ -34,7 +34,8 @@ export default {
         description: ""
       },
       ruleInline: {
-        name: [{ required: true, message: "标签名称必须填写", trigger: "blur" }]
+        name: [{ required: true, message: "标签名称必须填写", trigger: "blur" }],
+        slug: [{ required: true, message: "缩略名必须填写", trigger: "blur" }]
       }
     };
   },
@@ -45,12 +46,12 @@ export default {
           if (this.formItem.id) {
             //更新数据
             tag.update(this.formItem.id, this.formItem).then(res => {
-              this.$router.push("/admin/tag/list");
+              this.$router.push("/tag/list");
             });
           } else {
             //新增数据
             tag.create(this.formItem).then(res => {
-              this.$router.push("/admin/tag/list");
+              this.$router.push("/tag/list");
             });
           }
         } else {

@@ -45,12 +45,12 @@ export default {
           if (this.formItem.id) {
             //更新数据
             category.update(this.formItem.id, this.formItem).then(res => {
-              this.$router.push("/admin/category/list");
+              this.$router.push("/category/list");
             });
           } else {
             //新增数据
             category.create(this.formItem).then(res => {
-              this.$router.push("/admin/category/list");
+              this.$router.push("/category/list");
             });
           }
         } else {

@@ -89,71 +89,28 @@ export default {
         },
         {
           name: "内容管理",
-          path: "/content",
+          path: "/content/list",
           icon: "document",
-          children: [
-            {
-              name: "内容发布",
-              path: "/content/save",
-              icon: "edit"
-            },
-            {
-              name: "内容列表",
-              path: "/content/list",
-              icon: "navicon-round"
-            }
-          ]
         },
         {
           name: "页面管理",
-          path: "/page",
+          path: "/page/list",
           icon: "ios-paper",
-          children: [
-            {
-              name: "页面发布",
-              path: "/page/save",
-              icon: "edit"
-            },
-            {
-              name: "页面列表",
-              path: "/page/list",
-              icon: "navicon-round"
-            }
-          ]
+        },
+        {
+          name: "评论管理",
+          path: "/comment/list",
+          icon: "chatbubbles"
         },
         {
           name: "分类管理",
-          path: "/category",
+          path: "/category/list",
           icon: "shuffle",
-          children: [
-            {
-              name: "分类发布",
-              path: "/category/save",
-              icon: "edit"
-            },
-            {
-              name: "分类列表",
-              path: "/category/list",
-              icon: "navicon-round"
-            }
-          ]
         },
         {
           name: "标签管理",
-          path: "/tag",
+          path: "/tag/list",
           icon: "pricetags",
-          children: [
-            {
-              name: "标签发布",
-              path: "/tag/save",
-              icon: "edit"
-            },
-            {
-              name: "标签列表",
-              path: "/tag/list",
-              icon: "navicon-round"
-            }
-          ]
         },
         {
           name: "系统设置",
@@ -174,6 +131,8 @@ export default {
         home: "控制台",
         content: "内容",
         category: "分类",
+        page: "页面",
+        comment: "评论",
         tag: "标签",
         save: "编辑",
         list: "列表"

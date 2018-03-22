@@ -189,3 +189,12 @@ body {
 .line-chart-con {
 	height: 150px;
 }
+
+.page {
+	float: right;
+	margin-top: 10px;
+}
+
+.search {
+	text-align: right;
+}

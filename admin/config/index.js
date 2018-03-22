@@ -60,12 +60,12 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, '../../www/admin.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsRoot: path.resolve(__dirname, '../../www/static/admin'),
+    assetsSubDirectory: '',
+    assetsPublicPath: '/static/admin/',
 
     /**
      * Source Maps

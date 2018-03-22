@@ -1,22 +1,18 @@
-<style>
-  .page{
-    float:right;
-    margin-top:10px;
-  }
-  .search{
-    text-align: right;
-  }
-</style>
 <template>
     <div>
-      <Form ref="formInline" :model="map" inline class="search">
+      <Form ref="formInline" :model="map" inline>
+        <FormItem>
+          <Button type="primary" style="float: left" icon="plus" @click="add">添加页面</Button>
+        </FormItem>
+        <div class="search">
           <FormItem>
               <Input type="text" v-model="map.key" placeholder="关键字">
               </Input>
           </FormItem>
           <FormItem>
               <Button type="primary" @click="getList">查询</Button>
-          </FormItem>
+          </FormItem>          
+        </div>
       </Form>
       <Table border :loading="loading" :columns="columns" :data="data.data"></Table>
       <Page class="page" :total="data.count" :page-size="data.pagesize" show-total  @on-change="changePage"></Page>
@@ -55,7 +51,7 @@ export default {
           align: "center",
           render: (h, params) => {
             if (!params.row.create_time) return "";
-            return new Date(params.row.create_time * 1000).toLocaleString();
+            return h('span',new Date(params.row.create_time * 1000).toLocaleString());
           }
         },
         {
@@ -70,7 +66,8 @@ export default {
                 {
                   props: {
                     type: "primary",
-                    size: "small"
+                    size: "small",
+                    icon:'edit'
                   },
                   style: {
                     marginRight: "5px"
@@ -85,15 +82,15 @@ export default {
                       });
                     }
                   }
-                },
-                "编辑"
+                }
               ),
               h(
                 "Button",
                 {
                   props: {
                     type: "error",
-                    size: "small"
+                    size: "small",
+                    icon:'trash-a'
                   },
                   on: {
                     click: () => {
@@ -102,8 +99,7 @@ export default {
                       }
                     }
                   }
-                },
-                "删除"
+                }
               )
             ]);
           }
@@ -135,6 +131,9 @@ export default {
     changePage(index){
       this.map.page=index;
       this.getList();
+    },
+    add(){
+      this.$router.push('/page/save');
     }
   },
   mounted() {

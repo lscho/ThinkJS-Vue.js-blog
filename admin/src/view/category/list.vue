@@ -1,13 +1,22 @@
 <template>
-    <Table border  :loading="loading" :columns="columns" :data="data"></Table>
+    <div>
+      <Form ref="formInline" inline>
+          <FormItem>
+          <Button type="primary" icon="plus" @click="add">添加分类</Button>
+          </FormItem>
+      </Form>
+      <Table border :loading="loading" :columns="columns" :data="data"></Table>
+    </div>
 </template>
 <script>
 import { category } from "@/api";
-import { Button, Table } from 'iview';
+import { Button, Table, Form, FormItem } from 'iview';
 export default {
   components: {
     Button,
-    Table
+    Table,
+    Form,
+    FormItem
   },
   data() {
     return {
@@ -49,7 +58,8 @@ export default {
                 {
                   props: {
                     type: "primary",
-                    size: "small"
+                    size: "small",
+                    icon:'edit'
                   },
                   style: {
                     marginRight: "5px"
@@ -64,15 +74,15 @@ export default {
                       });
                     }
                   }
-                },
-                "编辑"
+                }
               ),
               h(
                 "Button",
                 {
                   props: {
                     type: "error",
-                    size: "small"
+                    size: "small",
+                    icon:'trash-a'
                   },
                   on: {
                     click: () => {
@@ -81,8 +91,7 @@ export default {
                       }
                     }
                   }
-                },
-                "删除"
+                }
               )
             ]);
           }
@@ -102,6 +111,9 @@ export default {
       category.delete(id).then(res => {
         this.data.splice(index, 1);
       });
+    },
+    add(){
+      this.$router.push('/category/save');
     }
   },
   mounted() {
