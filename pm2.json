@@ -1,0 +1,12 @@
+{
+  "apps": [{
+    "name": "blog",
+    "script": "production.js",
+    "cwd": "/www/blog",
+    "max_memory_restart": "1G",
+    "autorestart": true,
+    "node_args": [],
+    "args": [],
+    "env": {}
+  }]
+}
