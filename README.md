@@ -1,13 +1,12 @@
 ## 设计方案  
 
-#### 后台
 1.前后端分离 
 
 2.RESTful API 
 
 3.使用 jwt 身份认证 
 
-4.后台使用 iview 
+4.后台使用 Vue.js + iview 
 
 ## 安装  
 

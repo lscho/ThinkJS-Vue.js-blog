@@ -6,8 +6,7 @@ module.exports = class extends BaseRest {
    * @return {[type]} [description]
    */
   async putAction() {
-    // 删除缓存
-    think.cache('site', null);
+  	think.cache('site', null);
 
     return super.putAction();
   }

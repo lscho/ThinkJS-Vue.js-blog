@@ -26,6 +26,7 @@ module.exports = class extends think.Controller {
       .select();
     // 最近五条回复
     const comment = await think.model('comment')
+      .cache('recent_comment')
       .alias('comment')
       .join({
         table: 'content',
@@ -40,7 +41,6 @@ module.exports = class extends think.Controller {
         on: ['content.category_id', 'id']
       })
       .where({ 'comment.status': 99 })
-      .cache('recent_comment')
       .field('comment.*,content.slug,content.category_id,category.slug as category')
       .limit(5)
       .order('comment.create_time desc')

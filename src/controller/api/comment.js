@@ -3,6 +3,26 @@ const BaseRest = require('../rest.js');
 module.exports = class extends BaseRest {
 
   /**
+   * 删除内容
+   * @return {[type]} [description]
+   */
+  async deleteAction() {
+    think.cache('recent_comment', null);
+
+    return super.deleteAction();
+  }
+
+  /**
+   * 更新内容
+   * @return {[type]} [description]
+   */
+  async putAction() {
+    think.cache('recent_comment', null);
+
+    return super.deleteAction();
+  }
+
+  /**
    * 获取数据
    * @return {[type]} [description]
    */

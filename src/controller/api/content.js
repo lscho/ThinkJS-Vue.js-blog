@@ -25,6 +25,8 @@ module.exports = class extends BaseRest {
     };
     const id = this.modelInstance.insert(data);
     if (id) {
+      // 删除缓存
+      think.cache('recent_content', null);
       return this.success({ id: id }, '添加成功');
     } else {
       return this.fail(1000, '添加失败');
@@ -36,13 +38,13 @@ module.exports = class extends BaseRest {
    * @return {[type]} [description]
    */
   async putAction() {
-    // 删除缓存
-    think.cache('recent_content', null);
 
     const id = this.id;
     if (!this.id) {
       return this.fail(1001, '文章不存在');
     }
+    // 删除缓存
+    think.cache('recent_content', null);
     const data = {
       title: this.post('title'),
       category_id: this.post('category_id'),
@@ -129,6 +131,8 @@ module.exports = class extends BaseRest {
     }
     const rows = await this.modelInstance.where({ id: this.id }).delete();
     if (rows) {
+      // 删除缓存
+      think.cache('recent_content', null);
       return this.success({ affectedRows: rows }, '删除成功');
     } else {
       return this.fail(1000, '删除失败');
