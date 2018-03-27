@@ -43,7 +43,31 @@ export default {
           title: "文章名称",
           key: "title",
           render: (h, params) => {
-            return h('span', params.row.title);
+            return h('a',{
+              attrs:{
+                href:"/"+params.row.category+'/'+params.row.slug+'.html',
+                target:"_blank"
+              }
+            },params.row.title);
+          }
+        },
+        {
+          title: "作者",
+          key: "title",
+          render: (h, params) => {
+            return h('a',{
+              attrs:{
+                href:params.row.url,
+                target:"_blank"
+              }
+            },params.row.author);
+          }
+        },
+        {
+          title: "邮箱",
+          key: "email",
+          render: (h, params) => {
+            return h('span', params.row.email);
           }
         },
         {

@@ -1,5 +1,14 @@
 <template>
   <Form :model="formItem" ref="formItem" :rules="ruleInline" :label-width="80">
+    <FormItem label="作者" prop="author">
+      <Input v-model="formItem.author" type="text"></Input>
+    </FormItem>
+    <FormItem label="邮箱" prop="email">
+      <Input v-model="formItem.email" type="text"></Input>
+    </FormItem>
+    <FormItem label="地址" prop="url">
+      <Input v-model="formItem.url" type="text"></Input>
+    </FormItem>
     <FormItem label="状态" prop="status">
       <RadioGroup v-model="formItem.status">
         <Radio :label="1">隐藏</Radio>
@@ -34,6 +43,17 @@ export default {
         status: 99
       },
       ruleInline: {
+        author: [
+          { required: true, message: '作者不能为空' }
+        ],
+        email: [
+          { required: true, message: '邮箱不能为空' },
+          { type: 'email', message: '邮箱格式错误'}
+        ],
+        url: [
+          { required: true, message: '地址不能为空' },
+          { type: 'url', message: '地址格式错误'}
+        ],
         text: [
           { required: true, message: '留言内容不能为空' }
         ],
