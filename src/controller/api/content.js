@@ -83,7 +83,7 @@ module.exports = class extends BaseRest {
       data = await this.modelInstance.where(map).find();
       // 增加阅读量
       if (!this.userInfo) {
-        // this.modelInstance.where(map).increment('view');
+        this.modelInstance.where(map).increment('view');
       }
       return this.success(data);
     }

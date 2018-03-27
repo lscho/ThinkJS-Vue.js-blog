@@ -81,7 +81,7 @@ module.exports = class extends Base {
     }
     this.assign('content',content);
     // 增加阅读量
-    // this.model('content').where(map).increment('view');
+    this.model('content').where(map).increment('view');
 
     const replyTo = this.get('replyTo') || 0;
     this.assign('replyTo', replyTo);
