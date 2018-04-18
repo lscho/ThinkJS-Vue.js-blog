@@ -5,7 +5,7 @@ import image from '@/api/image'
 import tag from '@/api/tag'
 import token from '@/api/token'
 import user from '@/api/user'
-import site from '@/api/site'
+import config from '@/api/config'
 
 export {
   category,
@@ -15,5 +15,5 @@ export {
   tag,
   token,
   user,
-  site
+  config
 }

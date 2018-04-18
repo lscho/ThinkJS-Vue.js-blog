@@ -30,16 +30,16 @@
         </Col>
         <Col :md="16" :lg="16" :style="{marginBottom: '10px',height:'300px'}">
         <Card style="height:100%;">
-          <div id="hot" style="height:300px;">
-          </div>
+        <div id="archives" style="height:300px;">
+        </div>
         </Card>
         </Col>
       </Row>
       </Col>
       <Col :md="24" :lg="24">
       <Card style="height:100%;">
-        <div id="archives" style="height:300px;">
-        </div>
+          <div id="hot" style="height:300px;">
+          </div>
       </Card>
       </Col>
     </Row>
@@ -78,11 +78,10 @@ export default {
         let xAxisData = [];
         let seriesData = [];
         for (let i in res.data) {
-          xAxisData.push(res.data[i].title);
+          xAxisData.push(res.data[i].slug);
           seriesData.push(res.data[i].view);
         }
         myChart.setOption({
-          color: ['#2d8cf0'],
           title: { text: '热门文章' },
           tooltip: {},
           xAxis: { data: xAxisData, axisLine: { lineStyle: { color: '#495060' } } },
@@ -121,11 +120,10 @@ export default {
           seriesData.push(monthsData[key] ? monthsData[key] : 0);
         }
         myChart.setOption({
-          color: ['#2d8cf0'],
           title: { text: '发布频率' },
           tooltip: { trigger: 'axis' },
           xAxis: { data: xAxisData, axisLine: { lineStyle: { color: '#495060' } } },
-          yAxis: { max: max, axisLine: { lineStyle: { color: '#495060' } } },
+          yAxis: { max: max,axisLine: { lineStyle: { color: '#495060' } } },
           series: [{ name: '文章数量', type: 'line', data: seriesData }]
         });
 

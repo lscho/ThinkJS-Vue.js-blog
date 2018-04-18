@@ -64,7 +64,7 @@ exports.session = {
     tokenType: 'header', // ['query', 'body', 'header', 'cookie'], 'cookie' is default
     tokenName: 'authorization', // if tokenType not 'cookie', this will be token name, 'jwt' is default
     sign: {
-      // sign options is not required
+      expiresIn: 60 * 60
     },
     verify: {
       // verify options is not required

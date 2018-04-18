@@ -1,14 +1,3 @@
-<style>
-.page {
-  float: right;
-  margin-top: 10px;
-}
-
-.search {
-  text-align: right;
-}
-
-</style>
 <template>
   <div>
     <Form ref="formInline" :model="map" inline class="search">
@@ -61,6 +50,13 @@ export default {
                 target:"_blank"
               }
             },params.row.author);
+          }
+        },
+        {
+          title: "IP",
+          key: "ip",
+          render: (h, params) => {
+            return h('span', params.row.ip);
           }
         },
         {

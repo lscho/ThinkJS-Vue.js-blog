@@ -1,15 +1,15 @@
 module.exports = [
   // RESTFUL
   [/\/api\/(\w+)(?:\/(.*))?/, 'api/:1?id=:2', 'rest'],
-  ['/page/about', 'post/page?slug=about'],
-  ['/page/links', 'post/page?slug=links'],
-  ['/page/archives', 'post/archives'],
-  [/\/page\/(\d+)/, 'post/list?page=:1'],
-  ['/search/:search', 'post/muster'],
-  ['/category/:category', 'post/muster'],
-  ['/category/:category/:page', 'post/muster'],
-  ['/tag/:tag', 'post/muster'],
-  ['/tag/:tag/:page', 'post/muster'],
-  ['/:category/:slug', 'post/detail'],
-  ['/:category/:slug/comment', 'post/comment']
+  ['/page/about', 'content/page?slug=about'],
+  ['/page/links', 'content/page?slug=links'],
+  ['/page/archives', 'content/archives'],
+  [/\/page\/(\d+)/, 'content/list?page=:1'],
+  ['/search/:search', 'content/muster'],
+  ['/category/:category', 'content/muster'],
+  ['/category/:category/:page', 'content/muster'],
+  ['/tag/:tag', 'content/muster'],
+  ['/tag/:tag/:page', 'content/muster'],
+  ['/:category/:slug', 'content/detail'],
+  ['/:category/:slug/comment', 'content/comment']
 ];

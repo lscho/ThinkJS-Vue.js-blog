@@ -1,8 +1,8 @@
 module.exports = class extends think.Controller {
   async __before() {
     // 获取站点配置
-    const site = await think.model('site').cache('site').find();
-    this.assign('site', site);
+    const config = await think.model('config').cache('config').getList();
+    this.assign('site', config.site);
     // 获取用户资料
     // TODO:如果要改为多用户系统，此处需要修改
     const user = await think.model('user').cache('user').find();

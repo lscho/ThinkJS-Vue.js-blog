@@ -56,7 +56,12 @@ module.exports = class extends think.Controller {
       return this.fail('data is empty');
     }
     const insertId = await this.modelInstance.add(data);
-    return this.success({ id: insertId });
+    if (insertId) {
+      data[pk] = insertId;
+      await this.hook(this.resource + 'Create', data);
+    } else {
+      return this.success({ id: insertId });
+    }
   }
 
   async deleteAction() {
@@ -66,6 +71,7 @@ module.exports = class extends think.Controller {
     const pk = this.modelInstance.pk;
     const rows = await this.modelInstance.where({ [pk]: this.id }).delete();
     if (rows) {
+      await this.hook(this.resource + 'Delete', {[pk]: this.id});
       return this.success({ affectedRows: rows }, '删除成功');
     } else {
       return this.fail(1000, '删除失败');
@@ -84,6 +90,7 @@ module.exports = class extends think.Controller {
     }
     const rows = await this.modelInstance.where({ [pk]: this.id }).update(data);
     if (rows) {
+      await this.hook(this.resource + 'Update', data);
       return this.success({ affectedRows: rows }, '更新成功');
     } else {
       return this.fail(1000, '更新失败');

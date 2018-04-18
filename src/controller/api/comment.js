@@ -1,27 +1,6 @@
 const BaseRest = require('../rest.js');
 
 module.exports = class extends BaseRest {
-
-  /**
-   * 删除内容
-   * @return {[type]} [description]
-   */
-  async deleteAction() {
-    think.cache('recent_comment', null);
-
-    return super.deleteAction();
-  }
-
-  /**
-   * 更新内容
-   * @return {[type]} [description]
-   */
-  async putAction() {
-    think.cache('recent_comment', null);
-
-    return super.deleteAction();
-  }
-
   /**
    * 获取数据
    * @return {[type]} [description]
@@ -56,24 +35,24 @@ module.exports = class extends BaseRest {
     // 每页显示数量
     const pageSize = this.get('pageSize') || 5;
     data = await this.modelInstance
-                .alias('comment')
-                .join({
-                  table: 'content',
-                  join: 'left',
-                  as: 'content',
-                  on: ['content_id', 'id']
-                })
-                .join({
-                  table: 'meta',
-                  join: 'left',
-                  as: 'category',
-                  on: ['content.category_id', 'id']
-                })
-                .where(map)
-                .page(page, pageSize)
-                .field('comment.*,content.slug,content.title,content.category_id,category.slug as category')
-                .order('comment.id desc')
-                .countSelect();
+      .alias('comment')
+      .join({
+        table: 'content',
+        join: 'left',
+        as: 'content',
+        on: ['content_id', 'id']
+      })
+      .join({
+        table: 'meta',
+        join: 'left',
+        as: 'category',
+        on: ['content.category_id', 'id']
+      })
+      .where(map)
+      .page(page, pageSize)
+      .field('comment.*,content.slug,content.title,content.category_id,category.slug as category')
+      .order('comment.id desc')
+      .countSelect();
     return this.success(data);
   }
 };

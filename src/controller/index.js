@@ -9,6 +9,6 @@ module.exports = class extends Base {
     if (this.post('s')) {
       return this.redirect('/search/' + this.post('s') + '/');
     }
-    return this.action('post', 'list');
+    return this.action('content', 'list');
   }
 };

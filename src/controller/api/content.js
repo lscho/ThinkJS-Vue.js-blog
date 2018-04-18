@@ -25,8 +25,8 @@ module.exports = class extends BaseRest {
     };
     const id = this.modelInstance.insert(data);
     if (id) {
-      // 删除缓存
-      think.cache('recent_content', null);
+      data.id = id;
+      await this.hook('contentCreate', data);
       return this.success({ id: id }, '添加成功');
     } else {
       return this.fail(1000, '添加失败');
@@ -38,13 +38,10 @@ module.exports = class extends BaseRest {
    * @return {[type]} [description]
    */
   async putAction() {
-
     const id = this.id;
     if (!this.id) {
       return this.fail(1001, '文章不存在');
     }
-    // 删除缓存
-    think.cache('recent_content', null);
     const data = {
       title: this.post('title'),
       category_id: this.post('category_id'),
@@ -61,6 +58,8 @@ module.exports = class extends BaseRest {
     };
     const res = this.modelInstance.save(id, data);
     if (res) {
+      data.id = id;
+      await this.hook('contentUpdate', data);
       return this.success({ id: id }, '修改成功');
     } else {
       return this.fail(1000, '添加失败');
@@ -96,7 +95,7 @@ module.exports = class extends BaseRest {
     }
     // 热门文章
     if (type === 'hot') {
-      data = await this.modelInstance.where({ status: 99 }).order('view desc').limit(10).field('title,view').select();
+      data = await this.modelInstance.where({ status: 99 }).order('view desc').limit(10).field('title,slug,view').select();
       return this.success(data);
     }
     // 是否获取全部
@@ -131,8 +130,7 @@ module.exports = class extends BaseRest {
     }
     const rows = await this.modelInstance.where({ id: this.id }).delete();
     if (rows) {
-      // 删除缓存
-      think.cache('recent_content', null);
+      await this.hook('contentDelete', {id: this.id});
       return this.success({ affectedRows: rows }, '删除成功');
     } else {
       return this.fail(1000, '删除失败');

@@ -1,8 +1,8 @@
 <template>
     <div>
       <Form ref="formInline" :model="map" inline>
-          <Button type="primary" icon="plus" @click="add">发布文章</Button>
           <div class="search">
+            <Button type="primary" class="fl" icon="plus" @click="add">发布文章</Button>
             <FormItem>
                 <Input type="text" v-model="map.key" placeholder="关键字">
                 </Input>

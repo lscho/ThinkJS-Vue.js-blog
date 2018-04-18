@@ -114,7 +114,7 @@ export default {
         },
         {
           name: "系统设置",
-          path: "/site",
+          path: "/config",
           icon: "ios-gear"
         }
       ]
@@ -135,7 +135,8 @@ export default {
         comment: "评论",
         tag: "标签",
         save: "编辑",
-        list: "列表"
+        list: "列表",
+        config:"设置"
       };
       let arr = [];
       for (var i in breadcrumbs) {

@@ -79,7 +79,7 @@ module.exports = class extends Base {
     if (think.isEmpty(content)) {
       return this.redirect('/');
     }
-    this.assign('content',content);
+    this.assign('content', content);
     // 增加阅读量
     this.model('content').where(map).increment('view');
 
@@ -94,7 +94,6 @@ module.exports = class extends Base {
    * @return {[type]} [description]
    */
   async commentAction() {
-
     const map = {
       slug: this.get('slug'),
       type: 'post',
@@ -123,8 +122,8 @@ module.exports = class extends Base {
     const insertId = await this.model('comment').add(data);
 
     if (insertId) {
-      // 删除缓存
-      think.cache('recent_comment', null);
+      data.id = insertId;
+      await this.hook('commentCreate', data);
       return this.redirect('/' + content.category.slug + '/' + content.slug + '.html#comment-' + insertId);
     } else {
       return this.redirect('/' + content.category.slug + '/' + content.slug + '.html');
