@@ -86,7 +86,7 @@ module.exports = class extends Base {
     const replyTo = this.get('replyTo') || 0;
     this.assign('replyTo', replyTo);
 
-    return this.display('post');
+    return this.display('content');
   }
 
   /**
