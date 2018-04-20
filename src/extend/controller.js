@@ -11,7 +11,7 @@ module.exports = {
     try {
       if (hooks[node]) {
         for (const i in hooks[node]) {
-          await hooks[node][i]();
+          await hooks[node][i](data);
         }
       }
     } catch (e) {

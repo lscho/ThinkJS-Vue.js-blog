@@ -123,6 +123,7 @@ module.exports = class extends Base {
 
     if (insertId) {
       data.id = insertId;
+      data.content = content;
       await this.hook('commentCreate', data);
       return this.redirect('/' + content.category.slug + '/' + content.slug + '.html#comment-' + insertId);
     } else {

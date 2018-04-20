@@ -29,8 +29,7 @@ module.exports = class extends think.Service {
     think.cache('recent_content', null);
   }
 
-  config(data){
+  config(data) {
     think.cache('config', null);
   }
-
 };

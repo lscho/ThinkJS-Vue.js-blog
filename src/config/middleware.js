@@ -24,7 +24,7 @@ module.exports = [
       debug: isDev,
       templates: {
         404: path.join(think.ROOT_PATH, 'view/error_404.html'),
-        500: path.join(think.ROOT_PATH, 'view/error_500.html'),        
+        500: path.join(think.ROOT_PATH, 'view/error_500.html')
       }
     }
   },

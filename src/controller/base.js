@@ -48,7 +48,7 @@ module.exports = class extends think.Controller {
     return { content: content, comment: comment };
   }
 
-  __call(){
+  __call() {
     return this.display('404');
   }
 };
