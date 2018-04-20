@@ -51,13 +51,13 @@ module.exports = class extends think.Service {
 
     // 给被回复者发送一份
     if (data.parent_id) {
-      options.to = data.email;
       const parent = await think.model('comment').where({ id: data.parent_id }).find();
       if (parent.email !== email.user) {
+        options.to = parent.email;
         options.subject = '您在 [' + data.content.title + '] 的评论有了回复 - ' + config.site.url;
         options.html = `<div style="margin: 16px 40px; background-color: #eef2fa; border: 1px solid #d8e3e8; padding: 0 15px;  -moz-border-radius:5px; -webkit-border-radius:5px; -khtml-border-radius:5px; border-radius:5px;">
                       <p>${data.author}：<a target="_blank" href="${config.site.url}/${data.content.category.slug}/${data.content.slug}.html#comment-${data.id}">${data.content.title}</a>&nbsp;有新的回复</p>
-                      <p><strong>${parent.author}</strong>&nbsp;说：${data.text}</p>
+                      <p><strong>${data.author}</strong>&nbsp;说：${data.text}</p>
                       <p>你的评论：${parent.text}</p>
                       <p>时间：${date}</p>
                     </div>`;
