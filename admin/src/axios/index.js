@@ -14,6 +14,18 @@ axios.interceptors.request.use(config => {
   if (localStorage.getItem('token')) {
     config.headers.Authorization = localStorage.getItem('token')
   }
+  // 防止缓存
+  if (config.method === 'post') {
+    config.data = {
+      ...config.data,
+      _t: Date.parse(new Date()) / 1000
+    }
+  } else if (config.method === 'get') {
+    config.params = {
+      _t: Date.parse(new Date()) / 1000,
+      ...config.params
+    }
+  }
   return config
 }, error => {
   LoadingBar.error()

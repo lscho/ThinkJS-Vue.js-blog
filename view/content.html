@@ -38,6 +38,7 @@
                 <div id="directory-content" class="directory-content">
                     <div id="directory"></div>
                 </div>
+                <%include footer.html%>
                 <script>
                 var postDirectoryBuild = function() { var postChildren = function children(childNodes, reg) { var result = [],
                                 isReg = typeof reg === 'object',
@@ -73,12 +74,11 @@
                                 link.innerHTML = !isDirNum ? contentArr[i] : dirNum.join('.') + ' ' + contentArr[i];
                                 li.appendChild(link);
                                 currentList.appendChild(li) } directory.appendChild(root) };
-                    createPostDirectory(document.getElementById('post-content'), document.getElementById('directory'), true) };
+                createPostDirectory(document.getElementById('post-content'), document.getElementById('directory'), true) };
                 postDirectoryBuild();
                 var postDirectory = new Headroom(document.getElementById("directory-content"), { tolerance: 0, offset: 90, classes: { initial: "initial", pinned: "pinned", unpinned: "unpinned" } });
                 postDirectory.init();
                 </script>
-                <%include footer.html%>
     </body>
 
 </html>

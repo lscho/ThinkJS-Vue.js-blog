@@ -94,6 +94,13 @@ module.exports = class extends Base {
    * @return {[type]} [description]
    */
   async commentAction() {
+    // 时间戳检验[过滤机器评论]
+    let _t=this.post('_t')||0;
+    
+    if(Date.now()-_t>10*60*1000){
+      return this.redirect('/');
+    }
+
     const map = {
       slug: this.get('slug'),
       type: 'post',
