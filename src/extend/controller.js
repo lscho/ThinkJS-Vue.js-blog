@@ -11,7 +11,9 @@ module.exports = {
     try {
       if (hooks[node]) {
         for (const i in hooks[node]) {
-          await hooks[node][i](data);
+          let hook=hooks[node][i];
+          let service=think.service(hook.service);
+          await service[hook.function](data);
         }
       }
     } catch (e) {

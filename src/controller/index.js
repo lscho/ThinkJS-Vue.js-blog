@@ -9,7 +9,7 @@ module.exports = class extends Base {
     if (this.post('s')) {
       return this.redirect('/search/' + this.post('s') + '/');
     }
-    await this.hook('commentCreate', {email: '3133430@qq.com'});
+    await this.hook('contentUpdate');
     return this.action('content', 'list');
   }
 };

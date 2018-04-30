@@ -41,6 +41,7 @@ export const adminRouter = [{
     { path: 'tag/save', name: 'TagSave', meta: { title: '标签编辑', requiresAuth: true }, component: resolve => { require(['@/view/tag/save.vue'], resolve) } },
     { path: 'tag/list', name: 'TagList', meta: { title: '标签列表', requiresAuth: true }, component: resolve => { require(['@/view/tag/list.vue'], resolve) } },
     { path: 'user/info', name: 'UserInfo', meta: { title: '个人资料', requiresAuth: true }, component: resolve => { require(['@/view/user/info.vue'], resolve) } },
+    { path: 'user/password', name: 'UserPassword', meta: { title: '修改密码', requiresAuth: true }, component: resolve => { require(['@/view/user/password.vue'], resolve) } },
     { path: 'config', name: 'System', meta: { title: '系统设置', requiresAuth: true }, component: resolve => { require(['@/view/config/save.vue'], resolve) } }
   ]
 }]

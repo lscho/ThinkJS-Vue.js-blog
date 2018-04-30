@@ -1,9 +1,9 @@
-const BaseRest = require('../rest.js');
 const fs = require('fs');
 const path = require('path');
 const rename = think.promisify(fs.rename, fs);
 
-module.exports = class extends BaseRest {
+module.exports = class extends  think.Controller {
+
   // 图片上传
   async postAction() {
     const file = this.file('image');
@@ -21,6 +21,10 @@ module.exports = class extends BaseRest {
     const filepath = path.join(think.ROOT_PATH, 'www' + savepath);
     think.mkdir(path.dirname(filepath));
     rename(file.path, filepath);
-    return this.success({ url: savepath }, '上传成功');
+
+    let data={ url: savepath, basename:basename, filepath:filepath};
+    await this.hook('upload',data);
+    delete data.filepath;
+    return this.success(data, '上传成功');
   }
 };

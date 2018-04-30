@@ -85,7 +85,7 @@
                     time: [
                         { required: true, message: '发布时间必须选择' }
                     ],
-                },                
+                },
                 category:[],
                 tag:[]
             }
@@ -138,7 +138,7 @@
             getTag(){
                 tag.getList().then(res=>{
                     this.tag=res.data;
-                });                
+                });
             },
             get(id){
                 content.getInfo(id).then(res=>{
@@ -153,13 +153,13 @@
                 });
             },
             imgAdd(pos, $file){
-               var formdata = new FormData();
-               formdata.append('image', $file); 
+               let formdata = new FormData();
+               formdata.append('image', $file);
                image.upload(formdata).then(res=>{
                     if(res.errno==0&&res.data.url){
                         this.$refs['md'].$img2Url(pos, res.data.url);
                     }
-               });               
+               });
             }
         },
         mounted(){

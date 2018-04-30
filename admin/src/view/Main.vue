@@ -19,7 +19,7 @@
                         <MenuItem  :name="item.path" v-if="!item.children">
                             <Icon :type="item.icon" :size="iconSize"></Icon>
                             <span class="layout-text">{{item.name}}</span>
-                        </MenuItem>                        
+                        </MenuItem>
                     </template>
                 </Menu>
             </Col>
@@ -29,7 +29,7 @@
                         <Col span="12" class="layout-header-left">
                           <Button type="text" @click="toggleClick">
                               <Icon type="navicon" size="32"></Icon>
-                          </Button>                          
+                          </Button>
                         </Col>
                         <Col span="12" class="layout-header-right">
                             <a class="home" target="_blank" href="/"><Icon type="home"></Icon></a>
@@ -40,6 +40,7 @@
                                 </a>
                                 <DropdownMenu slot="list">
                                     <DropdownItem name="userInfo">个人资料</DropdownItem>
+                                    <DropdownItem name="changePassword">修改密码</DropdownItem>
                                     <DropdownItem name="loginOut">退出后台</DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
@@ -80,7 +81,7 @@ export default {
       userInfo: {},
       fold: this.$store.getters.getMenu.fold,
       //菜单数据
-      // TODO：需要优化，这样写太丑 
+      // TODO：需要优化，这样写太丑
       menu: [
         {
           name: "控制台",
@@ -173,11 +174,14 @@ export default {
       this.$router.push("/login");
     },
     dropdownClick(name) {
-      if (name == "loginOut") {
+      if (name === 'loginOut') {
         this.loginOut();
       }
-      if (name == "userInfo") {
+      if (name === 'userInfo') {
         this.$router.push("/user/info");
+      }
+      if (name === 'changePassword') {
+        this.$router.push("/user/password");
       }
     }
   }

@@ -20,7 +20,10 @@ think.beforeStartServer(async() => {
                 hooks[node] = [];
               }
               if (typeof service[hook] === 'function') {
-                hooks[node].push(service[hook]);
+                hooks[node].push({
+                  service:serviceName,
+                  function:hook
+                });
               }
             }
           }

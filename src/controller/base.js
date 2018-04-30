@@ -4,7 +4,6 @@ module.exports = class extends think.Controller {
     const config = await think.model('config').cache('config').getList();
     this.assign('site', config.site);
     // 获取用户资料
-    // TODO:如果要改为多用户系统，此处需要修改
     const user = await think.model('user').cache('user').find();
     this.assign('user', user);
 

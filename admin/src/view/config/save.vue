@@ -20,14 +20,14 @@
 
             <FormItem label="底部说明">
                 <Input type="textarea" v-model="site.footer"></Input>
-            </FormItem>    
+            </FormItem>
 
             <FormItem>
                 <Button type="primary" @click="post('site',site)">保存</Button>
-            </FormItem> 
-            </Form>       
+            </FormItem>
+            </Form>
           </TabPane>
-    
+
           <TabPane label="邮箱设置">
             <Form :model="email" :label-width="80">
             <FormItem label="服务器">
@@ -51,12 +51,32 @@
 
             <FormItem label="密码">
                 <Input v-model="email.pass"></Input>
-            </FormItem>  
+            </FormItem>
 
             <FormItem>
                 <Button type="primary" @click="post('email',email)">保存</Button>
-            </FormItem> 
-            </Form>          
+            </FormItem>
+            </Form>
+          </TabPane>
+
+          <TabPane label="七牛配置">
+            <Form :model="qiniu" :label-width="80">
+            <FormItem label="access_key">
+                <Input v-model="qiniu.access_key"></Input>
+            </FormItem>
+
+            <FormItem label="secret_key">
+                <Input v-model="qiniu.secret_key"></Input>
+            </FormItem>
+
+            <FormItem label="bucket">
+                <Input v-model="qiniu.bucket"></Input>
+            </FormItem>
+
+            <FormItem>
+                <Button type="primary" @click="post('qiniu',qiniu)">保存</Button>
+            </FormItem>
+            </Form>
           </TabPane>
       </Tabs>
 </template>
@@ -72,7 +92,8 @@ export default {
       site: {},
       email:{
         secure:1
-      }
+      },
+      qiniu :{}
     };
   },
   methods: {
@@ -83,6 +104,9 @@ export default {
         }
         if(res.data.email){
           this.email = res.data.email;
+        }
+        if(res.data.qiniu){
+          this.qiniu = res.data.qiniu;
         }
       });
     },
