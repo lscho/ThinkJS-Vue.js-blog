@@ -53,6 +53,7 @@ module.exports = class extends Base {
     }
 
     this.assign('meta', meta);
+    this.assign('title',meta.value);
 
     const page = this.get('page') || 1;
     const pageSize = this.get('pageSize') || 6;
@@ -86,6 +87,8 @@ module.exports = class extends Base {
     const replyTo = this.get('replyTo') || 0;
     this.assign('replyTo', replyTo);
 
+    this.assign('title',content.title);
+
     return this.display('content');
   }
 
@@ -96,7 +99,7 @@ module.exports = class extends Base {
   async commentAction() {
     // 时间戳检验[过滤机器评论]
     let _t=this.post('_t')||0;
-    
+
     if(Date.now()-_t>10*60*1000){
       return this.redirect('/');
     }
@@ -159,7 +162,7 @@ module.exports = class extends Base {
       }
       list[month].push(data[i]);
     }
-
+    this.assign('title','archives');
     this.assign('list', list);
     return this.display('archives');
   }
@@ -176,7 +179,7 @@ module.exports = class extends Base {
     };
 
     const content = await this.model('content').where(map).find();
-
+    this.assign('title',content.title);
     this.assign('content', content);
     return this.display('page');
   }

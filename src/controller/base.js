@@ -6,9 +6,11 @@ module.exports = class extends think.Controller {
     // 获取用户资料
     const user = await think.model('user').cache('user').find();
     this.assign('user', user);
-
+    // 最近文章
     const recent = await this.getRecent();
     this.assign('recent', recent);
+    // 默认title
+    this.assign('title',"");
   }
 
   /**
