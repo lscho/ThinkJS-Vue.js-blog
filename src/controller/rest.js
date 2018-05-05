@@ -10,6 +10,7 @@ module.exports = class extends think.Controller {
   }
 
   async __before(action) {
+    this.header('Access-Control-Allow-Origin', '*');
     try {
       this.userInfo = await this.ctx.session('userInfo');
     } catch (err) {

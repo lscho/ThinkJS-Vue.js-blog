@@ -38,7 +38,6 @@
                 <div id="directory-content" class="directory-content">
                     <div id="directory"></div>
                 </div>
-                <%include footer.html%>
                 <script>
                 var postDirectoryBuild = function() { var postChildren = function children(childNodes, reg) { var result = [],
                                 isReg = typeof reg === 'object',
@@ -79,6 +78,7 @@
                 var postDirectory = new Headroom(document.getElementById("directory-content"), { tolerance: 0, offset: 90, classes: { initial: "initial", pinned: "pinned", unpinned: "unpinned" } });
                 postDirectory.init();
                 </script>
+                <%include footer.html%>
     </body>
 
 </html>
