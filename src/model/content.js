@@ -52,7 +52,7 @@ module.exports = class extends think.Model {
       }
       think.model('relationships').addMany(tagData);
       // 更新文章数量
-      this.updateCount(id, data.category_id, tag);
+      this.updateCount(data.category_id, tag);
     }
     return id;
   }
@@ -70,10 +70,12 @@ module.exports = class extends think.Model {
     data = this.parseContent(data);
     data.id = id;
     const res = await this.where({ id: data.id }).update(data);
-    // if (res) {
-    //   //更新文章数量
-    //   this.updateCount(data.category_id, data.tag);
-    // }
+
+    if (res) {
+      //更新文章数量
+      this.updateCount(data.category_id, data.tag);
+    }
+
     return res;
   }
 
@@ -81,7 +83,7 @@ module.exports = class extends think.Model {
   parseContent(data) {
     // 描述处理
     if (data.content.indexOf('<!--more-->') > -1) {
-      data.description = data.content.split('<!--more-->')[0];
+      data.description = data.content.split('<!--more-->')[0]; // 写文章内容时，description部分是<!--more-->前面的部分,要自己写
     } else {
       data.description = '';
     }
