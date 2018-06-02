@@ -14,6 +14,8 @@ module.exports = class extends BaseRest {
     if (think.isEmpty(result)) {
       return this.fail('密码不正确');
     }
+    delete userInfo.password;
+    delete userInfo.encrypt;
     user.where({ username: username }).update({last_login_time: (new Date()).getTime() / 1000});
     const token = await this.session('userInfo', userInfo);
     return this.success({ token: token });
