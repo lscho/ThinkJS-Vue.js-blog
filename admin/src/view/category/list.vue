@@ -67,7 +67,7 @@ export default {
                   on: {
                     click: () => {
                       this.$router.push({
-                        path: "/admin/category/save",
+                        path: "/category/save",
                         query: {
                           id: params.row.id
                         }
