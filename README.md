@@ -1,16 +1,36 @@
-## 设计方案  
+## 结构
 
-1.前后端分离 
+	├── admin			//后台vue项目，vue-cli创建
+	│   ├── build
+	│   ├── config
+	│   ├── index.html
+	│   ├── package.json
+	│   ├── src
+	│   └── static
+	├── development.js		//开发模式入口
+	├── package.json	
+	├── production.js		//生产模式入口
+	├── src
+	│   ├── bootstrap		//启动自动执行目录 
+	│   ├── config			//配置目录
+	│   ├── controller		//控制器目录
+	│   │   ├── api			//接口控制器目录
+	│   ├── extend
+	│   ├── logic
+	│   ├── model				//模型目录
+	│   └── service
+	├── view					//前台模版目录
+	└── www					//对外开放目录
+	    ├── admin.html		//后台入口文件
+	    └── static			//静态资源
 
-2.RESTful API 
 
-3.使用 jwt 身份认证 
 
-4.后台使用 Vue.js + iview 
+## 安装
 
-## 安装  
+后台默认账号：admin 默认密码：123456
 
-#### 开发  
+#### 开发
 
 导入sql,修改[配置](https://github.com/lscho/ThinkJS-Vue.js-blog/blob/master/server/src/config/adapter.js)中 mysql 部分,启动服务
 
@@ -22,7 +42,7 @@ cd ./admin
 npm start
 ```
 
-#### 部署  
+#### 部署
 
 ```bash
 # 编译

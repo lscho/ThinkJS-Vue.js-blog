@@ -60,7 +60,7 @@ INSERT INTO `ls_config` (`id`, `name`, `value`) VALUES
 CREATE TABLE `ls_content` (
   `id` int(10) NOT NULL,
   `title` varchar(200) NOT NULL,
-  `uid` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
   `slug` varchar(200) DEFAULT NULL,
   `thumb` varchar(200) DEFAULT NULL,
   `category_id` int(10) NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE `ls_content` (
 -- 转存表中的数据 `ls_content`
 --
 
-INSERT INTO `ls_content` (`id`, `title`, `uid`, `slug`, `thumb`, `category_id`, `status`, `type`, `description`, `markdown`, `content`, `create_time`, `modify_time`, `view`) VALUES
+INSERT INTO `ls_content` (`id`, `title`, `user_id`, `slug`, `thumb`, `category_id`, `status`, `type`, `description`, `markdown`, `content`, `create_time`, `modify_time`, `view`) VALUES
 (1, '浅谈 js 变量作用域', 1, 'js-variables', NULL, 1, 99, 'post', '<p>关于 javascript 这门语言许多人都是从开始的时候觉得容易，后来觉得难，再后来又觉得容易的过程走过来的。最开始的时候觉得简单，是因为没有重视，没有把它当作一门语言来来认真对待，总是以自己学习其他语言的“经验”来使用它。在使用中会遇到各种问题，比如 javascript特有的变量作用域和异步问题，这时候会觉得它其实也很难。但是如果真正理解了变量作用域和异步，其实也不是很难。只是写法的区别。</p>\n', '关于 javascript 这门语言许多人都是从开始的时候觉得容易，后来觉得难，再后来又觉得容易的过程走过来的。最开始的时候觉得简单，是因为没有重视，没有把它当作一门语言来来认真对待，总是以自己学习其他语言的“经验”来使用它。在使用中会遇到各种问题，比如 javascript特有的变量作用域和异步问题，这时候会觉得它其实也很难。但是如果真正理解了变量作用域和异步，其实也不是很难。只是写法的区别。\n<!--more-->\n无意间看到一套前端面试题，作为后端汪，也只能看看其中的 js 部分，见到一道 js 笔试题特别不错，特尝试解答一下。\n\n原题：\n```javascript\n\n    var a, b = 0, fn = function(){\n            var a = b = 2;\n        };\n        fn();\n        console.log(a, b);\n```\n\n看上去很简单的一道题，细细分析一下却发现这题出的真妙。咱们一行一行分析\n\n第一行声明了a,b,fn，此时a声明但未赋值，故a=undefined,b=0,fn为一个函数。\n\n第四行执行fn函数。\n\n在fn函数内部 var a=b=2;    这里才是真正的重点，var a重新使用 var 对 a做了覆盖声明，并把 b 的值赋给它。后面 b =2。这里 b 并没有使用 var 声明。事实上这一行是创建了一个函数内部的变量 a，和对全局变量 b 进行赋值。所以虽然这里 a 也被赋值了，但此时它是个函数内部的变量，外部无法访问。\n\n第五行，输出全局变量a和b，所以此时a=undefined，b=2；\n\n我们再来转换一种写法。\n```javascript\nvar a, b = 0, fn = function(){\n		var b=1;\n        a = b = 2;\n        console.log(a, b);\n    };\n    fn();\n    console.log(a, b);\n```\n\n和上面一样，第一行对三个变量声明。\n\n此时第四行输出a和b时都是函数内部的变量，a和b都是2\n\n最后一行输出的时候全局变量a是，在函数内部被赋值，所以是2。全局变量b在第一行被复制0，但是在函数内部第三行被var 重新声明为函数内部的变量，虽然被赋值为1，虽然下一行被赋值为2，但是事实上和全部变量b是没有关系的。所以此时b为0', '<p>关于 javascript 这门语言许多人都是从开始的时候觉得容易，后来觉得难，再后来又觉得容易的过程走过来的。最开始的时候觉得简单，是因为没有重视，没有把它当作一门语言来来认真对待，总是以自己学习其他语言的“经验”来使用它。在使用中会遇到各种问题，比如 javascript特有的变量作用域和异步问题，这时候会觉得它其实也很难。但是如果真正理解了变量作用域和异步，其实也不是很难。只是写法的区别。</p>\n<!--more-->\n<p>无意间看到一套前端面试题，作为后端汪，也只能看看其中的 js 部分，见到一道 js 笔试题特别不错，特尝试解答一下。</p>\n<p>原题：</p>\n<pre><div class=\"hljs\"><code class=\"lang-javascript\">\n    <span class=\"hljs-keyword\">var</span> a, b = <span class=\"hljs-number\">0</span>, fn = <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\"></span>)</span>{\n            <span class=\"hljs-keyword\">var</span> a = b = <span class=\"hljs-number\">2</span>;\n        };\n        fn();\n        <span class=\"hljs-built_in\">console</span>.log(a, b);\n</code></div></pre>\n<p>看上去很简单的一道题，细细分析一下却发现这题出的真妙。咱们一行一行分析</p>\n<p>第一行声明了a,b,fn，此时a声明但未赋值，故a=undefined,b=0,fn为一个函数。</p>\n<p>第四行执行fn函数。</p>\n<p>在fn函数内部 var a=b=2;    这里才是真正的重点，var a重新使用 var 对 a做了覆盖声明，并把 b 的值赋给它。后面 b =2。这里 b 并没有使用 var 声明。事实上这一行是创建了一个函数内部的变量 a，和对全局变量 b 进行赋值。所以虽然这里 a 也被赋值了，但此时它是个函数内部的变量，外部无法访问。</p>\n<p>第五行，输出全局变量a和b，所以此时a=undefined，b=2；</p>\n<p>我们再来转换一种写法。</p>\n<pre><div class=\"hljs\"><code class=\"lang-javascript\"><span class=\"hljs-keyword\">var</span> a, b = <span class=\"hljs-number\">0</span>, fn = <span class=\"hljs-function\"><span class=\"hljs-keyword\">function</span>(<span class=\"hljs-params\"></span>)</span>{\n		<span class=\"hljs-keyword\">var</span> b=<span class=\"hljs-number\">1</span>;\n        a = b = <span class=\"hljs-number\">2</span>;\n        <span class=\"hljs-built_in\">console</span>.log(a, b);\n    };\n    fn();\n    <span class=\"hljs-built_in\">console</span>.log(a, b);\n</code></div></pre>\n<p>和上面一样，第一行对三个变量声明。</p>\n<p>此时第四行输出a和b时都是函数内部的变量，a和b都是2</p>\n<p>最后一行输出的时候全局变量a是，在函数内部被赋值，所以是2。全局变量b在第一行被复制0，但是在函数内部第三行被var 重新声明为函数内部的变量，虽然被赋值为1，虽然下一行被赋值为2，但是事实上和全部变量b是没有关系的。所以此时b为0</p>\n', 1463760000, 1521712656, 0),
 (3, 'DVI 接口的类别区分', 1, 'dvi', NULL, 1, 99, 'post', '<p>这台电脑的时候其实是准备写代码来的，所以没有装显卡。然而代码没写多少又想打游戏了 ，于是去卡吧收了个二手显卡，于是开始了“装卡之旅”。</p>\n', ' 这台电脑的时候其实是准备写代码来的，所以没有装显卡。然而代码没写多少又想打游戏了 ，于是去卡吧收了个二手显卡，于是开始了“装卡之旅”。\n<!--more-->\n显卡收到之后发现只有两个接口和显示器上的接口不一样。于是赶紧请教了一下度娘。发现显卡上是两个DVI接口，也就是所谓的高清接口。而我的杂牌显示器上是VGA接口。如图下示例。\n![b6JFjm6.jpg!web.jpg][1]\n这三个接口应该算是最常见的三种接口.\n\n左边是HDMI接口:高清晰度多媒体接口（英文：High Definition Multimedia Interface，HDMI）是一种数字化视频/音频接口技术，是适合影像传输的专用型数字化接口，其可同时传送音频和影像信号，最高数据传输速度为4.5GB/s\n\n中间的是VGA接口：VGA（Video Graphics Array）视频图形阵列是IBM于1987年提出的一个使用模拟信号的电脑显示标准。VGA接口即电脑采用VGA标准输出数据的专用接口。接收图形信号。\n\n右边的是DVI接口：由1998年9月，在Intel开发者论坛上成立的数字显示工作小组（Digital Display Working Group简称DDWG）发明的一种高速传输数字信号的技术，有 DVI-A、DVI-D 和 DVI-I 三种不同的接口形式。 DVI-D 只有数字接口，DVI-I 有数字和模拟接口，目前应用主要以 DVI-i(24+5) 为主。接收数字信号。\n\n百度之后看了一下发现显卡是 DVI 接口，而显示器是 VGA 接口的，而且对比了一下主板上的 DVI 接口发现显卡的上的 DVI 接口和主板上的 DVI 接口竟然还不太一样。继续百度。\n\n![QFJRFrr.jpg!web.jpg][2]\n竟然有五种类型的接口，按照针数的不同分为\n\n    12+5\n    18+1\n    18+5\n    24+1\n    24+5\n\n其中12+5的是 DVI-A 接口，就是与 VGA 规范一样的 包括 RGBHV 信号线的模拟接口。\n\n18+1和24+1的是 DVI-D 接口，传输的为数字信号。\n\n18+5和24+5的是 DVI-I 接口，则可以传输数字信号，也可以模拟图形信号。\n\n也就是说， xx+5的 DVI-I 接口通过转换头或者线可以连接到VGA设备上使用，也可以连接到任意DVI设备上使用，但是xx+1的 DVI-D 接口是不能连接到 VGA 设备上使用的。 现在市场上以 DVI-I 接口居多。\n\n前面的XX则是传输速率，18为单通道，传输速率只有24针的一半，为165MHz。在画面显示上，单通道的DVI支持的分辨率和双通道的完全一样，但刷新率却只有双通道的一半左右，会造成显示质量的下降。一般来讲，单通道的DVI接口，最大的刷新率只能支持到1920 1080 60hz或1600 1200 60hz，即现有23寸宽屏显示器和20寸普通比例显示器的正常显示，再高的话就会造成显示效果的下降。 大屏幕的话需要使用24针的接口，小屏幕使用18针的接口也可以正常显示。\n\n也就是说我需要一个 24+5 转 VGA 的转接头，下楼买完装上，开机，成功点亮！\n\n\n  [1]: http://lscho.com/usr/uploads/2017/03/3548923097.jpg\n  [2]: http://lscho.com/usr/uploads/2017/03/3296033423.jpg', '<p>这台电脑的时候其实是准备写代码来的，所以没有装显卡。然而代码没写多少又想打游戏了 ，于是去卡吧收了个二手显卡，于是开始了“装卡之旅”。</p>\n<!--more-->\n<p>显卡收到之后发现只有两个接口和显示器上的接口不一样。于是赶紧请教了一下度娘。发现显卡上是两个DVI接口，也就是所谓的高清接口。而我的杂牌显示器上是VGA接口。如图下示例。<br />\n<img src=\"http://lscho.com/usr/uploads/2017/03/3548923097.jpg\" alt=\"b6JFjm6.jpg!web.jpg\" /><br />\n这三个接口应该算是最常见的三种接口.</p>\n<p>左边是HDMI接口:高清晰度多媒体接口（英文：High Definition Multimedia Interface，HDMI）是一种数字化视频/音频接口技术，是适合影像传输的专用型数字化接口，其可同时传送音频和影像信号，最高数据传输速度为4.5GB/s</p>\n<p>中间的是VGA接口：VGA（Video Graphics Array）视频图形阵列是IBM于1987年提出的一个使用模拟信号的电脑显示标准。VGA接口即电脑采用VGA标准输出数据的专用接口。接收图形信号。</p>\n<p>右边的是DVI接口：由1998年9月，在Intel开发者论坛上成立的数字显示工作小组（Digital Display Working Group简称DDWG）发明的一种高速传输数字信号的技术，有 DVI-A、DVI-D 和 DVI-I 三种不同的接口形式。 DVI-D 只有数字接口，DVI-I 有数字和模拟接口，目前应用主要以 DVI-i(24+5) 为主。接收数字信号。</p>\n<p>百度之后看了一下发现显卡是 DVI 接口，而显示器是 VGA 接口的，而且对比了一下主板上的 DVI 接口发现显卡的上的 DVI 接口和主板上的 DVI 接口竟然还不太一样。继续百度。</p>\n<p><img src=\"http://lscho.com/usr/uploads/2017/03/3296033423.jpg\" alt=\"QFJRFrr.jpg!web.jpg\" /><br />\n竟然有五种类型的接口，按照针数的不同分为</p>\n<pre><code>12+5\n18+1\n18+5\n24+1\n24+5\n</code></pre>\n<p>其中12+5的是 DVI-A 接口，就是与 VGA 规范一样的 包括 RGBHV 信号线的模拟接口。</p>\n<p>18+1和24+1的是 DVI-D 接口，传输的为数字信号。</p>\n<p>18+5和24+5的是 DVI-I 接口，则可以传输数字信号，也可以模拟图形信号。</p>\n<p>也就是说， xx+5的 DVI-I 接口通过转换头或者线可以连接到VGA设备上使用，也可以连接到任意DVI设备上使用，但是xx+1的 DVI-D 接口是不能连接到 VGA 设备上使用的。 现在市场上以 DVI-I 接口居多。</p>\n<p>前面的XX则是传输速率，18为单通道，传输速率只有24针的一半，为165MHz。在画面显示上，单通道的DVI支持的分辨率和双通道的完全一样，但刷新率却只有双通道的一半左右，会造成显示质量的下降。一般来讲，单通道的DVI接口，最大的刷新率只能支持到1920 1080 60hz或1600 1200 60hz，即现有23寸宽屏显示器和20寸普通比例显示器的正常显示，再高的话就会造成显示效果的下降。 大屏幕的话需要使用24针的接口，小屏幕使用18针的接口也可以正常显示。</p>\n<p>也就是说我需要一个 24+5 转 VGA 的转接头，下楼买完装上，开机，成功点亮！</p>\n', 1465315200, 1521712701, 0),
 (4, '一个漏洞的发现过程', 1, 'ly-bug', NULL, 1, 99, 'post', '<p>无意间发现的一个漏洞。本想提交乌云，结果一看活动时间，今天晚上就要结束了，遂作罢。整个过程都抱着学习的态度记录了一下，整理成文，以记之。</p>\n', '无意间发现的一个漏洞。本想提交乌云，结果一看活动时间，今天晚上就要结束了，遂作罢。整个过程都抱着学习的态度记录了一下，整理成文，以记之。\n<!--more-->\n在12306研究研究咋买票，点了图片验证点了几十次都没登录成功。尼玛，那8*8像素的图片你让我咋识别。先刷个朋友圈放松一下。现在这朋友圈真是不行了，都是面膜。翻翻翻，戳我免单？这是什么玩意？原来是一个APP的活动，正好我手机上装的有这个玩意。点开火车票栏目，还真有个免单的玩意。唔，先看一下规则。\n![fmYbErm.jpg!web.jpg][1]\n我默默的数了数自己微信好友。。。这活动太不靠谱了。\n\n买买买，买了两张高铁票。买完又弹一个烦人的页面让我找人帮忙免单。尼玛，我去哪找那么多人帮我。随手给基友的微信分享了一个，骚扰骚扰他。然后顺手点进免单看了一下。这页面简直不忍直视，估计哪个程序员通宵赶工出来。整页的图片背景，图片按钮。好吧，我准备看一下它的代码写的烂不烂。把链接复制到电脑上。页面down下来看一下。\n\njs代码写的不错，暗赞了一句。开始找提交的按钮触发的事件。\n![za6fayu.png!web.png][2]\n\n然而菜鸡表示压力山大，没看懂。还是分析请求吧。模拟器开启，抓包工具开启。\n![6zaeqmi.jpg!web.jpg][3]\n\n看了一圈，这个请求比较可疑。拿出来分析一下。先照葫芦画瓢模拟一下请求。\n![VVnYzaA.jpg!web.jpg][4]\n毫无疑问，肯定会有限制，提示非法用户。由于是get请求，也不可能做特别复杂验证。并且这个活动是微信内部页面，大多数程序员都会或多或少的对安全验证方面不自觉的忽略（ 比如我，顺便鄙视一下居然用jsonp做跨域）。所以最用可能的还是在header中的几个参数。，加了cookie，没反应。加了X-Requested-With，没反应。加了Referer，我擦？竟然有反应了。\n![jIbEfuU.jpg!web.jpg][5]\n看到这个提示，觉得有戏。微信里用什么识别身份的？openid啊！找了找get的参数。果然有一个openid。随便改了一个字母。\n![uy2UNrB.png!web.png][6]\n执行成功，回头刷新了一下那个页面，over\n![Iz6N7rf.png!web.png][7]\n出现bug原因就是这一步没有验证openid的有效性。但即使验证了openid有效性，还是会出现问题。无非多收集几个有效的openid。其实最重要的还是在程序设计中对安全性的轻视。以为这个请求是在APP执行的，以为这个页面是在微信中打开的。如果放到电脑端，估计没有任何程序员会这样写一个活动页面，更别提这个大的一个公司的活动和产品。\n\n\n  [1]: http://lscho.com/usr/uploads/2017/03/1159021702.jpg\n  [2]: http://lscho.com/usr/uploads/2017/03/2954890667.png\n  [3]: http://lscho.com/usr/uploads/2017/03/634225941.jpg\n  [4]: http://lscho.com/usr/uploads/2017/03/2060227312.jpg\n  [5]: http://lscho.com/usr/uploads/2017/03/1783569698.jpg\n  [6]: http://lscho.com/usr/uploads/2017/03/1357037553.png\n  [7]: http://lscho.com/usr/uploads/2017/03/1309942170.png', '<p>无意间发现的一个漏洞。本想提交乌云，结果一看活动时间，今天晚上就要结束了，遂作罢。整个过程都抱着学习的态度记录了一下，整理成文，以记之。</p>\n<!--more-->\n<p>在12306研究研究咋买票，点了图片验证点了几十次都没登录成功。尼玛，那8*8像素的图片你让我咋识别。先刷个朋友圈放松一下。现在这朋友圈真是不行了，都是面膜。翻翻翻，戳我免单？这是什么玩意？原来是一个APP的活动，正好我手机上装的有这个玩意。点开火车票栏目，还真有个免单的玩意。唔，先看一下规则。<br />\n<img src=\"http://lscho.com/usr/uploads/2017/03/1159021702.jpg\" alt=\"fmYbErm.jpg!web.jpg\" /><br />\n我默默的数了数自己微信好友。。。这活动太不靠谱了。</p>\n<p>买买买，买了两张高铁票。买完又弹一个烦人的页面让我找人帮忙免单。尼玛，我去哪找那么多人帮我。随手给基友的微信分享了一个，骚扰骚扰他。然后顺手点进免单看了一下。这页面简直不忍直视，估计哪个程序员通宵赶工出来。整页的图片背景，图片按钮。好吧，我准备看一下它的代码写的烂不烂。把链接复制到电脑上。页面down下来看一下。</p>\n<p>js代码写的不错，暗赞了一句。开始找提交的按钮触发的事件。<br />\n<img src=\"http://lscho.com/usr/uploads/2017/03/2954890667.png\" alt=\"za6fayu.png!web.png\" /></p>\n<p>然而菜鸡表示压力山大，没看懂。还是分析请求吧。模拟器开启，抓包工具开启。<br />\n<img src=\"http://lscho.com/usr/uploads/2017/03/634225941.jpg\" alt=\"6zaeqmi.jpg!web.jpg\" /></p>\n<p>看了一圈，这个请求比较可疑。拿出来分析一下。先照葫芦画瓢模拟一下请求。<br />\n<img src=\"http://lscho.com/usr/uploads/2017/03/2060227312.jpg\" alt=\"VVnYzaA.jpg!web.jpg\" /><br />\n毫无疑问，肯定会有限制，提示非法用户。由于是get请求，也不可能做特别复杂验证。并且这个活动是微信内部页面，大多数程序员都会或多或少的对安全验证方面不自觉的忽略（ 比如我，顺便鄙视一下居然用jsonp做跨域）。所以最用可能的还是在header中的几个参数。，加了cookie，没反应。加了X-Requested-With，没反应。加了Referer，我擦？竟然有反应了。<br />\n<img src=\"http://lscho.com/usr/uploads/2017/03/1783569698.jpg\" alt=\"jIbEfuU.jpg!web.jpg\" /><br />\n看到这个提示，觉得有戏。微信里用什么识别身份的？openid啊！找了找get的参数。果然有一个openid。随便改了一个字母。<br />\n<img src=\"http://lscho.com/usr/uploads/2017/03/1357037553.png\" alt=\"uy2UNrB.png!web.png\" /><br />\n执行成功，回头刷新了一下那个页面，over<br />\n<img src=\"http://lscho.com/usr/uploads/2017/03/1309942170.png\" alt=\"Iz6N7rf.png!web.png\" /><br />\n出现bug原因就是这一步没有验证openid的有效性。但即使验证了openid有效性，还是会出现问题。无非多收集几个有效的openid。其实最重要的还是在程序设计中对安全性的轻视。以为这个请求是在APP执行的，以为这个页面是在微信中打开的。如果放到电脑端，估计没有任何程序员会这样写一个活动页面，更别提这个大的一个公司的活动和产品。</p>\n', 1465660800, 1521712711, 0),
@@ -96,7 +96,7 @@ INSERT INTO `ls_content` (`id`, `title`, `uid`, `slug`, `thumb`, `category_id`, 
 
 CREATE TABLE `ls_meta` (
   `id` int(10) NOT NULL,
-  `uid` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
   `name` varchar(50) NOT NULL,
   `slug` varchar(100) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
@@ -109,7 +109,7 @@ CREATE TABLE `ls_meta` (
 -- 转存表中的数据 `ls_meta`
 --
 
-INSERT INTO `ls_meta` (`id`, `uid`, `name`, `slug`, `description`, `type`, `count`, `sort`) VALUES
+INSERT INTO `ls_meta` (`id`, `user_id`, `name`, `slug`, `description`, `type`, `count`, `sort`) VALUES
 (1, 1, 'tech', 'tech', '', 'category', 5, 0),
 (2, 1, 'life', 'life', '', 'category', 0, 0),
 (6, 1, 'php', 'php', '', 'tag', 9, 0),
@@ -129,19 +129,19 @@ INSERT INTO `ls_meta` (`id`, `uid`, `name`, `slug`, `description`, `type`, `coun
 -- --------------------------------------------------------
 
 --
--- 表的结构 `ls_relationships`
+-- 表的结构 `ls_relationship`
 --
 
-CREATE TABLE `ls_relationships` (
+CREATE TABLE `ls_relationship` (
   `content_id` int(10) NOT NULL,
   `meta_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- 转存表中的数据 `ls_relationships`
+-- 转存表中的数据 `ls_relationship`
 --
 
-INSERT INTO `ls_relationships` (`content_id`, `meta_id`) VALUES
+INSERT INTO `ls_relationship` (`content_id`, `meta_id`) VALUES
 (2, 6),
 (2, 7),
 (2, 6),
@@ -183,7 +183,7 @@ CREATE TABLE `ls_user` (
 --
 
 INSERT INTO `ls_user` (`id`, `username`, `email`, `qq`, `github`, `zhihu`, `weibo`, `password`, `encrypt`) VALUES
-(1, 'root', NULL, '', NULL, NULL, NULL, '24d8cee9ed793b9f818b6c4b67aae9aa', 'Mje5sowT7');
+(1, 'admin', NULL, '', NULL, NULL, NULL, '24d8cee9ed793b9f818b6c4b67aae9aa', 'Mje5sowT7');
 
 --
 -- Indexes for dumped tables

@@ -12,7 +12,7 @@ module.exports = class extends think.Model {
       tag: {
         type: think.Model.MANY_TO_MANY,
         model: 'meta',
-        rModel: 'relationships',
+        rModel: 'relationship',
         rfKey: 'meta_id',
         key: 'id',
         fKey: 'content_id',
@@ -28,7 +28,7 @@ module.exports = class extends think.Model {
       user: {
         type: think.Model.BELONG_TO,
         model: 'user',
-        key: 'uid',
+        key: 'user_id',
         fKey: 'id',
         field: 'id,username,email,qq,github,weibo,zhihu'
       }
@@ -50,7 +50,7 @@ module.exports = class extends think.Model {
           meta_id: tag[i]
         });
       }
-      think.model('relationships').addMany(tagData);
+      think.model('relationship').addMany(tagData);
       // 更新文章数量
       this.updateCount(data.category_id, tag);
     }
@@ -101,7 +101,7 @@ module.exports = class extends think.Model {
     think.model('meta').where({ id: categoryId }).update({ count: categoryCount });
     // 更新标签数量
     for (var i in tagData) {
-      const tagCount = await think.model('relationships').where({ meta_id: tagData[i] }).count();
+      const tagCount = await think.model('relationship').where({ meta_id: tagData[i] }).count();
       think.model('meta').where({ id: tagData[i] }).update({ count: tagCount });
     }
   }

@@ -9,7 +9,7 @@ module.exports = class extends BaseRest {
     const userInfo = this.userInfo;
     const createTime = this.post('create_time') ? (new Date(this.post('create_time'))).getTime() / 1000 : (new Date()).getTime() / 1000;
     const data = {
-      uid: userInfo.id,
+      user_id: userInfo.id,
       title: this.post('title'),
       category_id: this.post('category_id'),
       slug: this.post('slug'),

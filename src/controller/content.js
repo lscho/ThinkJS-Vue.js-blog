@@ -45,7 +45,7 @@ module.exports = class extends Base {
 
     if (this.get('tag')) {
       const tags = await this.model('meta').where({ slug: this.get('tag'), type: 'tag' }).getField('id');
-      const contentIds = await this.model('relationships').where({ meta_id: ['IN', tags] }).getField('content_id');
+      const contentIds = await this.model('relationship').where({ meta_id: ['IN', tags] }).getField('content_id');
       meta = { key: 'tag', value: this.get('tag') };
       if (contentIds) {
         map['id'] = ['IN', contentIds];

@@ -5,7 +5,7 @@ module.exports = class extends BaseRest {
   async postAction() {
     const userInfo = this.userInfo;
     const data = {
-      uid: userInfo.id,
+      user_id: userInfo.id,
       name: this.post('name'),
       slug: this.post('slug'),
       type: this.post('type'),
