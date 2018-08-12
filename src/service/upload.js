@@ -3,7 +3,7 @@ module.exports = class extends think.Service {
      * 注册HOOK点
      * @return {[type]} [description]
      */
-  registerHook() {
+  static registerHook() {
     return {
       'qiniu': ['upload']
     };

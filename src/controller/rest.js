@@ -11,14 +11,15 @@ module.exports = class extends think.Controller {
 
   async __before(action) {
     this.header('Access-Control-Allow-Origin', '*');
-    try {
-      this.userInfo = await this.ctx.session('userInfo');
-    } catch (err) {
-      this.userInfo = {};
-    }
-    if (this.resource !== 'token' && this.ctx.method !== 'GET' && think.isEmpty(this.userInfo)) {
-      this.ctx.status = 401;
-      return this.ctx.fail(-1, '请登录后操作');
+
+    this.userInfo = await this.session('userInfo').catch(_ => ({}));
+
+    const isAllowedMethod = this.isMethod('GET');
+    const isAllowedResource = this.resource === 'token';
+    const isLogin = !think.isEmpty(this.userInfo);
+
+    if(!isAllowedMethod && !isAllowedResource && !isLogin) {
+      return this.ctx.throw(401, '请登录后操作');
     }
   }
 

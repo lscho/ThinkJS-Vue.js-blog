@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { routers } from './router'
+import { Base64 } from 'js-base64'
 
 Vue.use(VueRouter)
 
@@ -15,10 +16,23 @@ const router = new VueRouter(RouterConfig)
 router.beforeEach((to, from, next) => {
   // 设置title
   window.document.title = to.meta.title
-  // 登录检测
-  if (!localStorage.getItem('token') && to.meta.requiresAuth === true) {
+  let token = localStorage.getItem('token')
+  let requiresAuth = to.meta.requiresAuth
+
+  if (!token && requiresAuth === true) {
     next('/login')
-  } else if (localStorage.getItem('token') && to.name === 'login') {
+  }
+
+  let tokenArray = token.split('.')
+  if (tokenArray.length !== 3) {
+    next('/login')
+  }
+  let payload = Base64.decode(tokenArray[1])
+  if (Date.now() > payload.exp * 1000) {
+    next('/login')
+  }
+
+  if (localStorage.getItem('token') && to.name === 'login') {
     next('/home')
   }
   // 权限检测 TODO

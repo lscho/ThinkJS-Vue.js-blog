@@ -1,23 +1,19 @@
 module.exports = {
 
-  /**
-     * hook
-     * @param  {[type]} node 钩子点
-     * @param  {[type]} data 数据
-     * @return {[type]}      [description]
+    /**
+     * 执行hook
+     * @param  {[type]}    name [description]
+     * @param  {...[type]} args [description]
+     * @return {[type]}         [description]
      */
-  async hook(node, data) {
-    const hooks = think.config('hooks');
-    try {
-      if (hooks[node]) {
-        for (const i in hooks[node]) {
-          let hook=hooks[node][i];
-          let service=think.service(hook.service);
-          await service[hook.function](data);
+    async hook(name, ...args) {
+        const { hooks } = think.config();
+        const hookFuncs = hooks[name];
+        if (!think.isArray(hookFuncs)) {
+            return;
         }
-      }
-    } catch (e) {
-      think.logger.error(e);
+        for(const {service, method} of hookFuncs) {
+            await service[method](...args)
+        };
     }
-  }
 };

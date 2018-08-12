@@ -1,37 +1,36 @@
-const fs = require('fs');
-const path = require('path');
 think.beforeStartServer(async() => {
-  // 注册插件
-  const hooks = {};
-  try {
-    const files = fs.readdirSync(think.APP_PATH + '/service');
-    files.forEach((val, index) => {
-      const ext = path.extname(val);
-      if (ext === '.js') {
-        const serviceName = path.basename(val, ext);
-        const service = think.service(serviceName);
-        if (typeof service.registerHook === 'function') {
-          const data = service.registerHook();
-          // hook点
-          for (const hook in data) {
-            for (const i in data[hook]) {
-              const node = data[hook][i];
-              if (!hooks[node]) {
-                hooks[node] = [];
-              }
-              if (typeof service[hook] === 'function') {
-                hooks[node].push({
-                  service:serviceName,
-                  function:hook
-                });
-              }
-            }
-          }
-        }
+  const hooks = [];
+
+  for (const Service of Object.values(think.app.services)) {
+      const isHookService = think.isFunction(Service.registerHook);
+      if (!isHookService) {
+          continue;
       }
-    });
-  } catch (e) {
-    think.logger.error(e);
+
+      const service = new Service();
+      const serviceHooks = Service.registerHook();
+      for (const hookFuncName in serviceHooks) {
+          if (!think.isFunction(service[hookFuncName])) {
+              continue;
+          }
+
+          let funcForHooks = serviceHooks[hookFuncName];
+          if (think.isString(funcForHooks)) {
+              funcForHooks = [funcForHooks];
+          }
+
+          if (!think.isArray(funcForHooks)) {
+              continue;
+          }
+
+          for (const hookName of funcForHooks) {
+              if (!hooks[hookName]) {
+                  hooks[hookName] = [];
+              }
+
+              hooks[hookName].push({ service, method: hookFuncName });
+          }
+      }
   }
   think.config('hooks', hooks);
 });
