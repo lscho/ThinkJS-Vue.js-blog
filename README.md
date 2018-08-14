@@ -1,6 +1,6 @@
 ## 结构
 
-	├── admin				//后台vue项目，vue-cli创建
+	├── admin			//后台vue项目，vue-cli创建
 	│   ├── build
 	│   ├── config
 	│   ├── index.html
@@ -19,8 +19,8 @@
 	│   ├── logic
 	│   ├── model			//模型目录
 	│   └── service
-	├── view				//前台模版目录
-	└── www					//对外开放目录
+	├── view			//前台模版目录
+	└── www				//对外开放目录
 	    ├── admin.html		//后台入口文件
 	    └── static			//静态资源
 
