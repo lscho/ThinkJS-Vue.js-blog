@@ -1,6 +1,6 @@
 ## 结构
 
-	├── admin			//后台vue项目，vue-cli创建
+	├── admin				//后台vue项目，vue-cli创建
 	│   ├── build
 	│   ├── config
 	│   ├── index.html
@@ -8,18 +8,18 @@
 	│   ├── src
 	│   └── static
 	├── development.js		//开发模式入口
-	├── package.json	
+	├── package.json
 	├── production.js		//生产模式入口
 	├── src
-	│   ├── bootstrap		//启动自动执行目录 
+	│   ├── bootstrap		//启动自动执行目录
 	│   ├── config			//配置目录
 	│   ├── controller		//控制器目录
 	│   │   ├── api			//接口控制器目录
 	│   ├── extend
 	│   ├── logic
-	│   ├── model				//模型目录
+	│   ├── model			//模型目录
 	│   └── service
-	├── view					//前台模版目录
+	├── view				//前台模版目录
 	└── www					//对外开放目录
 	    ├── admin.html		//后台入口文件
 	    └── static			//静态资源

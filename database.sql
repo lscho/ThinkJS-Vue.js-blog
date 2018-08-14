@@ -175,15 +175,16 @@ CREATE TABLE `ls_user` (
   `zhihu` varchar(100) DEFAULT NULL,
   `weibo` varchar(100) DEFAULT NULL,
   `password` varchar(50) NOT NULL,
-  `encrypt` varchar(10) NOT NULL
+  `encrypt` varchar(10) NOT NULL,
+  `last_login_time` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- 转存表中的数据 `ls_user`
 --
 
-INSERT INTO `ls_user` (`id`, `username`, `email`, `qq`, `github`, `zhihu`, `weibo`, `password`, `encrypt`) VALUES
-(1, 'admin', NULL, '', NULL, NULL, NULL, '24d8cee9ed793b9f818b6c4b67aae9aa', 'Mje5sowT7');
+INSERT INTO `ls_user` (`id`, `username`, `email`, `qq`, `github`, `zhihu`, `weibo`, `password`, `encrypt`, `last_login_time`) VALUES
+(1, 'admin', NULL, '', NULL, NULL, NULL, '24d8cee9ed793b9f818b6c4b67aae9aa', 'Mje5sowT7', '');
 
 --
 -- Indexes for dumped tables
