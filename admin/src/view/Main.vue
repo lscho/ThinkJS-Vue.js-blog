@@ -4,18 +4,7 @@
             <Col :span="fold?1:3" class="layout-menu-left">
                 <Menu active-name="1" theme="dark" width="auto" :active-name="route.path"  @on-select="select" >
                     <div class="layout-logo-left"></div>
-                    <template v-for="(item,i) in menu">
-                        <Submenu :name="item.path" v-if="item.children">
-                            <template slot="title">
-                                <Icon :type="item.icon" :size="iconSize"></Icon>
-                                <span class="layout-text">{{item.name}}</span>
-                            </template>
-                            <MenuItem :name="child.path" v-for="(child,index) in item.children">
-                                <Icon :type="child.icon" :size="iconSize"></Icon>
-                                <span class="layout-text">{{child.name}}</span>
-                            </MenuItem>
-                        </Submenu>
-
+                    <template v-for="(item,key) in menu">
                         <MenuItem  :name="item.path" v-if="!item.children">
                             <Icon :type="item.icon" :size="iconSize"></Icon>
                             <span class="layout-text">{{item.name}}</span>

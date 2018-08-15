@@ -7,7 +7,6 @@ Vue.use(VueRouter)
 
 // 路由配置
 const RouterConfig = {
-  //mode: 'history',
   routes: routers
 }
 
@@ -19,21 +18,26 @@ router.beforeEach((to, from, next) => {
   let token = localStorage.getItem('token')
   let requiresAuth = to.meta.requiresAuth
 
-  if (!token && requiresAuth === true) {
-    next('/login')
+  if(requiresAuth === true){
+    if(!token){
+      next('/login')
+      return false
+    }
+    let tokenArray = token.split('.')
+    if (tokenArray.length !== 3) {
+      next('/login')
+      return false
+    }
+    let payload = Base64.decode(tokenArray[1])
+    if (Date.now() > payload.exp * 1000) {
+      next('/login')
+      return false
+    }
   }
 
-  let tokenArray = token.split('.')
-  if (tokenArray.length !== 3) {
-    next('/login')
-  }
-  let payload = Base64.decode(tokenArray[1])
-  if (Date.now() > payload.exp * 1000) {
-    next('/login')
-  }
-
-  if (localStorage.getItem('token') && to.name === 'login') {
+  if (token && to.name === 'login') {
     next('/home')
+    return false
   }
   // 权限检测 TODO
   next()
