@@ -10,6 +10,10 @@
                 <Input v-model="site.url"></Input>
             </FormItem>
 
+            <FormItem label="cdn域名">
+                <Input v-model="site.cdn"></Input>
+            </FormItem>
+
             <FormItem label="关键词">
                 <Input v-model="site.keywords"></Input>
             </FormItem>
