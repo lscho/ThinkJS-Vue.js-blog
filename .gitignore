@@ -1,4 +1,5 @@
 .DS_Store
+*.js.map
 node_modules/
 runtime/
 logs/

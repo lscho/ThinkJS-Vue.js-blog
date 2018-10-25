@@ -1,10 +1,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-dns-prefetch-control" content="on">
-    <% if (site.cdn) { %>
     <link rel="dns-prefetch" href="<%=site.cdn %>" />
-    <base href="<%=site.cdn %>" />
-    <% }%>
     <link rel="dns-prefetch" href="//secure.gravatar.com" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="renderer" content="webkit">
@@ -16,5 +13,5 @@
     </title>
     <meta name="keywords" content="<%=site.keywords %>" />
     <meta name="description" content="<%=site.description %>" />
-    <link href="/static/home/css/style.css" rel="stylesheet">
+    <link href="<%=site.cdn %>/static/home/css/style.css" rel="stylesheet">
 </head>
