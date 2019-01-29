@@ -6,8 +6,10 @@ module.exports = class extends Base {
    * @return {[type]} [description]
    */
   async indexAction() {
-    if (this.post('s')) {
-      return this.redirect('/search/' + this.post('s') + '/');
+    let searchParam = this.post('s');
+    if (searchParam) {
+      searchParam = encodeURIComponent(searchParam);
+      return this.redirect('/search/' + searchParam + '/');
     }
     await this.hook('contentUpdate');
     return this.action('content', 'list');
