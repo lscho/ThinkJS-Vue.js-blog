@@ -6,6 +6,9 @@ module.exports = class extends Base {
    * @return {[type]} [description]
    */
   async listAction() {
+    //输出头部HTML
+    await this.renderAndFlush('header');
+
     const map = {
       status: 99,
       type: 'post'
@@ -25,6 +28,9 @@ module.exports = class extends Base {
    * @return {[type]} [description]
    */
   async musterAction() {
+    //输出头部HTML
+    await this.renderAndFlush('header');
+
     const map = {
       status: 99,
       type: 'post'
@@ -71,6 +77,9 @@ module.exports = class extends Base {
    * @return {[type]} [description]
    */
   async detailAction() {
+    //输出头部HTML
+    await this.renderAndFlush('header');
+
     const map = {
       slug: this.get('slug'),
       type: 'post',
@@ -148,6 +157,9 @@ module.exports = class extends Base {
    * @return {[type]} [description]
    */
   async archivesAction() {
+    //输出头部HTML
+    await this.renderAndFlush('header');
+
     const map = {
       type: 'post',
       status: 99
@@ -174,6 +186,9 @@ module.exports = class extends Base {
    * @return {[type]} [description]
    */
   async pageAction() {
+    //输出头部HTML
+    await this.renderAndFlush('header');
+
     const map = {
       slug: this.get('slug'),
       type: 'page',

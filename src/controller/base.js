@@ -3,14 +3,14 @@ module.exports = class extends think.Controller {
     // 获取站点配置
     const config = await think.model('config').cache('config').getList();
     this.assign('site', config.site);
+    // 默认title
+    this.assign('title',"");
     // 获取用户资料
     const user = await think.model('user').cache('user').find();
     this.assign('user', user);
     // 最近文章
     const recent = await this.getRecent();
     this.assign('recent', recent);
-    // 默认title
-    this.assign('title',"");
   }
 
   /**
