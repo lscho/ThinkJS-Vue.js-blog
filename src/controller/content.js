@@ -32,7 +32,7 @@ module.exports = class extends Base {
 
     let meta = {};
     if (this.get('search')) {
-      map['title|description'] = this.get('search');
+      map['title|description'] = ['like','%'+this.get('search')+'%'];
       meta = { key: 'search', value: this.get('search') };
     }
     if (this.get('category')) {

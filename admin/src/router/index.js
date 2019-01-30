@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from '@/store'
 import VueRouter from 'vue-router'
 import { routers } from './router'
 import { Base64 } from 'js-base64'
@@ -17,7 +18,6 @@ router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title
   let token = localStorage.getItem('token')
   let requiresAuth = to.meta.requiresAuth
-
   if(requiresAuth === true){
     if(!token){
       next('/login')
@@ -28,13 +28,13 @@ router.beforeEach((to, from, next) => {
       next('/login')
       return false
     }
-    let payload = Base64.decode(tokenArray[1])
+    let payload = JSON.parse(Base64.decode(tokenArray[1]))
     if (Date.now() > payload.exp * 1000) {
+      store.commit('clearToken')
       next('/login')
       return false
     }
   }
-
   if (token && to.name === 'login') {
     next('/home')
     return false

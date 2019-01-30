@@ -4,3 +4,4 @@ node_modules/
 runtime/
 logs/
 www/uploads
+src/config/*.production.js
