@@ -31,9 +31,11 @@ module.exports = class extends Base {
     };
 
     let meta = {};
-    if (this.get('search')) {
-      map['title|description'] = ['like','%'+this.get('search')+'%'];
-      meta = { key: 'search', value: this.get('search') };
+    let searchParam = this.get('search');
+    if (searchParam) {
+      searchParam = decodeURIComponent(searchParam);
+      map['title|description'] = searchParam;
+      meta = { key: 'search', value: searchParam };
     }
     if (this.get('category')) {
       const categoryId = await this.model('meta').where({ slug: this.get('category'), type: 'category' }).getField('id', true);
