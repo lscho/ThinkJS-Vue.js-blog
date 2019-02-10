@@ -15,7 +15,7 @@ axios.interceptors.request.use(config => {
     config.headers.Authorization = localStorage.getItem('token')
   }
   // 防止缓存
-  if (config.method === 'post'&& config.headers['Content-Type']!=='multipart/form-data') {
+  if (config.method === 'post' && config.headers['Content-Type'] !== 'multipart/form-data') {
     config.data = {
       ...config.data,
       _t: Date.parse(new Date()) / 1000

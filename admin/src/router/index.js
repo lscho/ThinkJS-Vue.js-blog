@@ -3,6 +3,7 @@ import store from '@/store'
 import VueRouter from 'vue-router'
 import { routers } from './router'
 import { Base64 } from 'js-base64'
+import { Message } from 'iview'
 
 Vue.use(VueRouter)
 
@@ -18,18 +19,21 @@ router.beforeEach((to, from, next) => {
   window.document.title = to.meta.title
   let token = localStorage.getItem('token')
   let requiresAuth = to.meta.requiresAuth
-  if(requiresAuth === true){
-    if(!token){
+  if (requiresAuth === true) {
+    if (!token) {
+      Message.info('请登录')
       next('/login')
       return false
     }
     let tokenArray = token.split('.')
     if (tokenArray.length !== 3) {
+      Message.error('身份验证错误，请重新登录')
       next('/login')
       return false
     }
     let payload = JSON.parse(Base64.decode(tokenArray[1]))
     if (Date.now() > payload.exp * 1000) {
+      Message.error('登录已超时，请重新登录')
       store.commit('clearToken')
       next('/login')
       return false

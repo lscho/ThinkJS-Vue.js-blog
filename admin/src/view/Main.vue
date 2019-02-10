@@ -19,6 +19,12 @@
                           <Button type="text" @click="toggleClick">
                               <Icon type="navicon" size="32"></Icon>
                           </Button>
+                        <Breadcrumb style="margin-left: 30px;display: inline-block;">
+                            <BreadcrumbItem to="/home">首页</BreadcrumbItem>
+                            <BreadcrumbItem v-if="breadcrumb[0]">{{breadcrumb[0]}}</BreadcrumbItem>
+                            <BreadcrumbItem v-if="breadcrumb[1]">{{breadcrumb[1]}}</BreadcrumbItem>
+                            <BreadcrumbItem v-if="breadcrumb[2]">{{breadcrumb[2]}}</BreadcrumbItem>
+                        </Breadcrumb>
                         </Col>
                         <Col span="12" class="layout-header-right">
                             <a class="home" target="_blank" href="/"><Icon type="home"></Icon></a>
@@ -36,13 +42,6 @@
                             <Avatar :src="userInfo.avator" size="large" />
                         </Col>
                     </Row>
-                </div>
-                <div class="layout-breadcrumb">
-                    <Breadcrumb>
-                        <BreadcrumbItem v-if="breadcrumb[0]">{{breadcrumb[0]}}</BreadcrumbItem>
-                        <BreadcrumbItem v-if="breadcrumb[1]">{{breadcrumb[1]}}</BreadcrumbItem>
-                        <BreadcrumbItem v-if="breadcrumb[2]">{{breadcrumb[2]}}</BreadcrumbItem>
-                    </Breadcrumb>
                 </div>
                 <div class="layout-content">
                     <div class="layout-content-main">

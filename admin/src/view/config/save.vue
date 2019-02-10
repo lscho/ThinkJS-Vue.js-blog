@@ -63,7 +63,7 @@
             </Form>
           </TabPane>
 
-          <TabPane label="七牛配置">
+<!--           <TabPane label="七牛配置">
             <Form :model="qiniu" :label-width="80">
             <FormItem label="access_key">
                 <Input v-model="qiniu.access_key"></Input>
@@ -81,7 +81,7 @@
                 <Button type="primary" @click="post('qiniu',qiniu)">保存</Button>
             </FormItem>
             </Form>
-          </TabPane>
+          </TabPane> -->
       </Tabs>
 </template>
 <script>
@@ -126,3 +126,8 @@ export default {
   }
 };
 </script>
+<style type="text/css">
+  .ivu-input{
+    width: 60%;
+  }
+</style>

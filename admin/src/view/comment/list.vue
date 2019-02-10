@@ -11,11 +11,23 @@
     </Form>
     <Table border :loading="loading" :columns="columns" :data="data.data"></Table>
     <Page class="page" :total="data.count" :page-size="data.pagesize" show-total @on-change="changePage"></Page>
+    <Modal v-model="modal" width="360">
+      <p slot="header" style="color:#f60;text-align:center">
+        <Icon type="ios-information-circle"></Icon>
+        <span>删除确认</span>
+      </p>
+      <div style="text-align:center">
+        <p>删除后数据将无法找回，是否继续删除？</p>
+      </div>
+      <div slot="footer">
+        <Button type="error" size="large" long :loading="modal_loading" @click="del">确认删除</Button>
+      </div>
+    </Modal>
   </div>
 </template>
 <script>
 import { comment } from "@/api";
-import { Button, Table, Page, Form, FormItem, Input } from 'iview';
+import { Button, Table, Page, Form, FormItem, Input, Modal, Icon } from 'iview';
 export default {
   components: {
     Button,
@@ -23,11 +35,16 @@ export default {
     Page,
     Form,
     FormItem,
-    Input
+    Input,
+    Modal,
+    Icon
   },
   data() {
     return {
       loading: true,
+      modal:false,
+      modal_loading:false,
+      modal_temp:{},
       columns: [{
           title: "文章名称",
           key: "title",
@@ -136,8 +153,10 @@ export default {
                   },
                   on: {
                     click: () => {
-                      if (confirm("确定要删除吗？")) {
-                        this.delete(params.row.id, params.index);
+                      this.modal=true;
+                      this.modal_temp={
+                        id:params.row.id,
+                        index:params.index
                       }
                     }
                   }
@@ -164,9 +183,15 @@ export default {
         this.loading = false;
       });
     },
-    delete(id, index) {
-      comment.delete(id).then(res => {
-        this.data.data.splice(index, 1);
+    del() {
+      if(!this.modal_temp.id){
+        return false;
+      }
+      comment.delete(this.modal_temp.id).then(res => {
+        this.modal=false;
+        if (res.errno == 0){
+          this.getList();
+        }
       });
     },
     changePage(index) {

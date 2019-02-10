@@ -12,7 +12,7 @@ export default {
 
   update (type, data) {
     return new Promise((resolve, reject) => {
-      Vue.axios.put('/config/'+type, data).then(response => {
+      Vue.axios.put('/config/' + type, data).then(response => {
         resolve(response.data)
       })
     })
