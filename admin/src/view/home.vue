@@ -33,7 +33,7 @@
         <Card style="height:100%;">
           <p slot="title">最新发布</p>
           <Timeline>
-            <TimelineItem v-for="(v,i) in archives" v-if="i<5">
+            <TimelineItem v-for="(v,i) in archives" :key="v.id" v-if="i<5">
               <p class="time">{{v.create_time|date}}</p>
               <p class="content" v-html="v.title"></p>
             </TimelineItem>
