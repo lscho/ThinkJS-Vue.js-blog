@@ -11,7 +11,6 @@ module.exports = class extends Base {
       searchParam = encodeURIComponent(searchParam);
       return this.redirect('/search/' + searchParam + '/');
     }
-    await this.hook('contentUpdate');
     return this.action('content', 'list');
   }
 };
