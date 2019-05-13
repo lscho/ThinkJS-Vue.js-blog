@@ -40,7 +40,7 @@ module.exports = class extends Base {
     let searchParam = this.get('search');
     if (searchParam) {
       searchParam = decodeURIComponent(searchParam);
-      map['title|description'] = searchParam;
+      map['title|description'] = ['like','%'+searchParam+'%'];
       meta = { key: 'search', value: searchParam };
     }
     if (this.get('category')) {
