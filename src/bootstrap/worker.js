@@ -33,4 +33,10 @@ think.beforeStartServer(async() => {
       }
   }
   think.config('hooks', hooks);
+
+  let postTitle = {};
+  (await think.model('content').field(['slug', 'title']).select()).forEach(item => {
+      postTitle[item.slug] = item.title;
+  });
+  think.config('postTitle', postTitle);
 });

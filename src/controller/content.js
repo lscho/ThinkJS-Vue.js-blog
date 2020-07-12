@@ -6,7 +6,7 @@ module.exports = class extends Base {
    * @return {[type]} [description]
    */
   async listAction() {
-    //输出头部HTML
+    // 输出头部HTML
     await this.renderAndFlush('header');
 
     const map = {
@@ -77,11 +77,14 @@ module.exports = class extends Base {
    * @return {[type]} [description]
    */
   async detailAction() {
-    //输出头部HTML
+    const slug = this.get('slug');
+    const { postTitle } = think.config();
+    this.assign('title',postTitle[slug] || "");
+    // 输出头部HTML
     await this.renderAndFlush('header');
 
     const map = {
-      slug: this.get('slug'),
+      slug: slug,
       type: 'post',
       status: 99
     };
@@ -89,7 +92,7 @@ module.exports = class extends Base {
     const content = await this.model('content').where(map).find();
 
     if (think.isEmpty(content)) {
-      return this.redirect('/');
+      return this.display('error_404');
     }
     this.assign('content', content);
     // 增加阅读量
@@ -97,8 +100,6 @@ module.exports = class extends Base {
 
     const replyTo = this.get('replyTo') || 0;
     this.assign('replyTo', replyTo);
-
-    this.assign('title',content.title);
 
     return this.display('content');
   }
@@ -112,7 +113,7 @@ module.exports = class extends Base {
     let _t=this.post('_t')||0;
 
     if(Date.now()-_t>10*60*1000){
-      return this.redirect('/');
+      return this.display('error_500');
     }
 
     const map = {
@@ -124,7 +125,7 @@ module.exports = class extends Base {
     const content = await this.model('content').where(map).find();
 
     if (think.isEmpty(content)) {
-      return this.redirect('/');
+      return this.display('error_500');
     }
 
     const data = {
@@ -157,6 +158,7 @@ module.exports = class extends Base {
    * @return {[type]} [description]
    */
   async archivesAction() {
+    this.assign('title','archives');
     //输出头部HTML
     await this.renderAndFlush('header');
 
@@ -176,7 +178,6 @@ module.exports = class extends Base {
       }
       list[month].push(data[i]);
     }
-    this.assign('title','archives');
     this.assign('list', list);
     return this.display('archives');
   }
@@ -186,17 +187,19 @@ module.exports = class extends Base {
    * @return {[type]} [description]
    */
   async pageAction() {
+    const slug = this.get('slug');
+    const { postTitle } = think.config();
+    this.assign('title',postTitle[slug] || "");
     //输出头部HTML
     await this.renderAndFlush('header');
 
     const map = {
-      slug: this.get('slug'),
+      slug: slug,
       type: 'page',
       status: 99
     };
 
     const content = await this.model('content').where(map).find();
-    this.assign('title',content.title);
     this.assign('content', content);
     return this.display('page');
   }
