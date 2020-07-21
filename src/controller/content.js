@@ -92,7 +92,7 @@ module.exports = class extends Base {
     const content = await this.model('content').where(map).find();
 
     if (think.isEmpty(content)) {
-      return this.display('error_404');
+      return this.redirect('/404');
     }
     this.assign('content', content);
     // 增加阅读量
@@ -113,7 +113,7 @@ module.exports = class extends Base {
     let _t=this.post('_t')||0;
 
     if(Date.now()-_t>10*60*1000){
-      return this.display('error_500');
+      return this.redirect('/404');
     }
 
     const map = {
@@ -125,7 +125,7 @@ module.exports = class extends Base {
     const content = await this.model('content').where(map).find();
 
     if (think.isEmpty(content)) {
-      return this.display('error_500');
+      return this.redirect('/404');
     }
 
     const data = {

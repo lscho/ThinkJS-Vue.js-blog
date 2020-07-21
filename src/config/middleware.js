@@ -1,6 +1,6 @@
 const path = require('path');
 const isDev = think.env === 'development';
-
+const isFaas = process.env.isFaas;
 module.exports = [
   {
     handle: 'meta',
@@ -11,7 +11,7 @@ module.exports = [
   },
   {
     handle: 'resource',
-    enable: isDev,
+    enable: isDev||isFaas,
     options: {
       root: path.join(think.ROOT_PATH, 'www'),
       publicPath: /^\/(static|uploads|favicon\.ico|index\.html|admin\.html)/
@@ -23,8 +23,8 @@ module.exports = [
     options: {
       debug: isDev,
       templates: {
-        404: path.join(think.ROOT_PATH, 'view/error_404.html'),
-        500: path.join(think.ROOT_PATH, 'view/error_500.html')
+        404: path.join(think.ROOT_PATH, isDev ? 'view/error_404.html' : 'runtime/view/error_404.html'),
+        500: path.join(think.ROOT_PATH, isDev ? 'view/error_500.html' : 'runtime/view/error_500.html')
       }
     }
   },

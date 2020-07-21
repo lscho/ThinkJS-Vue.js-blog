@@ -79,7 +79,7 @@ exports.session = {
 exports.view = {
   type: 'ejs',
   common: {
-    viewPath: path.join(think.ROOT_PATH, 'view'),
+    viewPath: path.join(think.ROOT_PATH, isDev ? 'view' : 'runtime/view'),
     extname: '.html',
     sep: '_' // seperator between controller and action
   },
