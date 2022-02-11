@@ -10,7 +10,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install production dependencies.
-RUN npm install --only=production --registry=https://registry.npm.taobao.org
+RUN npm install --only=production --registry=https://registry.npmmirror.com
 
 # Copy local code to the container image.
 COPY . ./
