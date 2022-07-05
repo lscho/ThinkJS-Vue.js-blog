@@ -36,13 +36,13 @@ exports.model = {
   },
   mysql: {
     handle: mysql,
-    database: 'blog',
+    database: process.env.MYSQL_DATABASE || 'blog',
     prefix: 'ls_',
     encoding: 'utf8',
-    host: '127.0.0.1',
+    host: process.env.MYSQL_HOST || '127.0.0.1',
     port: '',
-    user: 'root',
-    password: '123456',
+    user: process.env.MYSQL_USERNAME || 'root',
+    password: process.env.MYSQL_PASSWORD || '123456',
     dateStrings: true
   }
 };
