@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "axios": "^0.21.2",
-    "echarts": "^3.8.5",
+    "echarts": "^6.1.0",
     "iview": "^2.8.0",
     "js-base64": "^2.4.8",
     "mavon-editor": "^2.4.13",
